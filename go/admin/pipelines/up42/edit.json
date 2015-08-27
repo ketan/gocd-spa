@@ -1,0 +1,208 @@
+{
+  "name": "yourproject",
+  "label_template": "foo-1.0.${COUNT}-${svn}",
+  "locked": true,
+  "template": null,
+  "params": [
+    {
+      "name": "COMMAND",
+      "value": "echo"
+    },
+    {
+      "name": "WORKING_DIR",
+      "value": "/repo/branch"
+    }
+  ],
+  "tracking_tool": {
+    "type": "mingle",
+    "attributes": {
+      "base_url": "http://mingle.example.com",
+      "project_identifier": "my_project",
+      "grouping_conditions": "status > 'In Dev'"
+    }
+  },
+  "timer": "0 0 22 ? * MON-FRI",
+  "materials": [
+    {
+      "type": "svn",
+      "attributes": {
+        "username": "bob",
+        "password": "bob'sP@ssw0rd",
+        "name": "svn_material",
+        "url": "http://your-svn/",
+        "dest": "dest_folder",
+        "auto_update": true
+      }
+    }
+  ],
+  "environment_variables": [
+    {
+      "name": "MULTIPLE_LINES",
+      "value": "multiplelines",
+      "secure": true
+    },
+    {
+      "name": "COMPLEX",
+      "value": "This has very <complex> data",
+      "secure": false
+    }
+  ],
+  "stages": [
+    {
+      "name": "ut",
+      "fetch_materials": true,
+      "clean_working_directory": false,
+      "never_clean_artifacts": true,
+      "approval": {
+        "type": "manual|success",
+        "authorization": {
+          "roles": [
+
+          ],
+          "users": [
+
+          ]
+        }
+      },
+      "environment_variables": [
+        {
+          "name": "stage-MULTIPLE_LINES",
+          "value": "multiplelines",
+          "secure": true
+        },
+        {
+          "name": "stage-COMPLEX",
+          "value": "This has very <complex> data",
+          "secure": false
+        }
+      ],
+      "jobs": [
+        {
+          "name": "build",
+          "run_on_all_agents": false,
+          "run_instance_count": 0,
+          "timeout": null,
+          "environment_variables": [
+
+          ],
+          "resources": [
+            "jdk5",
+            "tomcat5"
+          ],
+          "tasks": [
+            {
+              "type": "ant",
+              "attributes": {
+                "target": "clean",
+                "working_dir": "dir"
+              }
+            }
+          ],
+          "artifacts": [
+            {
+              "src": "target/dist.jar",
+              "dest": "pkg",
+              "type": "build"
+            },
+            {
+              "src": "target/reports/**/*Test.xml",
+              "dest": "reports",
+              "type": "test"
+            }
+          ],
+          "tabs": [
+            {
+              "name": "coverage",
+              "path": "Jcoverage/index.html"
+            }
+          ],
+          "properties": [
+            {
+              "name": "coverage.class",
+              "src": "target/emma/coverage.xml",
+              "xpath": "substring-before(//report/data/all/coverage[starts-with(@type,'class')]/@value, '%')"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ut1",
+      "fetch_materials": true,
+      "clean_working_directory": false,
+      "never_clean_artifacts": true,
+      "approval": {
+        "type": "manual|success",
+        "authorization": {
+          "roles": [
+
+          ],
+          "users": [
+
+          ]
+        }
+      },
+      "environment_variables": [
+        {
+          "name": "stage-MULTIPLE_LINES",
+          "value": "multiplelines",
+          "secure": true
+        },
+        {
+          "name": "stage-COMPLEX",
+          "value": "This has very <complex> data",
+          "secure": false
+        }
+      ],
+      "jobs": [
+        {
+          "name": "build",
+          "run_on_all_agents": false,
+          "run_instance_count": 0,
+          "timeout": null,
+          "environment_variables": [
+
+          ],
+          "resources": [
+            "jdk5",
+            "tomcat5"
+          ],
+          "tasks": [
+            {
+              "type": "ant",
+              "attributes": {
+                "target": "clean",
+                "working_dir": "dir"
+              }
+            }
+          ],
+          "artifacts": [
+            {
+              "src": "target/dist.jar",
+              "dest": "pkg",
+              "type": "build"
+            },
+            {
+              "src": "target/reports/**/*Test.xml",
+              "dest": "reports",
+              "type": "test"
+            }
+          ],
+          "tabs": [
+            {
+              "name": "coverage",
+              "path": "Jcoverage/index.html"
+            }
+          ],
+          "properties": [
+            {
+              "name": "coverage.class",
+              "src": "target/emma/coverage.xml",
+              "xpath": "substring-before(//report/data/all/coverage[starts-with(@type,'class')]/@value, '%')"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
