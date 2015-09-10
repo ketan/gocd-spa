@@ -16,28 +16,21 @@
 
 
 define(['mithril', 'lodash', 'string-plus', './model_mixins'], function (m, _, s, Mixins) {
-
-  var EnvironmentVariables = function (data) {
-    Mixins.HasMany.call(this, {
-      factory:    EnvironmentVariables.Variable.create,
-      as:         'Variable',
-      collection: data,
-      uniqueOn:   'name'
-    });
+  var Tabs = function (data) {
+    Mixins.HasMany.call(this, {factory: Tabs.Tab.create, as: 'Tab', collection: data, uniqueOn: 'name'});
   };
 
-  EnvironmentVariables.Variable = function (data) {
-    this.constructor.modelType = 'environmentVariable';
+  Tabs.Tab = function (data) {
+    this.constructor.modelType = 'tab';
     Mixins.HasUUID.call(this);
 
     this.parent = Mixins.GetterSetter();
 
-    this.name   = m.prop(s.defaultToIfBlank(data.name, ''));
-    this.value  = m.prop(s.defaultToIfBlank(data.value, ''));
-    this.secure = m.prop(data.secure);
+    this.name = m.prop(s.defaultToIfBlank(data.name, ''));
+    this.path = m.prop(s.defaultToIfBlank(data.path, ''));
 
     this.isBlank = function () {
-      return s.isBlank(this.name()) && s.isBlank(this.value());
+      return s.isBlank(this.name()) && s.isBlank(this.path());
     };
 
     this.validate = function () {
@@ -48,31 +41,30 @@ define(['mithril', 'lodash', 'string-plus', './model_mixins'], function (m, _, s
       }
 
       if (s.isBlank(this.name())) {
-        if (!s.isBlank(this.value())) {
+        if (!s.isBlank(this.path())) {
           errors.add('name', Mixins.ErrorMessages.mustBePresent('name'));
         }
       } else {
-        this.parent().validateUniqueVariableName(this, errors);
+        this.parent().validateUniqueTabName(this, errors);
       }
 
       return errors;
     };
   };
 
-  EnvironmentVariables.Variable.create = function (data) {
-    return new EnvironmentVariables.Variable(data);
+  Tabs.Tab.create = function (data) {
+    return new Tabs.Tab(data);
   };
 
   Mixins.fromJSONCollection({
-    parentType: EnvironmentVariables,
-    childType:  EnvironmentVariables.Variable,
-    via:        'addVariable'
+    parentType: Tabs,
+    childType:  Tabs.Tab,
+    via:        'addTab'
   });
 
-  EnvironmentVariables.Variable.fromJSON = function (data) {
-    return new EnvironmentVariables.Variable(_.pick(data, ['name', 'value', 'secure']));
+  Tabs.Tab.fromJSON = function (data) {
+    return new Tabs.Tab(_.pick(data, ['name', 'path']));
   };
 
-  return EnvironmentVariables;
-
+  return Tabs;
 });

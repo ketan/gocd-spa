@@ -15,21 +15,46 @@
  */
 
 
-define(['mithril', 'lodash', 'string', './model_mixins', './constraints'], function (m, _, s, Mixins, constraints) {
+define(['mithril', 'lodash', 'string-plus', './model_mixins'], function (m, _, s, Mixins) {
 
   var Parameters = function (data) {
-    Mixins.Validator.call(this);
-    Mixins.HasMany.call(this, {factory: Parameters.Parameter.create, as: 'Parameter', collection: data});
+    Mixins.HasMany.call(this, {
+      factory:    Parameters.Parameter.create,
+      as:         'Parameter',
+      collection: data,
+      uniqueOn:   'name'
+    });
   };
 
   Parameters.Parameter = function (data) {
-    Mixins.Validator.call(this);
-    Mixins.UniqueInCollection.call(this, {uniqueOn: 'name', type: 'Parameter'});
-    this.name  = m.prop(data.name || null);
-    this.value = m.prop(data.value || null);
+    this.constructor.modelType = 'parameter';
+    Mixins.HasUUID.call(this);
+
+    this.parent = Mixins.GetterSetter();
+
+    this.name  = m.prop(s.defaultToIfBlank(data.name, ''));
+    this.value = m.prop(s.defaultToIfBlank(data.value, ''));
 
     this.isBlank = function () {
       return s.isBlank(this.name()) && s.isBlank(this.value());
+    };
+
+    this.validate = function () {
+      var errors = new Mixins.Errors();
+
+      if (this.isBlank()) {
+        return errors;
+      }
+
+      if (s.isBlank(this.name())) {
+        if (!s.isBlank(this.value())) {
+          errors.add('name', Mixins.ErrorMessages.mustBePresent('name'));
+        }
+      } else {
+        this.parent().validateUniqueParameterName(this, errors);
+      }
+
+      return errors;
     };
   };
 
@@ -42,10 +67,6 @@ define(['mithril', 'lodash', 'string', './model_mixins', './constraints'], funct
     childType:  Parameters.Parameter,
     via:        'addParameter'
   });
-
-  Parameters.Parameter.Constraints = {
-    name: constraints.name
-  };
 
   Parameters.Parameter.fromJSON = function (data) {
     return new Parameters.Parameter(_.pick(data, ['name', 'value']));

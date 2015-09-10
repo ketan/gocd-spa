@@ -15,10 +15,14 @@
  */
 
 
-requirejs(["jquery", "mithril", "pipeline_configs/views/pipeline_config_widget", 'foundation.topbar', 'foundation.accordion'], function ($, m, PipelineConfigWidget) {
+requirejs(["jquery", "mithril", 'pipeline_configs/models/pluggable_tasks', "pipeline_configs/views/pipeline_config_widget", 'foundation.topbar', 'foundation.accordion'], function ($, m, PluggableTasks, PipelineConfigWidget) {
   $(function () {
-    var pipelineConfigElem = $('#pipeline-config');
-    m.mount(pipelineConfigElem.get(0), PipelineConfigWidget(pipelineConfigElem.attr('data-pipeline-api-url')));
+    var pipelineConfigElem            = $('#pipeline-config');
+    var url                           = pipelineConfigElem.attr('data-pipeline-api-url');
+    var taskPluginTemplateDescriptors = JSON.parse(pipelineConfigElem.attr('data-task-template-plugins'));
+    PluggableTasks.initializeWith(taskPluginTemplateDescriptors);
+
+    m.mount(pipelineConfigElem.get(0), PipelineConfigWidget(url));
   });
 
   require(['domready'], function () {

@@ -41,14 +41,7 @@ define(['mithril', 'lodash'], function (m, _) {
 
     view: function (ctrl, args) {
       var appendStage = (
-        {tag: "li", attrs: {class:"add-stage"}, children: [
-          {tag: "div", attrs: {class:"label", 
-               onclick:ctrl.appendStage.bind(ctrl)}, children: [
-            {tag: "a", attrs: {
-              href:"javascript:void(0)"
-              }, children: ["+"]}
-          ]}
-        ]}
+        {tag: "li", attrs: {class:"add-stage", onclick:ctrl.appendStage.bind(ctrl)}}
       );
 
       var className = function (selection) {
@@ -63,7 +56,7 @@ define(['mithril', 'lodash'], function (m, _) {
 
           ctrl.stages.mapStages(function (stage) {
             return (
-              {tag: "li", attrs: {class:className(stage), onclick:ctrl.setSelection.bind(ctrl, stage)}, children: [
+              {tag: "li", attrs: {class:className(stage), onclick:ctrl.setSelection.bind(ctrl, stage), key:stage.uuid()}, children: [
                 {tag: "div", attrs: {className:"label"}, children: [stage.name()]}
               ]}
             );

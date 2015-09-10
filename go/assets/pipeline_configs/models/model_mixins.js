@@ -15,15 +15,61 @@
  */
 
 
-define(['lodash', 'validate-plus', 'string'], function (_, validate, s) {
+define(['lodash', 'string-plus'], function (_, s) {
 
   var Mixins = {};
+
+  Mixins.Errors = function () {
+    var errors = {};
+
+    this.add = function (attrName, message) {
+      errors[attrName] = errors[attrName] || [];
+      errors[attrName].push(message);
+    };
+
+    this.clear = function () {
+      errors = {};
+    };
+
+    this.errors = function (optionalAttribute) {
+      if (this._isEmpty()) {
+        return;
+      }
+
+      if (optionalAttribute) {
+        return errors[optionalAttribute];
+      }
+
+      return errors;
+    };
+
+    this._isEmpty = function () {
+      return _.isEmpty(errors);
+    };
+
+    this.errorsForDisplay = function (attrName) {
+      return _.map(errors[attrName] || [], function (message) {
+        return message + ".";
+      }).join(" ");
+    };
+  };
+
+  Mixins.HasUUID = function () {
+    this.uuid = Mixins.GetterSetter(this.constructor.modelType + '-' + s.uuid());
+  };
 
   Mixins.HasMany = function (options) {
     var factory               = options.factory;
     var associationName       = options.as;
-    var associationNamePlural = options.as + 's';
-    var collection            = m.prop(options.collection || []);
+    var associationNamePlural = s.defaultToIfBlank(options.plural, options.as + 's');
+    var uniqueOn              = options.uniqueOn;
+    var collection            = m.prop(s.defaultToIfBlank(options.collection, []));
+
+    this.toJSON = function () {
+      return _(collection()).map(function (item) {
+        return item.isBlank && item.isBlank() ? null : item;
+      }).compact().value();
+    };
 
     this['add' + associationName] = function (instance) {
       collection().push(instance);
@@ -45,12 +91,20 @@ define(['lodash', 'validate-plus', 'string'], function (_, validate, s) {
       return _.first(collection());
     };
 
+    this['count' + associationName] = function () {
+      return collection().length;
+    };
+
     this['previous' + associationName] = function (thing) {
       return collection()[_.indexOf(collection(), thing) - 1];
     };
 
     this['last' + associationName] = function () {
       return _.last(collection());
+    };
+
+    this['find' + associationName] = function (cb, thisArg) {
+      return _.find(collection(), cb, thisArg);
     };
 
     this['map' + associationNamePlural] = function (cb, thisArg) {
@@ -62,6 +116,15 @@ define(['lodash', 'validate-plus', 'string'], function (_, validate, s) {
         return child[propName]();
       });
     };
+
+    if (uniqueOn) {
+      this['validateUnique' + associationName + _.capitalize(uniqueOn)] = function (childModel, errors) {
+        var occurences = _.countBy(this['collect' + associationName + 'Property'](uniqueOn));
+        if (occurences[childModel[uniqueOn]()] > 1) {
+          errors.add(uniqueOn, Mixins.ErrorMessages.duplicate(uniqueOn));
+        }
+      };
+    }
   };
 
   Mixins.fromJSONCollection = function (options) {
@@ -82,53 +145,29 @@ define(['lodash', 'validate-plus', 'string'], function (_, validate, s) {
     };
   };
 
-  Mixins.UniqueInCollection = function (options) {
-    var uniqueOn = options.uniqueOn;
-    var type     = options.type;
-    var parent   = this.parent = m.prop();
-
-    this.constraints = function () {
-      var validations       = {};
-      validations[uniqueOn] = {
-        duplicates: function () {
-          return {
-            list: parent()['collect' + type + 'Property'](uniqueOn)
-          };
-        }
-      };
-      return validations;
+  // copy of mithri's m.prop without the toJSON on the getterSetter.
+  Mixins.GetterSetter = function (store) {
+    return function () {
+      if (arguments.length) {
+        store = arguments[0];
+      }
+      return store;
     };
   };
 
-  Mixins.Validator = function () {
-    var errors = null;
+  Mixins.Validations = {};
 
-    this.validate = function (constraints, shouldMerge) {
-      constraints = _.merge({}, constraints || this.constraints(), shouldMerge ? this.constraints() : {});
-
-      var asPlainObject = JSON.parse(JSON.stringify(this));
-      errors            = validate(asPlainObject, constraints);
-    };
-
-    this.errors = function (optionalAttribute) {
-      if (_.isEmpty(errors)) {
-        return;
-      }
-
-      if (optionalAttribute) {
-        return errors[optionalAttribute];
-      }
-
-      return errors;
-    };
-
-    this.errorForDisplay = function (optionalAttribute) {
-      return _.map(this.errors(optionalAttribute) || [], function (error) {
-        return error + ".";
-      }).join(" ");
-    };
+  Mixins.ErrorMessages = {
+    duplicate:     function (attribute) {
+      return s.humanize(attribute) + " is a duplicate";
+    },
+    mustBePresent: function (attribute) {
+      return s.humanize(attribute).replace(/\bxpath\b/i, 'XPath').replace(/\burl\b/i, 'URL') + " must be present";
+    },
+    mustBeAUrl:    function (attribute) {
+      return s.humanize(attribute) + "must be a valid http(s) url";
+    }
   };
 
   return Mixins;
-})
-;
+});

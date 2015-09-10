@@ -15,27 +15,40 @@
  */
 
 
-define(['mithril', 'lodash', './model_mixins', './environment_variables', './tasks', './artifact', './tab', './property'], function (m, _, Mixins, EnvironmentVariables, Tasks, Artifact, Tab, Property) {
+define(['mithril', 'lodash', 'string-plus', './model_mixins', './environment_variables', './tasks', './artifacts', './tabs', './properties'], function (m, _, s, Mixins, EnvironmentVariables, Tasks, Artifacts, Tabs, Properties) {
 
   var Jobs = function (data) {
-    Mixins.Validator.call(this);
-    Mixins.HasMany.call(this, {factory: Jobs.Job.create, as: 'Job', collection: data});
+    Mixins.HasMany.call(this, {factory: Jobs.Job.create, as: 'Job', collection: data, uniqueOn: 'name'});
   };
 
   Jobs.Job = function (data) {
-    Mixins.Validator.call(this);
-    Mixins.UniqueInCollection.call(this, {uniqueOn: 'name', type: 'Job'});
+    this.constructor.modelType = 'job';
+    Mixins.HasUUID.call(this);
 
-    this.name                 = m.prop(data.name || null);
+    this.parent = Mixins.GetterSetter();
+
+    this.name                 = m.prop(s.defaultToIfBlank(data.name, ''));
     this.runOnAllAgents       = m.prop(data.runOnAllAgents);
     this.runInstanceCount     = m.prop(data.runInstanceCount);
     this.timeout              = m.prop(data.timeout);
-    this.environmentVariables = m.prop(data.environmentVariables || new EnvironmentVariables());
-    this.resources            = m.prop(data.resources);
-    this.tasks                = m.prop(data.tasks || new Tasks());
-    this.artifacts            = m.prop(data.artifacts);
-    this.tabs                 = m.prop(data.tabs);
-    this.properties           = m.prop(data.properties);
+    this.resources            = m.prop(s.defaultToIfBlank(data.resources, ''));
+    this.environmentVariables = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.environmentVariables, new EnvironmentVariables())));
+    this.tasks                = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.tasks, new Tasks())));
+    this.artifacts            = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.artifacts, new Artifacts())));
+    this.tabs                 = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.tabs, new Tabs())));
+    this.properties           = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.properties, new Properties())));
+
+    this.validate = function () {
+      var errors = new Mixins.Errors();
+
+      if (s.isBlank(this.name())) {
+        errors.add('name', Mixins.ErrorMessages.mustBePresent('name'));
+      } else {
+        this.parent().validateUniqueJobName(this, errors);
+      }
+
+      return errors;
+    };
   };
 
   Jobs.Job.create = function (data) {
@@ -57,9 +70,9 @@ define(['mithril', 'lodash', './model_mixins', './environment_variables', './tas
       resources:            data.resources,
       environmentVariables: EnvironmentVariables.fromJSON(data.environment_variables),
       tasks:                Tasks.fromJSON(data.tasks),
-      artifacts:            Artifact.fromJSON(data.artifacts),
-      tabs:                 Tab.fromJSON(data.tabs),
-      properties:           Property.fromJSON(data.properties)
+      artifacts:            Artifacts.fromJSON(data.artifacts),
+      tabs:                 Tabs.fromJSON(data.tabs),
+      properties:           Properties.fromJSON(data.properties)
     });
   };
 

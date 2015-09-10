@@ -16,63 +16,63 @@
 
 
 define(['mithril', 'string-plus', '../helpers/form_helper'], function (m, _, f) {
-  var ParametersConfigWidget = {
+  var TabsConfigWidget = {
     controller: function (args) {
-      this.parameters = args.parameters;
+      this.tabs = args.tabs;
 
       this.add = function () {
-        this.parameters.createParameter();
+        this.tabs.createTab();
       };
 
-      this.remove = function (parameter) {
-        this.parameters.removeParameter(parameter);
-        this.paramChanged();
+      this.remove = function (tab) {
+        this.tabs.removeTab(tab);
+        this.tabChanged();
       };
 
-      this.lastParameter = function () {
-        return this.parameters.lastParameter();
+      this.lastTab = function () {
+        return this.tabs.lastTab();
       };
 
-      this.paramChanged = function () {
-        if (!this.lastParameter() || !this.lastParameter().isBlank()) {
+      this.tabChanged = function () {
+        if (!this.lastTab() || !this.lastTab().isBlank()) {
           this.add();
         }
       };
 
-      this.paramChanged();
+      this.tabChanged();
     },
 
     view: function (ctrl) {
-      var removeLink = function (parameter) {
-        if (parameter !== ctrl.lastParameter()) {
+      var removeLink = function (tab) {
+        if (tab !== ctrl.lastTab()) {
           return ({tag: "a", attrs: {
               href:"javascript:void(0)", 
               class:"remove", 
-              onclick:ctrl.remove.bind(ctrl, parameter)}}
+              onclick:ctrl.remove.bind(ctrl, tab)}}
           );
         }
       };
 
       return (
-        {tag: "fieldset", attrs: {class:"parameters"}, children: [
-          {tag: "legend", attrs: {}, children: ["Parameters"]}, 
-          ctrl.parameters.mapParameters(function (parameter) {
+        {tag: "fieldset", attrs: {class:"tabs"}, children: [
+          {tag: "legend", attrs: {}, children: ["Tabs"]}, 
+          ctrl.tabs.mapTabs(function (tab) {
             return (
-              m.component(f.row, {class:"parameter", "data-parameter-name":parameter.name(), key:parameter.uuid()}, [
+              m.component(f.row, {class:"tab", "data-tab-name":tab.name(), key:tab.uuid()}, [
                 m.component(f.input, {
-                  model:parameter, 
+                  model:tab, 
                   attrName:"name", 
-                  onchange:ctrl.paramChanged.bind(ctrl), 
+                  onchange:ctrl.tabChanged.bind(ctrl), 
                   size:4}), 
 
                 m.component(f.input, {
-                  model:parameter, 
-                  attrName:"value", 
-                  onchange:ctrl.paramChanged.bind(ctrl), 
+                  model:tab, 
+                  attrName:"path", 
+                  onchange:ctrl.tabChanged.bind(ctrl), 
                   size:4}), 
 
                 m.component(f.column, {size:3, end:true}, [
-                  removeLink(parameter)
+                  removeLink(tab)
                 ])
               ])
             );
@@ -82,5 +82,5 @@ define(['mithril', 'string-plus', '../helpers/form_helper'], function (m, _, f) 
     }
   };
 
-  return ParametersConfigWidget;
+  return TabsConfigWidget;
 });

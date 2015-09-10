@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*
  * Copyright 2015 ThoughtWorks, Inc.
  *
@@ -2183,6 +2182,81 @@ select {
   display: block;
 }
 
+/* line 112, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box {
+  border-style: solid;
+  border-width: 1px;
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: normal;
+  margin-bottom: 1.25rem;
+  padding: 0.875rem 1.5rem 0.875rem 0.875rem;
+  position: relative;
+  transition: opacity 300ms ease-out;
+  background-color: #008CBA;
+  border-color: #0078a0;
+  color: #FFFFFF;
+}
+/* line 115, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box .close {
+  right: 0.25rem;
+  background: inherit;
+  color: #333333;
+  font-size: 1.375rem;
+  line-height: .9;
+  margin-top: -0.6875rem;
+  opacity: 0.3;
+  padding: 0 6px 4px;
+  position: absolute;
+  top: 50%;
+}
+/* line 96, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box .close:hover, .alert-box .close:focus {
+  opacity: 0.5;
+}
+/* line 117, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box.radius {
+  border-radius: 3px;
+}
+/* line 118, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box.round {
+  border-radius: 1000px;
+}
+/* line 120, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box.success {
+  background-color: #43AC6A;
+  border-color: #3a945b;
+  color: #FFFFFF;
+}
+/* line 121, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box.alert {
+  background-color: #f04124;
+  border-color: #de2d0f;
+  color: #FFFFFF;
+}
+/* line 122, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box.secondary {
+  background-color: #e7e7e7;
+  border-color: #c7c7c7;
+  color: #4f4f4f;
+}
+/* line 123, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box.warning {
+  background-color: #f08a24;
+  border-color: #de770f;
+  color: #FFFFFF;
+}
+/* line 124, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box.info {
+  background-color: #a0d3e8;
+  border-color: #74bfdd;
+  color: #4f4f4f;
+}
+/* line 125, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_alert-boxes.scss */
+.alert-box.alert-close {
+  opacity: 0;
+}
+
 /* Standard Forms */
 /* line 387, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_forms.scss */
 form {
@@ -2832,6 +2906,138 @@ label.error {
 /* line 236, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_switches.scss */
 .switch.round label:after {
   border-radius: 2rem;
+}
+
+/* line 30, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs {
+  margin-bottom: 0 !important;
+  margin-left: 0;
+}
+/* line 172, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.tabs:before, .tabs:after {
+  content: " ";
+  display: table;
+}
+/* line 173, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.tabs:after {
+  clear: both;
+}
+/* line 35, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs dd,
+.tabs .tab-title {
+  float: left;
+  list-style: none;
+  margin-bottom: 0 !important;
+  position: relative;
+}
+/* line 42, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs dd > a,
+.tabs .tab-title > a {
+  display: block;
+  background-color: #EFEFEF;
+  color: #222222;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+}
+/* line 50, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs dd > a:hover,
+.tabs .tab-title > a:hover {
+  background-color: #e1e1e1;
+}
+/* line 55, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs dd.active a,
+.tabs .tab-title.active a {
+  background-color: #FFFFFF;
+  color: #222222;
+}
+/* line 64, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs.radius dd:first-child a,
+.tabs.radius .tab:first-child a {
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+/* line 69, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs.radius dd:last-child a,
+.tabs.radius .tab:last-child a {
+  -webkit-border-bottom-right-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+/* line 74, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs.vertical dd,
+.tabs.vertical .tab-title {
+  position: inherit;
+  float: none;
+  display: block;
+  top: auto;
+}
+
+/* line 84, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs-content {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+/* line 172, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.tabs-content:before, .tabs-content:after {
+  content: " ";
+  display: table;
+}
+/* line 173, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
+.tabs-content:after {
+  clear: both;
+}
+/* line 89, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs-content > .content {
+  display: none;
+  float: left;
+  padding: 0.9375rem 0;
+  width: 100%;
+}
+/* line 95, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs-content > .content.active {
+  display: block;
+  float: none;
+}
+/* line 99, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs-content > .content.contained {
+  padding: 0.9375rem;
+}
+/* line 104, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs-content.vertical {
+  display: block;
+}
+/* line 107, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.tabs-content.vertical > .content {
+  padding: 0 0.9375rem;
+}
+
+@media only screen and (min-width: 40.0625em) {
+  /* line 115, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+  .tabs.vertical {
+    float: left;
+    margin: 0;
+    margin-bottom: 1.25rem !important;
+    max-width: 20%;
+    width: 20%;
+  }
+
+  /* line 125, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+  .tabs-content.vertical {
+    float: left;
+    margin-left: -1px;
+    max-width: 80%;
+    padding-left: 1rem;
+    width: 80%;
+  }
+}
+/* line 136, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
+.no-js .tabs-content > .content {
+  display: block;
+  float: none;
 }
 
 /* line 113, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_top-bar.scss */
@@ -4217,6 +4423,706 @@ blockquote p {
     font-size: 1rem;
   }
 }
+/* small displays */
+@media only screen {
+  /* line 244, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-small-only, .show-for-small-up, .show-for-small, .show-for-small-down, .hide-for-medium-only, .hide-for-medium-up, .hide-for-medium, .show-for-medium-down, .hide-for-large-only, .hide-for-large-up, .hide-for-large, .show-for-large-down, .hide-for-xlarge-only, .hide-for-xlarge-up, .hide-for-xlarge, .show-for-xlarge-down, .hide-for-xxlarge-only, .hide-for-xxlarge-up, .hide-for-xxlarge, .show-for-xxlarge-down {
+    display: inherit !important;
+  }
+
+  /* line 247, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-for-small-only, .hide-for-small-up, .hide-for-small, .hide-for-small-down, .show-for-medium-only, .show-for-medium-up, .show-for-medium, .hide-for-medium-down, .show-for-large-only, .show-for-large-up, .show-for-large, .hide-for-large-down, .show-for-xlarge-only, .show-for-xlarge-up, .show-for-xlarge, .hide-for-xlarge-down, .show-for-xxlarge-only, .show-for-xxlarge-up, .show-for-xxlarge, .hide-for-xxlarge-down {
+    display: none !important;
+  }
+
+  /* line 251, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .visible-for-small-only, .visible-for-small-up, .visible-for-small, .visible-for-small-down, .hidden-for-medium-only, .hidden-for-medium-up, .hidden-for-medium, .visible-for-medium-down, .hidden-for-large-only, .hidden-for-large-up, .hidden-for-large, .visible-for-large-down, .hidden-for-xlarge-only, .hidden-for-xlarge-up, .hidden-for-xlarge, .visible-for-xlarge-down, .hidden-for-xxlarge-only, .hidden-for-xxlarge-up, .hidden-for-xxlarge, .visible-for-xxlarge-down {
+    position: static !important;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  /* line 254, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hidden-for-small-only, .hidden-for-small-up, .hidden-for-small, .hidden-for-small-down, .visible-for-medium-only, .visible-for-medium-up, .visible-for-medium, .hidden-for-medium-down, .visible-for-large-only, .visible-for-large-up, .visible-for-large, .hidden-for-large-down, .visible-for-xlarge-only, .visible-for-xlarge-up, .visible-for-xlarge, .hidden-for-xlarge-down, .visible-for-xxlarge-only, .visible-for-xxlarge-up, .visible-for-xxlarge, .hidden-for-xxlarge-down {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute !important;
+    width: 1px;
+  }
+
+  /* line 259, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  table.show-for-small-only, table.show-for-small-up, table.show-for-small, table.show-for-small-down, table.hide-for-medium-only, table.hide-for-medium-up, table.hide-for-medium, table.show-for-medium-down, table.hide-for-large-only, table.hide-for-large-up, table.hide-for-large, table.show-for-large-down, table.hide-for-xlarge-only, table.hide-for-xlarge-up, table.hide-for-xlarge, table.show-for-xlarge-down, table.hide-for-xxlarge-only, table.hide-for-xxlarge-up, table.hide-for-xxlarge, table.show-for-xxlarge-down {
+    display: table !important;
+  }
+
+  /* line 262, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  thead.show-for-small-only, thead.show-for-small-up, thead.show-for-small, thead.show-for-small-down, thead.hide-for-medium-only, thead.hide-for-medium-up, thead.hide-for-medium, thead.show-for-medium-down, thead.hide-for-large-only, thead.hide-for-large-up, thead.hide-for-large, thead.show-for-large-down, thead.hide-for-xlarge-only, thead.hide-for-xlarge-up, thead.hide-for-xlarge, thead.show-for-xlarge-down, thead.hide-for-xxlarge-only, thead.hide-for-xxlarge-up, thead.hide-for-xxlarge, thead.show-for-xxlarge-down {
+    display: table-header-group !important;
+  }
+
+  /* line 265, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tbody.show-for-small-only, tbody.show-for-small-up, tbody.show-for-small, tbody.show-for-small-down, tbody.hide-for-medium-only, tbody.hide-for-medium-up, tbody.hide-for-medium, tbody.show-for-medium-down, tbody.hide-for-large-only, tbody.hide-for-large-up, tbody.hide-for-large, tbody.show-for-large-down, tbody.hide-for-xlarge-only, tbody.hide-for-xlarge-up, tbody.hide-for-xlarge, tbody.show-for-xlarge-down, tbody.hide-for-xxlarge-only, tbody.hide-for-xxlarge-up, tbody.hide-for-xxlarge, tbody.show-for-xxlarge-down {
+    display: table-row-group !important;
+  }
+
+  /* line 268, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tr.show-for-small-only, tr.show-for-small-up, tr.show-for-small, tr.show-for-small-down, tr.hide-for-medium-only, tr.hide-for-medium-up, tr.hide-for-medium, tr.show-for-medium-down, tr.hide-for-large-only, tr.hide-for-large-up, tr.hide-for-large, tr.show-for-large-down, tr.hide-for-xlarge-only, tr.hide-for-xlarge-up, tr.hide-for-xlarge, tr.show-for-xlarge-down, tr.hide-for-xxlarge-only, tr.hide-for-xxlarge-up, tr.hide-for-xxlarge, tr.show-for-xxlarge-down {
+    display: table-row;
+  }
+
+  /* line 271, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  th.show-for-small-only, td.show-for-small-only, th.show-for-small-up, td.show-for-small-up, th.show-for-small, td.show-for-small, th.show-for-small-down, td.show-for-small-down, th.hide-for-medium-only, td.hide-for-medium-only, th.hide-for-medium-up, td.hide-for-medium-up, th.hide-for-medium, td.hide-for-medium, th.show-for-medium-down, td.show-for-medium-down, th.hide-for-large-only, td.hide-for-large-only, th.hide-for-large-up, td.hide-for-large-up, th.hide-for-large, td.hide-for-large, th.show-for-large-down, td.show-for-large-down, th.hide-for-xlarge-only, td.hide-for-xlarge-only, th.hide-for-xlarge-up, td.hide-for-xlarge-up, th.hide-for-xlarge, td.hide-for-xlarge, th.show-for-xlarge-down, td.show-for-xlarge-down, th.hide-for-xxlarge-only, td.hide-for-xxlarge-only, th.hide-for-xxlarge-up, td.hide-for-xxlarge-up, th.hide-for-xxlarge, td.hide-for-xxlarge, th.show-for-xxlarge-down, td.show-for-xxlarge-down {
+    display: table-cell !important;
+  }
+}
+/* medium displays */
+@media only screen and (min-width: 40.0625em) {
+  /* line 244, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-for-small-only, .show-for-small-up, .hide-for-small, .hide-for-small-down, .show-for-medium-only, .show-for-medium-up, .show-for-medium, .show-for-medium-down, .hide-for-large-only, .hide-for-large-up, .hide-for-large, .show-for-large-down, .hide-for-xlarge-only, .hide-for-xlarge-up, .hide-for-xlarge, .show-for-xlarge-down, .hide-for-xxlarge-only, .hide-for-xxlarge-up, .hide-for-xxlarge, .show-for-xxlarge-down {
+    display: inherit !important;
+  }
+
+  /* line 247, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-small-only, .hide-for-small-up, .show-for-small, .show-for-small-down, .hide-for-medium-only, .hide-for-medium-up, .hide-for-medium, .hide-for-medium-down, .show-for-large-only, .show-for-large-up, .show-for-large, .hide-for-large-down, .show-for-xlarge-only, .show-for-xlarge-up, .show-for-xlarge, .hide-for-xlarge-down, .show-for-xxlarge-only, .show-for-xxlarge-up, .show-for-xxlarge, .hide-for-xxlarge-down {
+    display: none !important;
+  }
+
+  /* line 251, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hidden-for-small-only, .visible-for-small-up, .hidden-for-small, .hidden-for-small-down, .visible-for-medium-only, .visible-for-medium-up, .visible-for-medium, .visible-for-medium-down, .hidden-for-large-only, .hidden-for-large-up, .hidden-for-large, .visible-for-large-down, .hidden-for-xlarge-only, .hidden-for-xlarge-up, .hidden-for-xlarge, .visible-for-xlarge-down, .hidden-for-xxlarge-only, .hidden-for-xxlarge-up, .hidden-for-xxlarge, .visible-for-xxlarge-down {
+    position: static !important;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  /* line 254, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .visible-for-small-only, .hidden-for-small-up, .visible-for-small, .visible-for-small-down, .hidden-for-medium-only, .hidden-for-medium-up, .hidden-for-medium, .hidden-for-medium-down, .visible-for-large-only, .visible-for-large-up, .visible-for-large, .hidden-for-large-down, .visible-for-xlarge-only, .visible-for-xlarge-up, .visible-for-xlarge, .hidden-for-xlarge-down, .visible-for-xxlarge-only, .visible-for-xxlarge-up, .visible-for-xxlarge, .hidden-for-xxlarge-down {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute !important;
+    width: 1px;
+  }
+
+  /* line 259, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  table.hide-for-small-only, table.show-for-small-up, table.hide-for-small, table.hide-for-small-down, table.show-for-medium-only, table.show-for-medium-up, table.show-for-medium, table.show-for-medium-down, table.hide-for-large-only, table.hide-for-large-up, table.hide-for-large, table.show-for-large-down, table.hide-for-xlarge-only, table.hide-for-xlarge-up, table.hide-for-xlarge, table.show-for-xlarge-down, table.hide-for-xxlarge-only, table.hide-for-xxlarge-up, table.hide-for-xxlarge, table.show-for-xxlarge-down {
+    display: table !important;
+  }
+
+  /* line 262, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  thead.hide-for-small-only, thead.show-for-small-up, thead.hide-for-small, thead.hide-for-small-down, thead.show-for-medium-only, thead.show-for-medium-up, thead.show-for-medium, thead.show-for-medium-down, thead.hide-for-large-only, thead.hide-for-large-up, thead.hide-for-large, thead.show-for-large-down, thead.hide-for-xlarge-only, thead.hide-for-xlarge-up, thead.hide-for-xlarge, thead.show-for-xlarge-down, thead.hide-for-xxlarge-only, thead.hide-for-xxlarge-up, thead.hide-for-xxlarge, thead.show-for-xxlarge-down {
+    display: table-header-group !important;
+  }
+
+  /* line 265, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tbody.hide-for-small-only, tbody.show-for-small-up, tbody.hide-for-small, tbody.hide-for-small-down, tbody.show-for-medium-only, tbody.show-for-medium-up, tbody.show-for-medium, tbody.show-for-medium-down, tbody.hide-for-large-only, tbody.hide-for-large-up, tbody.hide-for-large, tbody.show-for-large-down, tbody.hide-for-xlarge-only, tbody.hide-for-xlarge-up, tbody.hide-for-xlarge, tbody.show-for-xlarge-down, tbody.hide-for-xxlarge-only, tbody.hide-for-xxlarge-up, tbody.hide-for-xxlarge, tbody.show-for-xxlarge-down {
+    display: table-row-group !important;
+  }
+
+  /* line 268, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tr.hide-for-small-only, tr.show-for-small-up, tr.hide-for-small, tr.hide-for-small-down, tr.show-for-medium-only, tr.show-for-medium-up, tr.show-for-medium, tr.show-for-medium-down, tr.hide-for-large-only, tr.hide-for-large-up, tr.hide-for-large, tr.show-for-large-down, tr.hide-for-xlarge-only, tr.hide-for-xlarge-up, tr.hide-for-xlarge, tr.show-for-xlarge-down, tr.hide-for-xxlarge-only, tr.hide-for-xxlarge-up, tr.hide-for-xxlarge, tr.show-for-xxlarge-down {
+    display: table-row;
+  }
+
+  /* line 271, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  th.hide-for-small-only, td.hide-for-small-only, th.show-for-small-up, td.show-for-small-up, th.hide-for-small, td.hide-for-small, th.hide-for-small-down, td.hide-for-small-down, th.show-for-medium-only, td.show-for-medium-only, th.show-for-medium-up, td.show-for-medium-up, th.show-for-medium, td.show-for-medium, th.show-for-medium-down, td.show-for-medium-down, th.hide-for-large-only, td.hide-for-large-only, th.hide-for-large-up, td.hide-for-large-up, th.hide-for-large, td.hide-for-large, th.show-for-large-down, td.show-for-large-down, th.hide-for-xlarge-only, td.hide-for-xlarge-only, th.hide-for-xlarge-up, td.hide-for-xlarge-up, th.hide-for-xlarge, td.hide-for-xlarge, th.show-for-xlarge-down, td.show-for-xlarge-down, th.hide-for-xxlarge-only, td.hide-for-xxlarge-only, th.hide-for-xxlarge-up, td.hide-for-xxlarge-up, th.hide-for-xxlarge, td.hide-for-xxlarge, th.show-for-xxlarge-down, td.show-for-xxlarge-down {
+    display: table-cell !important;
+  }
+}
+/* large displays */
+@media only screen and (min-width: 64.0625em) {
+  /* line 244, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-for-small-only, .show-for-small-up, .hide-for-small, .hide-for-small-down, .hide-for-medium-only, .show-for-medium-up, .hide-for-medium, .hide-for-medium-down, .show-for-large-only, .show-for-large-up, .show-for-large, .show-for-large-down, .hide-for-xlarge-only, .hide-for-xlarge-up, .hide-for-xlarge, .show-for-xlarge-down, .hide-for-xxlarge-only, .hide-for-xxlarge-up, .hide-for-xxlarge, .show-for-xxlarge-down {
+    display: inherit !important;
+  }
+
+  /* line 247, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-small-only, .hide-for-small-up, .show-for-small, .show-for-small-down, .show-for-medium-only, .hide-for-medium-up, .show-for-medium, .show-for-medium-down, .hide-for-large-only, .hide-for-large-up, .hide-for-large, .hide-for-large-down, .show-for-xlarge-only, .show-for-xlarge-up, .show-for-xlarge, .hide-for-xlarge-down, .show-for-xxlarge-only, .show-for-xxlarge-up, .show-for-xxlarge, .hide-for-xxlarge-down {
+    display: none !important;
+  }
+
+  /* line 251, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hidden-for-small-only, .visible-for-small-up, .hidden-for-small, .hidden-for-small-down, .hidden-for-medium-only, .visible-for-medium-up, .hidden-for-medium, .hidden-for-medium-down, .visible-for-large-only, .visible-for-large-up, .visible-for-large, .visible-for-large-down, .hidden-for-xlarge-only, .hidden-for-xlarge-up, .hidden-for-xlarge, .visible-for-xlarge-down, .hidden-for-xxlarge-only, .hidden-for-xxlarge-up, .hidden-for-xxlarge, .visible-for-xxlarge-down {
+    position: static !important;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  /* line 254, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .visible-for-small-only, .hidden-for-small-up, .visible-for-small, .visible-for-small-down, .visible-for-medium-only, .hidden-for-medium-up, .visible-for-medium, .visible-for-medium-down, .hidden-for-large-only, .hidden-for-large-up, .hidden-for-large, .hidden-for-large-down, .visible-for-xlarge-only, .visible-for-xlarge-up, .visible-for-xlarge, .hidden-for-xlarge-down, .visible-for-xxlarge-only, .visible-for-xxlarge-up, .visible-for-xxlarge, .hidden-for-xxlarge-down {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute !important;
+    width: 1px;
+  }
+
+  /* line 259, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  table.hide-for-small-only, table.show-for-small-up, table.hide-for-small, table.hide-for-small-down, table.hide-for-medium-only, table.show-for-medium-up, table.hide-for-medium, table.hide-for-medium-down, table.show-for-large-only, table.show-for-large-up, table.show-for-large, table.show-for-large-down, table.hide-for-xlarge-only, table.hide-for-xlarge-up, table.hide-for-xlarge, table.show-for-xlarge-down, table.hide-for-xxlarge-only, table.hide-for-xxlarge-up, table.hide-for-xxlarge, table.show-for-xxlarge-down {
+    display: table !important;
+  }
+
+  /* line 262, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  thead.hide-for-small-only, thead.show-for-small-up, thead.hide-for-small, thead.hide-for-small-down, thead.hide-for-medium-only, thead.show-for-medium-up, thead.hide-for-medium, thead.hide-for-medium-down, thead.show-for-large-only, thead.show-for-large-up, thead.show-for-large, thead.show-for-large-down, thead.hide-for-xlarge-only, thead.hide-for-xlarge-up, thead.hide-for-xlarge, thead.show-for-xlarge-down, thead.hide-for-xxlarge-only, thead.hide-for-xxlarge-up, thead.hide-for-xxlarge, thead.show-for-xxlarge-down {
+    display: table-header-group !important;
+  }
+
+  /* line 265, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tbody.hide-for-small-only, tbody.show-for-small-up, tbody.hide-for-small, tbody.hide-for-small-down, tbody.hide-for-medium-only, tbody.show-for-medium-up, tbody.hide-for-medium, tbody.hide-for-medium-down, tbody.show-for-large-only, tbody.show-for-large-up, tbody.show-for-large, tbody.show-for-large-down, tbody.hide-for-xlarge-only, tbody.hide-for-xlarge-up, tbody.hide-for-xlarge, tbody.show-for-xlarge-down, tbody.hide-for-xxlarge-only, tbody.hide-for-xxlarge-up, tbody.hide-for-xxlarge, tbody.show-for-xxlarge-down {
+    display: table-row-group !important;
+  }
+
+  /* line 268, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tr.hide-for-small-only, tr.show-for-small-up, tr.hide-for-small, tr.hide-for-small-down, tr.hide-for-medium-only, tr.show-for-medium-up, tr.hide-for-medium, tr.hide-for-medium-down, tr.show-for-large-only, tr.show-for-large-up, tr.show-for-large, tr.show-for-large-down, tr.hide-for-xlarge-only, tr.hide-for-xlarge-up, tr.hide-for-xlarge, tr.show-for-xlarge-down, tr.hide-for-xxlarge-only, tr.hide-for-xxlarge-up, tr.hide-for-xxlarge, tr.show-for-xxlarge-down {
+    display: table-row;
+  }
+
+  /* line 271, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  th.hide-for-small-only, td.hide-for-small-only, th.show-for-small-up, td.show-for-small-up, th.hide-for-small, td.hide-for-small, th.hide-for-small-down, td.hide-for-small-down, th.hide-for-medium-only, td.hide-for-medium-only, th.show-for-medium-up, td.show-for-medium-up, th.hide-for-medium, td.hide-for-medium, th.hide-for-medium-down, td.hide-for-medium-down, th.show-for-large-only, td.show-for-large-only, th.show-for-large-up, td.show-for-large-up, th.show-for-large, td.show-for-large, th.show-for-large-down, td.show-for-large-down, th.hide-for-xlarge-only, td.hide-for-xlarge-only, th.hide-for-xlarge-up, td.hide-for-xlarge-up, th.hide-for-xlarge, td.hide-for-xlarge, th.show-for-xlarge-down, td.show-for-xlarge-down, th.hide-for-xxlarge-only, td.hide-for-xxlarge-only, th.hide-for-xxlarge-up, td.hide-for-xxlarge-up, th.hide-for-xxlarge, td.hide-for-xxlarge, th.show-for-xxlarge-down, td.show-for-xxlarge-down {
+    display: table-cell !important;
+  }
+}
+/* xlarge displays */
+@media only screen and (min-width: 90.0625em) {
+  /* line 244, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-for-small-only, .show-for-small-up, .hide-for-small, .hide-for-small-down, .hide-for-medium-only, .show-for-medium-up, .hide-for-medium, .hide-for-medium-down, .hide-for-large-only, .show-for-large-up, .hide-for-large, .hide-for-large-down, .show-for-xlarge-only, .show-for-xlarge-up, .show-for-xlarge, .show-for-xlarge-down, .hide-for-xxlarge-only, .hide-for-xxlarge-up, .hide-for-xxlarge, .show-for-xxlarge-down {
+    display: inherit !important;
+  }
+
+  /* line 247, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-small-only, .hide-for-small-up, .show-for-small, .show-for-small-down, .show-for-medium-only, .hide-for-medium-up, .show-for-medium, .show-for-medium-down, .show-for-large-only, .hide-for-large-up, .show-for-large, .show-for-large-down, .hide-for-xlarge-only, .hide-for-xlarge-up, .hide-for-xlarge, .hide-for-xlarge-down, .show-for-xxlarge-only, .show-for-xxlarge-up, .show-for-xxlarge, .hide-for-xxlarge-down {
+    display: none !important;
+  }
+
+  /* line 251, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hidden-for-small-only, .visible-for-small-up, .hidden-for-small, .hidden-for-small-down, .hidden-for-medium-only, .visible-for-medium-up, .hidden-for-medium, .hidden-for-medium-down, .hidden-for-large-only, .visible-for-large-up, .hidden-for-large, .hidden-for-large-down, .visible-for-xlarge-only, .visible-for-xlarge-up, .visible-for-xlarge, .visible-for-xlarge-down, .hidden-for-xxlarge-only, .hidden-for-xxlarge-up, .hidden-for-xxlarge, .visible-for-xxlarge-down {
+    position: static !important;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  /* line 254, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .visible-for-small-only, .hidden-for-small-up, .visible-for-small, .visible-for-small-down, .visible-for-medium-only, .hidden-for-medium-up, .visible-for-medium, .visible-for-medium-down, .visible-for-large-only, .hidden-for-large-up, .visible-for-large, .visible-for-large-down, .hidden-for-xlarge-only, .hidden-for-xlarge-up, .hidden-for-xlarge, .hidden-for-xlarge-down, .visible-for-xxlarge-only, .visible-for-xxlarge-up, .visible-for-xxlarge, .hidden-for-xxlarge-down {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute !important;
+    width: 1px;
+  }
+
+  /* line 259, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  table.hide-for-small-only, table.show-for-small-up, table.hide-for-small, table.hide-for-small-down, table.hide-for-medium-only, table.show-for-medium-up, table.hide-for-medium, table.hide-for-medium-down, table.hide-for-large-only, table.show-for-large-up, table.hide-for-large, table.hide-for-large-down, table.show-for-xlarge-only, table.show-for-xlarge-up, table.show-for-xlarge, table.show-for-xlarge-down, table.hide-for-xxlarge-only, table.hide-for-xxlarge-up, table.hide-for-xxlarge, table.show-for-xxlarge-down {
+    display: table !important;
+  }
+
+  /* line 262, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  thead.hide-for-small-only, thead.show-for-small-up, thead.hide-for-small, thead.hide-for-small-down, thead.hide-for-medium-only, thead.show-for-medium-up, thead.hide-for-medium, thead.hide-for-medium-down, thead.hide-for-large-only, thead.show-for-large-up, thead.hide-for-large, thead.hide-for-large-down, thead.show-for-xlarge-only, thead.show-for-xlarge-up, thead.show-for-xlarge, thead.show-for-xlarge-down, thead.hide-for-xxlarge-only, thead.hide-for-xxlarge-up, thead.hide-for-xxlarge, thead.show-for-xxlarge-down {
+    display: table-header-group !important;
+  }
+
+  /* line 265, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tbody.hide-for-small-only, tbody.show-for-small-up, tbody.hide-for-small, tbody.hide-for-small-down, tbody.hide-for-medium-only, tbody.show-for-medium-up, tbody.hide-for-medium, tbody.hide-for-medium-down, tbody.hide-for-large-only, tbody.show-for-large-up, tbody.hide-for-large, tbody.hide-for-large-down, tbody.show-for-xlarge-only, tbody.show-for-xlarge-up, tbody.show-for-xlarge, tbody.show-for-xlarge-down, tbody.hide-for-xxlarge-only, tbody.hide-for-xxlarge-up, tbody.hide-for-xxlarge, tbody.show-for-xxlarge-down {
+    display: table-row-group !important;
+  }
+
+  /* line 268, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tr.hide-for-small-only, tr.show-for-small-up, tr.hide-for-small, tr.hide-for-small-down, tr.hide-for-medium-only, tr.show-for-medium-up, tr.hide-for-medium, tr.hide-for-medium-down, tr.hide-for-large-only, tr.show-for-large-up, tr.hide-for-large, tr.hide-for-large-down, tr.show-for-xlarge-only, tr.show-for-xlarge-up, tr.show-for-xlarge, tr.show-for-xlarge-down, tr.hide-for-xxlarge-only, tr.hide-for-xxlarge-up, tr.hide-for-xxlarge, tr.show-for-xxlarge-down {
+    display: table-row;
+  }
+
+  /* line 271, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  th.hide-for-small-only, td.hide-for-small-only, th.show-for-small-up, td.show-for-small-up, th.hide-for-small, td.hide-for-small, th.hide-for-small-down, td.hide-for-small-down, th.hide-for-medium-only, td.hide-for-medium-only, th.show-for-medium-up, td.show-for-medium-up, th.hide-for-medium, td.hide-for-medium, th.hide-for-medium-down, td.hide-for-medium-down, th.hide-for-large-only, td.hide-for-large-only, th.show-for-large-up, td.show-for-large-up, th.hide-for-large, td.hide-for-large, th.hide-for-large-down, td.hide-for-large-down, th.show-for-xlarge-only, td.show-for-xlarge-only, th.show-for-xlarge-up, td.show-for-xlarge-up, th.show-for-xlarge, td.show-for-xlarge, th.show-for-xlarge-down, td.show-for-xlarge-down, th.hide-for-xxlarge-only, td.hide-for-xxlarge-only, th.hide-for-xxlarge-up, td.hide-for-xxlarge-up, th.hide-for-xxlarge, td.hide-for-xxlarge, th.show-for-xxlarge-down, td.show-for-xxlarge-down {
+    display: table-cell !important;
+  }
+}
+/* xxlarge displays */
+@media only screen and (min-width: 120.0625em) {
+  /* line 244, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-for-small-only, .show-for-small-up, .hide-for-small, .hide-for-small-down, .hide-for-medium-only, .show-for-medium-up, .hide-for-medium, .hide-for-medium-down, .hide-for-large-only, .show-for-large-up, .hide-for-large, .hide-for-large-down, .hide-for-xlarge-only, .show-for-xlarge-up, .hide-for-xlarge, .hide-for-xlarge-down, .show-for-xxlarge-only, .show-for-xxlarge-up, .show-for-xxlarge, .show-for-xxlarge-down {
+    display: inherit !important;
+  }
+
+  /* line 247, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-small-only, .hide-for-small-up, .show-for-small, .show-for-small-down, .show-for-medium-only, .hide-for-medium-up, .show-for-medium, .show-for-medium-down, .show-for-large-only, .hide-for-large-up, .show-for-large, .show-for-large-down, .show-for-xlarge-only, .hide-for-xlarge-up, .show-for-xlarge, .show-for-xlarge-down, .hide-for-xxlarge-only, .hide-for-xxlarge-up, .hide-for-xxlarge, .hide-for-xxlarge-down {
+    display: none !important;
+  }
+
+  /* line 251, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hidden-for-small-only, .visible-for-small-up, .hidden-for-small, .hidden-for-small-down, .hidden-for-medium-only, .visible-for-medium-up, .hidden-for-medium, .hidden-for-medium-down, .hidden-for-large-only, .visible-for-large-up, .hidden-for-large, .hidden-for-large-down, .hidden-for-xlarge-only, .visible-for-xlarge-up, .hidden-for-xlarge, .hidden-for-xlarge-down, .visible-for-xxlarge-only, .visible-for-xxlarge-up, .visible-for-xxlarge, .visible-for-xxlarge-down {
+    position: static !important;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  /* line 254, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .visible-for-small-only, .hidden-for-small-up, .visible-for-small, .visible-for-small-down, .visible-for-medium-only, .hidden-for-medium-up, .visible-for-medium, .visible-for-medium-down, .visible-for-large-only, .hidden-for-large-up, .visible-for-large, .visible-for-large-down, .visible-for-xlarge-only, .hidden-for-xlarge-up, .visible-for-xlarge, .visible-for-xlarge-down, .hidden-for-xxlarge-only, .hidden-for-xxlarge-up, .hidden-for-xxlarge, .hidden-for-xxlarge-down {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute !important;
+    width: 1px;
+  }
+
+  /* line 259, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  table.hide-for-small-only, table.show-for-small-up, table.hide-for-small, table.hide-for-small-down, table.hide-for-medium-only, table.show-for-medium-up, table.hide-for-medium, table.hide-for-medium-down, table.hide-for-large-only, table.show-for-large-up, table.hide-for-large, table.hide-for-large-down, table.hide-for-xlarge-only, table.show-for-xlarge-up, table.hide-for-xlarge, table.hide-for-xlarge-down, table.show-for-xxlarge-only, table.show-for-xxlarge-up, table.show-for-xxlarge, table.show-for-xxlarge-down {
+    display: table !important;
+  }
+
+  /* line 262, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  thead.hide-for-small-only, thead.show-for-small-up, thead.hide-for-small, thead.hide-for-small-down, thead.hide-for-medium-only, thead.show-for-medium-up, thead.hide-for-medium, thead.hide-for-medium-down, thead.hide-for-large-only, thead.show-for-large-up, thead.hide-for-large, thead.hide-for-large-down, thead.hide-for-xlarge-only, thead.show-for-xlarge-up, thead.hide-for-xlarge, thead.hide-for-xlarge-down, thead.show-for-xxlarge-only, thead.show-for-xxlarge-up, thead.show-for-xxlarge, thead.show-for-xxlarge-down {
+    display: table-header-group !important;
+  }
+
+  /* line 265, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tbody.hide-for-small-only, tbody.show-for-small-up, tbody.hide-for-small, tbody.hide-for-small-down, tbody.hide-for-medium-only, tbody.show-for-medium-up, tbody.hide-for-medium, tbody.hide-for-medium-down, tbody.hide-for-large-only, tbody.show-for-large-up, tbody.hide-for-large, tbody.hide-for-large-down, tbody.hide-for-xlarge-only, tbody.show-for-xlarge-up, tbody.hide-for-xlarge, tbody.hide-for-xlarge-down, tbody.show-for-xxlarge-only, tbody.show-for-xxlarge-up, tbody.show-for-xxlarge, tbody.show-for-xxlarge-down {
+    display: table-row-group !important;
+  }
+
+  /* line 268, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tr.hide-for-small-only, tr.show-for-small-up, tr.hide-for-small, tr.hide-for-small-down, tr.hide-for-medium-only, tr.show-for-medium-up, tr.hide-for-medium, tr.hide-for-medium-down, tr.hide-for-large-only, tr.show-for-large-up, tr.hide-for-large, tr.hide-for-large-down, tr.hide-for-xlarge-only, tr.show-for-xlarge-up, tr.hide-for-xlarge, tr.hide-for-xlarge-down, tr.show-for-xxlarge-only, tr.show-for-xxlarge-up, tr.show-for-xxlarge, tr.show-for-xxlarge-down {
+    display: table-row;
+  }
+
+  /* line 271, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  th.hide-for-small-only, td.hide-for-small-only, th.show-for-small-up, td.show-for-small-up, th.hide-for-small, td.hide-for-small, th.hide-for-small-down, td.hide-for-small-down, th.hide-for-medium-only, td.hide-for-medium-only, th.show-for-medium-up, td.show-for-medium-up, th.hide-for-medium, td.hide-for-medium, th.hide-for-medium-down, td.hide-for-medium-down, th.hide-for-large-only, td.hide-for-large-only, th.show-for-large-up, td.show-for-large-up, th.hide-for-large, td.hide-for-large, th.hide-for-large-down, td.hide-for-large-down, th.hide-for-xlarge-only, td.hide-for-xlarge-only, th.show-for-xlarge-up, td.show-for-xlarge-up, th.hide-for-xlarge, td.hide-for-xlarge, th.hide-for-xlarge-down, td.hide-for-xlarge-down, th.show-for-xxlarge-only, td.show-for-xxlarge-only, th.show-for-xxlarge-up, td.show-for-xxlarge-up, th.show-for-xxlarge, td.show-for-xxlarge, th.show-for-xxlarge-down, td.show-for-xxlarge-down {
+    display: table-cell !important;
+  }
+}
+/* Orientation targeting */
+/* line 285, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.show-for-landscape,
+.hide-for-portrait {
+  display: inherit !important;
+}
+
+/* line 287, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.hide-for-landscape,
+.show-for-portrait {
+  display: none !important;
+}
+
+/* Specific visibility for tables */
+/* line 292, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+table.hide-for-landscape, table.show-for-portrait {
+  display: table !important;
+}
+
+/* line 296, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+thead.hide-for-landscape, thead.show-for-portrait {
+  display: table-header-group !important;
+}
+
+/* line 300, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+tbody.hide-for-landscape, tbody.show-for-portrait {
+  display: table-row-group !important;
+}
+
+/* line 304, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+tr.hide-for-landscape, tr.show-for-portrait {
+  display: table-row !important;
+}
+
+/* line 309, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+td.hide-for-landscape, td.show-for-portrait,
+th.hide-for-landscape,
+th.show-for-portrait {
+  display: table-cell !important;
+}
+
+@media only screen and (orientation: landscape) {
+  /* line 314, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-landscape,
+  .hide-for-portrait {
+    display: inherit !important;
+  }
+
+  /* line 316, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-for-landscape,
+  .show-for-portrait {
+    display: none !important;
+  }
+
+  /* Specific visibility for tables */
+  /* line 321, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  table.show-for-landscape, table.hide-for-portrait {
+    display: table !important;
+  }
+
+  /* line 325, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  thead.show-for-landscape, thead.hide-for-portrait {
+    display: table-header-group !important;
+  }
+
+  /* line 329, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tbody.show-for-landscape, tbody.hide-for-portrait {
+    display: table-row-group !important;
+  }
+
+  /* line 333, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tr.show-for-landscape, tr.hide-for-portrait {
+    display: table-row !important;
+  }
+
+  /* line 338, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  td.show-for-landscape, td.hide-for-portrait,
+  th.show-for-landscape,
+  th.hide-for-portrait {
+    display: table-cell !important;
+  }
+}
+@media only screen and (orientation: portrait) {
+  /* line 344, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-portrait,
+  .hide-for-landscape {
+    display: inherit !important;
+  }
+
+  /* line 346, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-for-portrait,
+  .show-for-landscape {
+    display: none !important;
+  }
+
+  /* Specific visibility for tables */
+  /* line 351, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  table.show-for-portrait, table.hide-for-landscape {
+    display: table !important;
+  }
+
+  /* line 355, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  thead.show-for-portrait, thead.hide-for-landscape {
+    display: table-header-group !important;
+  }
+
+  /* line 359, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tbody.show-for-portrait, tbody.hide-for-landscape {
+    display: table-row-group !important;
+  }
+
+  /* line 363, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tr.show-for-portrait, tr.hide-for-landscape {
+    display: table-row !important;
+  }
+
+  /* line 368, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  td.show-for-portrait, td.hide-for-landscape,
+  th.show-for-portrait,
+  th.hide-for-landscape {
+    display: table-cell !important;
+  }
+}
+/* Touch-enabled device targeting */
+/* line 374, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.show-for-touch {
+  display: none !important;
+}
+
+/* line 375, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.hide-for-touch {
+  display: inherit !important;
+}
+
+/* line 376, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.touch .show-for-touch {
+  display: inherit !important;
+}
+
+/* line 377, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.touch .hide-for-touch {
+  display: none !important;
+}
+
+/* Specific visibility for tables */
+/* line 380, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+table.hide-for-touch {
+  display: table !important;
+}
+
+/* line 381, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.touch table.show-for-touch {
+  display: table !important;
+}
+
+/* line 382, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+thead.hide-for-touch {
+  display: table-header-group !important;
+}
+
+/* line 383, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.touch thead.show-for-touch {
+  display: table-header-group !important;
+}
+
+/* line 384, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+tbody.hide-for-touch {
+  display: table-row-group !important;
+}
+
+/* line 385, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.touch tbody.show-for-touch {
+  display: table-row-group !important;
+}
+
+/* line 386, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+tr.hide-for-touch {
+  display: table-row !important;
+}
+
+/* line 387, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.touch tr.show-for-touch {
+  display: table-row !important;
+}
+
+/* line 388, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+td.hide-for-touch {
+  display: table-cell !important;
+}
+
+/* line 389, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.touch td.show-for-touch {
+  display: table-cell !important;
+}
+
+/* line 390, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+th.hide-for-touch {
+  display: table-cell !important;
+}
+
+/* line 391, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.touch th.show-for-touch {
+  display: table-cell !important;
+}
+
+/* Screen reader-specific classes */
+/* line 394, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.show-for-sr {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+}
+
+/* line 397, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.show-on-focus {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+}
+/* line 400, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.show-on-focus:focus, .show-on-focus:active {
+  position: static !important;
+  height: auto;
+  width: auto;
+  overflow: visible;
+  clip: auto;
+}
+
+/*
+ * Print styles.
+ *
+ * Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+ * Credit to Paul Irish and HTML5 Boilerplate (html5boilerplate.com)
+*/
+/* line 414, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+.print-only {
+  display: none !important;
+}
+
+@media print {
+  /* line 416, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  * {
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #000000 !important;
+    /* Black prints faster: h5bp.com/s */
+    text-shadow: none !important;
+  }
+
+  /* line 422, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-print {
+    display: block;
+  }
+
+  /* line 423, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-for-print {
+    display: none;
+  }
+
+  /* line 425, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  table.show-for-print {
+    display: table !important;
+  }
+
+  /* line 426, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  thead.show-for-print {
+    display: table-header-group !important;
+  }
+
+  /* line 427, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tbody.show-for-print {
+    display: table-row-group !important;
+  }
+
+  /* line 428, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tr.show-for-print {
+    display: table-row !important;
+  }
+
+  /* line 429, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  td.show-for-print {
+    display: table-cell !important;
+  }
+
+  /* line 430, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  th.show-for-print {
+    display: table-cell !important;
+  }
+
+  /* line 432, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  /* line 434, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  /* line 436, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  /* line 439, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  /* line 443, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  pre,
+  blockquote {
+    border: 1px solid #999999;
+    page-break-inside: avoid;
+  }
+
+  /* line 449, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  thead {
+    display: table-header-group;
+    /* h5bp.com/t */
+  }
+
+  /* line 451, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  /* line 454, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: .5cm;
+  }
+  /* line 458, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* line 465, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+
+  /* line 468, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-on-print {
+    display: none !important;
+  }
+
+  /* line 469, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .print-only {
+    display: block !important;
+  }
+
+  /* line 470, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-for-print {
+    display: none !important;
+  }
+
+  /* line 471, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-print {
+    display: inherit !important;
+  }
+}
+/* Print visibility */
+@media print {
+  /* line 477, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-print {
+    display: block;
+  }
+
+  /* line 478, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .hide-for-print {
+    display: none;
+  }
+
+  /* line 480, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  table.show-for-print {
+    display: table !important;
+  }
+
+  /* line 481, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  thead.show-for-print {
+    display: table-header-group !important;
+  }
+
+  /* line 482, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tbody.show-for-print {
+    display: table-row-group !important;
+  }
+
+  /* line 483, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  tr.show-for-print {
+    display: table-row !important;
+  }
+
+  /* line 484, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  td.show-for-print {
+    display: table-cell !important;
+  }
+
+  /* line 485, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  th.show-for-print {
+    display: table-cell !important;
+  }
+}
+@media not print {
+  /* line 489, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_visibility.scss */
+  .show-for-print {
+    display: none !important;
+  }
+}
 /*
  * Copyright 2015 ThoughtWorks, Inc.
  *
@@ -4241,28 +5147,29 @@ blockquote p {
   font-weight: normal;
   font-style: normal;
 }
-/* line 25, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.css.scss */
+/* line 25, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
 form .switch.inline {
   display: inline-block;
   padding-top: 21px;
-  padding-bottom: 21px;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
-/* line 29, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.css.scss */
+/* line 30, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
 form .switch.inline ~ label {
   display: inline-block;
   position: relative;
   top: -7px;
   padding-left: 0.9375rem;
 }
-/* line 37, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.css.scss */
+/* line 38, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
 form .accordion-navigation {
   border: 1px solid #DDDDDD;
 }
-/* line 40, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.css.scss */
+/* line 41, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
 form .accordion-navigation > a {
   padding-right: 10px;
 }
-/* line 1420, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
 form .accordion-navigation > a:before {
   font-family: 'FontAwesome';
   content: "\f054";
@@ -4271,10 +5178,10 @@ form .accordion-navigation > a:before {
   display: inline-block;
   text-decoration: inherit;
   line-height: 1em;
-  margin-right: 5px;
+  margin: 5px;
   -webkit-font-smoothing: antialiased;
 }
-/* line 1420, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
 form .accordion-navigation.active > a:before {
   font-family: 'FontAwesome';
   content: "\f078";
@@ -4283,7 +5190,7 @@ form .accordion-navigation.active > a:before {
   display: inline-block;
   text-decoration: inherit;
   line-height: 1em;
-  margin-right: 5px;
+  margin: 5px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -4302,9 +5209,11 @@ form .accordion-navigation.active > a:before {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* line 18, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
+/* line 19, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
 [data-controller-name=pipeline_configs][data-action-name=edit] .box, [data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget, [data-controller-name=pipeline_configs][data-action-name=edit] .add-stage {
-  border: 1px solid red;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cccccc;
   height: 4em;
   width: 6em;
   cursor: pointer;
@@ -4312,32 +5221,68 @@ form .accordion-navigation.active > a:before {
   position: relative;
   text-align: center;
 }
-/* line 28, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
+/* line 33, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
 [data-controller-name=pipeline_configs][data-action-name=edit] .box .label, [data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget .label, [data-controller-name=pipeline_configs][data-action-name=edit] .add-stage .label {
   position: absolute;
   width: 100%;
   text-align: center;
   top: 1em;
 }
-/* line 39, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
+/* line 41, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] ul.stages-widget {
+  margin-bottom: 0;
+}
+/* line 48, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
 [data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget .remove {
   position: absolute;
   top: 5px;
   right: 5px;
 }
-/* line 45, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
+/* line 54, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
 [data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget.selected-stage {
-  border-color: blue;
+  background: #fafafa;
+  border-color: #999999;
 }
-/* line 49, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
+/* line 59, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
 [data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget ~ .stage-widget {
-  margin-left: 1em;
+  margin-left: 3em;
 }
-/* line 54, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget ~ .stage-widget:before {
+  font-family: 'FontAwesome';
+  content: "\f054";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1em;
+  margin: 5px;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  top: 17px;
+  left: -33px;
+}
+/* line 69, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
 [data-controller-name=pipeline_configs][data-action-name=edit] .add-stage {
-  margin-left: 1em;
+  margin-left: 3em;
+  border: 1px solid;
 }
-/* line 1420, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+[data-controller-name=pipeline_configs][data-action-name=edit] .add-stage:before {
+  font-family: 'FontAwesome';
+  content: "\f067";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1em;
+  margin: 5px;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  top: 17px;
+  left: 34px;
+}
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
 [data-controller-name=pipeline_configs][data-action-name=edit] .remove:before {
   font-family: 'FontAwesome';
   content: "\f1f8";
@@ -4346,22 +5291,16 @@ form .accordion-navigation.active > a:before {
   display: inline-block;
   text-decoration: inherit;
   line-height: 1em;
-  margin-right: 5px;
+  margin: 5px;
   color: #008CBA;
   -webkit-font-smoothing: antialiased;
 }
-/* line 64, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .job-definition .remove {
-  position: absolute;
-  top: 17px;
-  left: calc(100% - 34px);
-}
-/* line 70, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .job-definition .add-task {
+/* line 86, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .job-definition.accordion-navigation .add-task {
   padding-top: 1.75rem;
 }
-/* line 1420, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
-[data-controller-name=pipeline_configs][data-action-name=edit] .job-definition .add-task a:before {
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+[data-controller-name=pipeline_configs][data-action-name=edit] .job-definition.accordion-navigation .add-task a:before {
   font-family: 'FontAwesome';
   content: "\f055";
   font-weight: normal;
@@ -4369,14 +5308,19 @@ form .accordion-navigation.active > a:before {
   display: inline-block;
   text-decoration: inherit;
   line-height: 1em;
-  margin-right: 5px;
+  margin: 5px;
   -webkit-font-smoothing: antialiased;
 }
-/* line 79, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
+/* line 93, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .job-definition.accordion-navigation > a .remove {
+  position: absolute;
+  left: calc(100% - 42px);
+}
+/* line 100, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
 [data-controller-name=pipeline_configs][data-action-name=edit] .stage-definition .add-job {
   margin: 1.125rem 0;
 }
-/* line 1420, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
 [data-controller-name=pipeline_configs][data-action-name=edit] .stage-definition .add-job a:before {
   font-family: 'FontAwesome';
   content: "\f055";
@@ -4385,20 +5329,41 @@ form .accordion-navigation.active > a:before {
   display: inline-block;
   text-decoration: inherit;
   line-height: 1em;
-  margin-right: 5px;
+  margin: 5px;
   -webkit-font-smoothing: antialiased;
 }
-/* line 86, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
+/* line 107, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
 [data-controller-name=pipeline_configs][data-action-name=edit] .stage-definition > .remove {
   position: absolute;
   top: 39px;
   left: calc(100% - 42px);
 }
-/* line 94, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.css.scss */
+/* line 115, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .material-definitions .add-material {
+  padding-top: 1.75rem;
+}
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+[data-controller-name=pipeline_configs][data-action-name=edit] .material-definitions .add-material a:before {
+  font-family: 'FontAwesome';
+  content: "\f055";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1em;
+  margin: 5px;
+  -webkit-font-smoothing: antialiased;
+}
+/* line 123, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .material-definitions .accordion-navigation > a .remove {
+  position: absolute;
+  left: calc(100% - 62px);
+}
+/* line 131, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
 [data-controller-name=pipeline_configs][data-action-name=edit] .environment-variable .prefix-container {
   width: 30px;
 }
-/* line 1420, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
 [data-controller-name=pipeline_configs][data-action-name=edit] .environment-variable .prefix-container .prefix:before {
   font-family: 'FontAwesome';
   content: "\f13e";
@@ -4407,9 +5372,24 @@ form .accordion-navigation.active > a:before {
   display: inline-block;
   text-decoration: inherit;
   line-height: 1em;
-  margin-right: 0;
+  margin: 0;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+}
+/* line 139, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .heading {
+  margin-top: 1.125rem;
+}
+/* line 144, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .tabs .tab-title {
+  border-bottom: 1px solid #DDDDDD;
+}
+/* line 147, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .tabs .tab-title.active {
+  border-left: 1px solid #DDDDDD;
+  border-right: 1px solid #DDDDDD;
+  border-top: 1px solid #DDDDDD;
+  border-bottom: inherit;
 }
 
 /*
@@ -4432,99 +5412,151 @@ form .accordion-navigation.active > a:before {
   background-color: #292c2f;
   text-align: center;
   font-size: 1.2rem;
-  padding: 4rem;
+  padding: 1rem;
 }
 /* line 23, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-.footer .row {
-  max-width: 1200px;
-}
-/* line 27, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
 .footer .inline-list a {
   display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  background-color: #33383b;
   border-radius: 2px;
+}
+/* line 27, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
+.footer .inline-list a:nth-of-type(3) {
+  border-right: 2px solid green;
+  padding-right: 3px;
+}
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+.footer .inline-list a.twitter:before {
+  font-family: 'FontAwesome';
+  content: "\f099";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1.5rem;
+  margin: 5px;
   font-size: 1.5rem;
   color: #fff;
-  text-align: center;
-  line-height: 35px;
-  margin: 0 3px 0 0;
+  -webkit-font-smoothing: antialiased;
 }
-/* line 40, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-.footer .contact {
-  list-style-type: none;
-  margin: 0;
-  text-align: left;
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+.footer .inline-list a.github:before {
+  font-family: 'FontAwesome';
+  content: "\f09b";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1.5rem;
+  margin: 5px;
+  font-size: 1.5rem;
   color: #fff;
+  -webkit-font-smoothing: antialiased;
 }
-/* line 46, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-.footer .contact li {
-  margin-bottom: 2rem;
-}
-/* line 49, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-.footer .contact li p {
-  padding-left: 5rem;
-}
-/* line 54, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-.footer .contact i {
-  position: absolute;
-  background-color: #33383b;
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+.footer .inline-list a.forums:before {
+  font-family: 'FontAwesome';
+  content: "\f075";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1.5rem;
+  margin: 5px;
+  font-size: 1.5rem;
   color: #fff;
-  font-size: 2rem;
-  border-radius: 50%;
-  line-height: 1;
-  margin: 0 0 0 -4rem;
-  vertical-align: middle;
-  padding: .25em .45em;
+  -webkit-font-smoothing: antialiased;
 }
-/* line 67, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+.footer .inline-list a.plugins:before {
+  font-family: 'FontAwesome';
+  content: "\f1e6";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1.5rem;
+  margin: 5px;
+  font-size: 1.5rem;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+.footer .inline-list a.documentation:before {
+  font-family: 'FontAwesome';
+  content: "\f02d";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1.5rem;
+  margin: 5px;
+  font-size: 1.5rem;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+.footer .inline-list a.cctray:before {
+  font-family: 'FontAwesome';
+  content: "\f09e";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1.5rem;
+  margin: 5px;
+  font-size: 1.5rem;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+/* line 61, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
 .footer .copywrite {
   color: #8f9296;
   font-size: 0.875rem;
   margin: 0 0 1rem 0;
 }
-/* line 73, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-.footer .about {
-  color: #92999f;
-  font-size: 0.875rem;
-  margin: 0 0 1rem 0;
-}
-/* line 79, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-.footer .footer-links a {
-  list-style: none;
-  font-weight: normal;
-  color: #fff;
-  padding: 3rem 0 2rem;
-  margin: 0;
-  font-size: 0.875rem;
-}
-/* line 87, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-.footer .footer-links a::after {
-  content: "•";
-  padding: 0 0.2rem 0 0.4rem;
-}
-/* line 92, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-.footer .footer-links a:last-child::after {
-  content: "";
-  padding: 0 0.4rem 0 0.8rem;
-}
 @media only screen and (min-width: 40.063em) {
-  /* line 100, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
+  /* line 69, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
   .footer p {
     text-align: left;
   }
-  /* line 104, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
+  /* line 73, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
   .footer .social {
-    text-align: left;
+    text-align: right;
     margin: 0;
   }
-  /* line 109, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-  .footer .contact {
-    text-align: left;
-  }
-  /* line 111, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_footer.scss */
-  .footer .contact > i {
-    margin-right: 1rem;
-  }
+}
+
+/*
+ * Copyright 2015 ThoughtWorks, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/* line 18, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_navigation.scss */
+.navigation .logo {
+  display: inline-block;
+  background: url(/go/assets/g9/logo_go.png) no-repeat 10px 8px;
+  width: 85px;
+  height: 35px;
+}
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+.navigation .user:before {
+  font-family: 'FontAwesome';
+  content: "\f007";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1em;
+  margin: 5px;
+  -webkit-font-smoothing: antialiased;
 }

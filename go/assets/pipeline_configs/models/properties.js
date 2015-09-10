@@ -17,27 +17,28 @@
 
 define(['mithril', 'lodash', 'string-plus', './model_mixins'], function (m, _, s, Mixins) {
 
-  var EnvironmentVariables = function (data) {
+  var Properties = function (data) {
     Mixins.HasMany.call(this, {
-      factory:    EnvironmentVariables.Variable.create,
-      as:         'Variable',
+      factory:    Properties.Property.create,
+      as:         'Property',
+      plural:     'Properties',
       collection: data,
       uniqueOn:   'name'
     });
   };
 
-  EnvironmentVariables.Variable = function (data) {
-    this.constructor.modelType = 'environmentVariable';
+  Properties.Property = function (data) {
+    this.constructor.modelType = 'property';
     Mixins.HasUUID.call(this);
 
-    this.parent = Mixins.GetterSetter();
+    this.parent                = Mixins.GetterSetter();
 
     this.name   = m.prop(s.defaultToIfBlank(data.name, ''));
-    this.value  = m.prop(s.defaultToIfBlank(data.value, ''));
-    this.secure = m.prop(data.secure);
+    this.source = m.prop(s.defaultToIfBlank(data.source, ''));
+    this.xpath  = m.prop(s.defaultToIfBlank(data.xpath, ''));
 
     this.isBlank = function () {
-      return s.isBlank(this.name()) && s.isBlank(this.value());
+      return s.isBlank(this.name()) && s.isBlank(this.source()) && s.isBlank(this.xpath());
     };
 
     this.validate = function () {
@@ -48,31 +49,39 @@ define(['mithril', 'lodash', 'string-plus', './model_mixins'], function (m, _, s
       }
 
       if (s.isBlank(this.name())) {
-        if (!s.isBlank(this.value())) {
+        if (!s.isBlank(this.source()) || !s.isBlank(this.xpath())) {
           errors.add('name', Mixins.ErrorMessages.mustBePresent('name'));
         }
       } else {
-        this.parent().validateUniqueVariableName(this, errors);
+        this.parent().validateUniquePropertyName(this, errors);
       }
 
+      if (s.isBlank(this.source())) {
+        errors.add("source", Mixins.ErrorMessages.mustBePresent('source'));
+      }
+
+      if (s.isBlank(this.xpath())) {
+        errors.add("xpath", Mixins.ErrorMessages.mustBePresent('XPath'));
+      }
       return errors;
     };
+
   };
 
-  EnvironmentVariables.Variable.create = function (data) {
-    return new EnvironmentVariables.Variable(data);
+  Properties.Property.create = function (data) {
+    return new Properties.Property(data);
   };
 
   Mixins.fromJSONCollection({
-    parentType: EnvironmentVariables,
-    childType:  EnvironmentVariables.Variable,
-    via:        'addVariable'
+    parentType: Properties,
+    childType:  Properties.Property,
+    via:        'addProperty'
   });
 
-  EnvironmentVariables.Variable.fromJSON = function (data) {
-    return new EnvironmentVariables.Variable(_.pick(data, ['name', 'value', 'secure']));
+
+  Properties.Property.fromJSON = function (data) {
+    return new Properties.Property(_.pick(data, ['name', 'source', 'xpath']));
   };
 
-  return EnvironmentVariables;
-
+  return Properties;
 });

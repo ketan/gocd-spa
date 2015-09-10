@@ -15,26 +15,33 @@
  */
 
 
-define(['mithril', 'lodash', './constraints', './model_mixins', './environment_variables', './parameters', './materials', './tracking_tool', './stages'], function (m, _, constraints, Mixins, EnvironmentVariables, Parameters, Materials, TrackingTool, Stages) {
+define(['mithril', 'lodash', 'string-plus', './model_mixins', './environment_variables', './parameters', './materials', './tracking_tool', './stages'], function (m, _, s, Mixins, EnvironmentVariables, Parameters, Materials, TrackingTool, Stages) {
   var Pipeline = function (data) {
-    Mixins.Validator.call(this);
+    this.constructor.modelType = 'pipeline';
+    Mixins.HasUUID.call(this);
+
     this.name                 = m.prop(data.name);
     this.locked               = m.prop(data.locked);
-    this.templateName         = m.prop(data.templateName);
-    this.labelTemplate        = m.prop(data.labelTemplate);
-    this.timer                = m.prop(data.timer);
-    this.environmentVariables = m.prop(data.environmentVariables || new EnvironmentVariables());
-    this.parameters           = m.prop(data.parameters || new Parameters());
-    this.materials            = m.prop(data.materials || new Materials());
-    this.trackingTool         = m.prop(data.trackingTool);
-    this.stages               = m.prop(data.stages);
+    this.templateName         = m.prop(s.defaultToIfBlank(data.templateName, ''));
+    this.labelTemplate        = m.prop(s.defaultToIfBlank(data.labelTemplate, ''));
+    this.timer                = m.prop(s.defaultToIfBlank(data.timer, new Pipeline.Timer({})));
+    this.environmentVariables = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.environmentVariables, new EnvironmentVariables())));
+    this.parameters           = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.parameters, new Parameters())));
+    this.materials            = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.materials, new Materials())));
+    this.trackingTool         = s.overrideToJSON(m.prop(data.trackingTool));
+    this.stages               = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.stages, new Stages())));
 
-    this.constraints = _.constant(Pipeline.Constraints);
-  };
+    this.validate = function () {
+      var errors = new Mixins.Errors();
 
-  Pipeline.Constraints = {
-    labelTemplate: constraints.label,
-    name:          constraints.name
+      if (s.isBlank(this.labelTemplate())) {
+        errors.add('labelTemplate', Mixins.ErrorMessages.mustBePresent('labelTemplate'));
+      } else if (!this.labelTemplate().match(/(([a-zA-Z0-9_\-.!~*'()#:])*[$#]\{[a-zA-Z0-9_\-.!~*'()#:]+(\[:(\d+)])?}([a-zA-Z0-9_\-.!~*'()#:])*)+/)) {
+        errors.add('labelTemplate', "Label should be composed of alphanumeric text, it may contain the build number as ${COUNT}, it may contain a material revision as ${<material-name>} or ${<material-name>[:<length>]}, or use params as #{<param-name>}");
+      }
+
+      return errors;
+    };
   };
 
   Pipeline.get = function (url) {
@@ -47,13 +54,30 @@ define(['mithril', 'lodash', './constraints', './model_mixins', './environment_v
       locked:               data.locked,
       templateName:         data.template_name,
       labelTemplate:        data.label_template,
-      timer:                data.timer,
+      timer:                Pipeline.Timer.fromJSON(data.timer),
       trackingTool:         TrackingTool.fromJSON(data.tracking_tool),
       environmentVariables: EnvironmentVariables.fromJSON(data.environment_variables),
-      parameters:           Parameters.fromJSON(data.params),
+      parameters:           Parameters.fromJSON(data.parameters),
       materials:            Materials.fromJSON(data.materials),
       stages:               Stages.fromJSON(data.stages)
     });
+  };
+
+  Pipeline.Timer = function (data) {
+    this.constructor.modelType = 'pipelineTimer';
+
+    this.spec          = m.prop(s.defaultToIfBlank(data.spec, ''));
+    this.onlyOnChanges = m.prop(data.onlyOnChanges);
+  };
+
+  Pipeline.Timer.fromJSON = function (data) {
+    if (!_.isEmpty(data)) {
+      return new Pipeline.Timer({
+        spec:          data.spec,
+        onlyOnChanges: data.only_on_changes
+      });
+    }
+
   };
 
   return Pipeline;

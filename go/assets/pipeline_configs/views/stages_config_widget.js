@@ -15,7 +15,7 @@
  */
 
 
-define(['mithril', 'lodash', '../helpers/form_helper', './materials_config_widget', './environment_variable_config_widget',
+define(['mithril', 'lodash', '../helpers/form_helper', './materials_config_widget', './environment_variables_config_widget',
   './jobs_config_widget'], function (m, _, f, MaterialsConfigWidget, EnvironmentVariablesConfigWidget, JobsConfigWidget) {
 
   var StageConfigDefinitionWidget = {
@@ -23,60 +23,39 @@ define(['mithril', 'lodash', '../helpers/form_helper', './materials_config_widge
       this.stage            = args.stage;
       this.currentSelection = args.currentSelection;
       this.selectedJob      = m.prop(this.stage.jobs().firstJob());
-
-      this.removeStage = function (stage, evt) {
-        evt.stopPropagation();
-        var previousStage = this.stages.previousStage(stage);
-        var firstStage    = this.stages.firstStage();
-        this.currentSelection(previousStage || firstStage);
-        this.stages.removeStage(stage);
-      };
-
+      this.onRemove         = args.onRemove;
     },
 
     view: function (ctrl, args, children) {
       var className = function (selection) {
-        return 'stage-definition ' + ((ctrl.currentSelection() !== selection) ? 'hide' : '');
-      };
-
-      var removeButton = function (stage) {
-        return (
-          {tag: "a", attrs: {
-            href:"javascript:void(0)", 
-            class:"remove", 
-            onclick:ctrl.removeStage.bind(ctrl, stage)
-            }}
-        );
+        return _.compact(['stage-definition', (ctrl.currentSelection() !== selection) ? 'hide' : null]).join(' ');
       };
 
       return (
         {tag: "fieldset", attrs: {className:className(ctrl.stage), "data-key":ctrl.stage.name()}, children: [
-          {tag: "legend", attrs: {}, children: [ctrl.stage.name()]}, 
-          removeButton(ctrl.stage), 
+          {tag: "legend", attrs: {}, children: [ctrl.stage.name(), " "]}, 
+          {tag: "a", attrs: {
+            href:"javascript:void(0)", 
+            class:"remove", 
+            onclick:ctrl.onRemove
+            }}, 
           m.component(f.row, {}, [
             m.component(f.inputWithLabel, {
               attrName:"name", 
-              fieldName:"stage[name]", 
               model:ctrl.stage}), 
 
             m.component(f.checkBox, {
               model:ctrl.stage, 
-              attrName:"fetchMaterials", 
-              fieldName:"stage[fetch_materials]"}
-              ), 
+              attrName:"fetchMaterials"}), 
 
             m.component(f.checkBox, {
               model:ctrl.stage, 
-              attrName:"neverCleanArtifacts", 
-              fieldName:"stage[never_clean_artifacts]"}
-              ), 
+              attrName:"neverCleanArtifacts"}), 
 
             m.component(f.checkBox, {
               model:ctrl.stage, 
               attrName:"cleanWorkingDirectory", 
-              fieldName:"stage[clean_working_directory]", 
-              end:true}
-              )
+              end:true})
           ]), 
 
           m.component(f.row, {}, [
@@ -104,11 +83,12 @@ define(['mithril', 'lodash', '../helpers/form_helper', './materials_config_widge
 
     view: function (ctrl, args, children) {
       var className = function (selection) {
-        return 'stage-definition ' + ((ctrl.currentSelection() !== selection) ? 'hide' : '');
+        return _.compact(['material-definitions', (ctrl.currentSelection() !== selection) ? 'hide' : null]).join(' ');
       };
 
       return (
-        {tag: "div", attrs: {className:className(ctrl.materials)}, children: [
+        {tag: "fieldset", attrs: {className:className(ctrl.materials), "data-key":"materials"}, children: [
+          {tag: "legend", attrs: {}, children: ["Materials"]}, 
           m.component(MaterialsConfigWidget, {materials:ctrl.materials})
         ]}
       );
@@ -120,6 +100,14 @@ define(['mithril', 'lodash', '../helpers/form_helper', './materials_config_widge
       this.stages           = args.stages;
       this.materials        = args.materials;
       this.currentSelection = args.currentSelection;
+
+      this.removeStage = function (stage, evt) {
+        evt.stopPropagation();
+        var previousStage = this.stages.previousStage(stage);
+        this.stages.removeStage(stage);
+        var firstStage    = this.stages.firstStage() || this.stages.createStage();
+        this.currentSelection(previousStage || firstStage);
+      };
     },
 
     view: function (ctrl) {
@@ -127,7 +115,12 @@ define(['mithril', 'lodash', '../helpers/form_helper', './materials_config_widge
         {tag: "div", attrs: {class:"stage-definitions"}, children: [
           m.component(MaterialConfigWrapper, {materials:ctrl.materials, currentSelection:ctrl.currentSelection}), 
           ctrl.stages.mapStages(function (stage) {
-            return (m.component(StageConfigDefinitionWidget, {stage:stage, currentSelection:ctrl.currentSelection}));
+            return (
+              m.component(StageConfigDefinitionWidget, {key:stage.uuid(), 
+                                           stage:stage, 
+                                           currentSelection:ctrl.currentSelection, 
+                                           onRemove:ctrl.removeStage.bind(ctrl, stage)})
+            );
           })
         ]}
       );

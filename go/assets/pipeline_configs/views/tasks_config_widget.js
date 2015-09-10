@@ -15,7 +15,7 @@
  */
 
 
-define(['mithril', 'lodash', '../helpers/form_helper', '../models/tasks'], function (m, _, f, Tasks) {
+define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../models/tasks', '../models/pluggable_tasks', 'js-routes'], function (m, _, $, angular, f, Tasks, PluggableTasks, Routes) {
 
   var TaskViews = {
     base: {
@@ -38,22 +38,16 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tasks'], funct
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"target", 
-                fieldName:"task[target]", 
-                model:task}
-                ), 
+                model:task}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"buildFile", 
-                fieldName:"task[build_file]", 
-                model:task}
-                ), 
+                model:task}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"workingDir", 
-                fieldName:"task[working_dir]", 
                 model:task, 
-                end:true}
-                )
+                end:true})
             ])
           ])
         );
@@ -67,17 +61,14 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tasks'], funct
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"target", 
-                fieldName:"task[target]", 
                 model:task}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"workingDir", 
-                fieldName:"task[working_dir]", 
                 model:task}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"buildFile", 
-                fieldName:"task[build_file]", 
                 model:task, 
                 end:true})
             ]), 
@@ -85,7 +76,6 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tasks'], funct
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"nantHome", 
-                fieldName:"task[nant_home]", 
                 model:task, 
                 end:true})
             ])
@@ -103,20 +93,16 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tasks'], funct
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"command", 
-                fieldName:"task[command]", 
                 model:task}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"args", 
-                fieldName:"task[args]", 
                 model:task}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"workingDir", 
-                fieldName:"task[working_dir]", 
                 model:task, 
-                end:true}
-                )
+                end:true})
             ])
           ])
         );
@@ -131,22 +117,16 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tasks'], funct
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"target", 
-                fieldName:"task[target]", 
-                model:task}
-                ), 
+                model:task}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"buildFile", 
-                fieldName:"task[build_file]", 
-                model:task}
-                ), 
+                model:task}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"workingDir", 
-                fieldName:"task[working_dir]", 
                 model:task, 
-                end:true}
-                )
+                end:true})
             ])
           ])
         );
@@ -161,35 +141,120 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tasks'], funct
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"pipeline", 
-                fieldName:"task[pipeline]", 
                 model:task}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"stage", 
-                fieldName:"task[stage]", 
                 model:task}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"job", 
-                fieldName:"task[job]", 
                 model:task, 
-                end:true}
-                )
+                end:true})
             ]), 
 
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"type", 
-                fieldName:"task[source][type]", 
-                model:task.src()}), 
+                model:task.source()}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"location", 
-                fieldName:"task[source][location]", 
-                model:task.src(), 
+                model:task.source(), 
                 end:true})
             ])
           ])
+        );
+      }
+    },
+
+    plugin: {
+      controller: function (args) {
+        this.task              = args.task;
+        this.templateHTML      = PluggableTasks.Types[this.task.pluginId()].templateHTML;
+        this.defaultTaskConfig = PluggableTasks.Types[this.task.pluginId()].configuration;
+        this.uuid              = f.uuid();
+        this.ngControllerName  = 'controller-' + this.uuid;
+        this.appName           = 'app-' + this.uuid;
+        this.ngModule          = angular.module(this.appName, []);
+
+        this.hasBootstrapped = false;
+
+        var ctrl = this;
+
+        this.ngController = angular.module(this.appName).controller(this.ngControllerName, ['$scope', '$http', function ($scope, $http) {
+          $scope.addError = function (field) {
+            this.GOINPUTNAME[field.name] = {
+              $error: {
+                server: field.errors.join()
+              }
+            };
+          };
+
+          $scope.clearErrors = function () {
+            this.GOINPUTNAME               = {};
+            this.pluggableTaskGenericError = null;
+          };
+
+          $scope.clearErrors();
+
+          _.map(ctrl.defaultTaskConfig, function (config) {
+            var value = ctrl.task.configuration().valueFor(config.name);
+
+            if (!value) {
+              value = config.value;
+            }
+
+            $scope[config.name] = value;
+
+            $scope.$watch(config.name, _.debounce(function (newValue, oldValue) {
+              ctrl.task.configuration().setConfiguration(config.name, newValue);
+              var req = {
+                url:     Routes.apiInternalPluggableTaskValidationPath({plugin_id: ctrl.task.pluginId()}),
+                method:  'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').getAttribute('content')
+                },
+                data:    JSON.stringify(ctrl.task.configuration())
+              };
+
+              $http(req).then(
+                $scope.clearErrors.bind($scope),
+                function (response) {
+                  if (response.status === 422) {
+                    _.each(response.data, $scope.addError, $scope);
+                  } else if (response.status === 520) {
+                    $scope.pluggableTaskGenericError = response.data.error;
+                  } else {
+                    console.log('Something went wrong, we do not know what!');
+                  }
+                });
+            }, 100));
+          });
+        }]);
+      },
+
+      view: function (ctrl, args) {
+        window.setTimeout(function () {
+          var pluginTaskElem            = $('#' + ctrl.uuid);
+          var pluginTaskTemplateElement = $('#template-' + ctrl.uuid);
+          if (!ctrl.hasBootstrapped) {
+            angular.bootstrap(pluginTaskTemplateElement.get(0), [ctrl.appName]);
+            ctrl.hasBootstrapped = true;
+          }
+          pluginTaskElem.show();
+        }, 25);
+
+        return (
+          {tag: "div", attrs: {id:ctrl.uuid, style:"display:none"}, children: [
+            m.component(TaskViews.base, {task:ctrl.task}, [
+              {tag: "div", attrs: {id:'template-' + ctrl.uuid, "ng-controller":ctrl.ngControllerName}, children: [
+                {tag: "div", attrs: {class:"alert-box alert", "ng-show":"pluggableTaskGenericError"}, children: ['{{pluggableTaskGenericError}}']}, 
+                m.trust(ctrl.templateHTML)
+              ]}
+            ])
+          ]}
         );
       }
     }
@@ -200,26 +265,40 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tasks'], funct
       this.tasks    = args.tasks;
       this.selected = m.prop('exec');
       this.addTask  = function (type) {
-        this.tasks.createTask({type: type()});
+
+        if (Tasks.isBuiltInTaskType(type())) {
+          this.tasks.createTask({type: type()});
+        } else {
+          var pluggableTaskDescriptor = PluggableTasks.Types[type()];
+          this.tasks.createTask({
+            type:     type(),
+            pluginId: type(),
+            version:  pluggableTaskDescriptor.version
+          });
+        }
       };
     },
 
     view: function (ctrl) {
+
+      var items = _.transform(_.merge({}, Tasks.Types, PluggableTasks.Types), function (result, value, key) {
+        result[key] = value.description;
+      });
+
       return (
-        {tag: "row", attrs: {className:"task-selector"}, children: [
+        m.component(f.row, {className:"task-selector"}, [
           m.component(f.column, {size:3}, [
             {tag: "label", attrs: {class:"inline"}, children: ["Add task of type", 
-              {tag: "select", attrs: {onchange:m.withAttr('value', ctrl.selected), class:"inline"}, children: [
-                _.map(Tasks.Types, function (value, key) {
-                  return ({tag: "option", attrs: {value:key, selected:ctrl.selected() === key}, children: [value.description]});
-                })
-              ]}
+              m.component(f.select, {
+                value:ctrl.selected, 
+                class:"inline", 
+                items:items})
             ]}
           ]), 
           m.component(f.column, {size:2, end:true, class:"add-task"}, [
             {tag: "a", attrs: {href:"javascript:void(0)", onclick:ctrl.addTask.bind(ctrl, ctrl.selected)}, children: ["Add"]}
           ])
-        ]}
+        ])
       );
     }
   };
@@ -231,7 +310,7 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tasks'], funct
         {tag: "div", attrs: {className:"tasks"}, children: [
           tasks.mapTasks(function (task) {
             var taskView = TaskViews[task.type()];
-            return (m.component(taskView, {task: task}));
+            return (m.component(taskView, {task: task, key: task.uuid()}));
           }), 
           m.component(TaskTypeSelector, {tasks:tasks})
         ]}

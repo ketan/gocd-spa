@@ -15,60 +15,66 @@
  */
 
 
-define(['mithril', 'lodash', '../helpers/form_helper', './environment_variable_config_widget', './tasks_config_widget'], function (m, _, f, EnvironmentVariablesConfigWidget, TasksConfigWidget) {
+define(['mithril', 'lodash', '../helpers/form_helper', './environment_variables_config_widget', './tasks_config_widget', './artifacts_config_widget', './properties_config_widget', './tabs_config_widget'], function (m, _, f, EnvironmentVariablesConfigWidget, TasksConfigWidget, ArtifactsConfigWidget, PropertiesConfigWidget, TabsConfigWidget) {
 
   var JobConfigWidget = {
-    controller: function () {
-      this.uuid = f.uuid();
+    controller: function (args) {
+      this.uuid        = f.uuid();
+      this.job         = args.job;
+      this.onRemove    = args.onRemove;
+      this.selectedJob = args.selectedJob;
+
+      this.artifactsTabId = 'job-artifacts-' + this.uuid;
     },
 
     view: function (ctrl, args) {
-      var job      = args.job;
-      var onRemove = args.onRemove;
-
       return (
-        {tag: "dd", attrs: {class:"accordion-navigation"}, children: [
-          {tag: "a", attrs: {href:`#panel-${ctrl.uuid}`}, children: [job.name()]}, 
+        {tag: "dd", attrs: {class:"accordion-navigation job-definition"}, children: [
+          {tag: "a", attrs: {href:'#panel-' + ctrl.uuid}, children: [
+            ctrl.job.name(), 
+            {tag: "a", attrs: {
+              href:"javascript:void(0)", 
+              class:"remove", 
+              onclick:ctrl.onRemove
+              }}
+          ]}, 
 
-          {tag: "div", attrs: {id:`panel-${ctrl.uuid}`, class:"content active"}, children: [
+          {tag: "div", attrs: {id:'panel-' + ctrl.uuid, class:'content ' + ((ctrl.selectedJob() == ctrl.job) ? 'active' : '')}, children: [
             m.component(f.row, {}, [
-              {tag: "div", attrs: {class:"job-definition", "data-key":job.name()}, children: [
+              m.component(f.column, {size:12}, [
+                m.component(f.inputWithLabel, {
+                  attrName:"name", 
+                  model:ctrl.job}), 
 
-                {tag: "a", attrs: {
-                  href:"javascript:void(0)", 
-                  class:"remove", 
-                  onclick:onRemove
-                  }}, 
+                m.component(f.inputWithLabel, {
+                  attrName:"resources", 
+                  model:ctrl.job, 
+                  end:true})
+              ])
+            ]), 
 
+            m.component(f.row, {}, [
+              m.component(f.column, {size:12, end:true}, [
+                m.component(EnvironmentVariablesConfigWidget, {variables:ctrl.job.environmentVariables()})
+              ])
+            ]), 
 
-                m.component(f.row, {}, [
-                  m.component(f.inputWithLabel, {
-                    attrName:"name", 
-                    fieldName:"job[name]", 
-                    model:job}
-                    ), 
+            m.component(f.row, {}, [
+              m.component(f.column, {size:12, end:true}, [
+                m.component(TasksConfigWidget, {tasks:ctrl.job.tasks()})
+              ])
+            ]), 
 
-                  m.component(f.inputWithLabel, {
-                    attrName:"resources", 
-                    fieldName:"job[resources]", 
-                    model:job, 
-                    end:true}
-                    )
-                ]), 
-
-                m.component(f.row, {}, [
-                  m.component(f.column, {size:12, end:true}, [
-                    m.component(EnvironmentVariablesConfigWidget, {variables:job.environmentVariables()})
-                  ])
-                ]), 
-
-                m.component(f.row, {}, [
-                  m.component(f.column, {size:12, end:true}, [
-                    m.component(TasksConfigWidget, {tasks:job.tasks()})
-                  ])
+            m.component(f.row, {}, [
+              m.component(f.column, {size:12}, [
+                m.component(f.tabs, {tabTitles:['Artifacts', 'Tabs', 'Properties']}, [
+                  m.component(ArtifactsConfigWidget, {artifacts:ctrl.job.artifacts()}), 
+                  m.component(TabsConfigWidget, {tabs:ctrl.job.tabs()}), 
+                  m.component(PropertiesConfigWidget, {properties:ctrl.job.properties()})
                 ])
-              ]}
+              ])
             ])
+
           ]}
         ]}
       );
@@ -93,7 +99,11 @@ define(['mithril', 'lodash', '../helpers/form_helper', './environment_variable_c
 
       this.selectJob = function (job) {
         this.selectedJob(job);
-        $(document).foundation('accordion', 'reflow');
+
+        window.setTimeout(function () {
+          $(document).foundation('accordion', 'reflow');
+          $(document).foundation('tab', 'reflow');
+        }, 30);
       };
 
       this.selectJob(this.jobs.firstJob() || this.jobs.createJob());
@@ -102,10 +112,14 @@ define(['mithril', 'lodash', '../helpers/form_helper', './environment_variable_c
     view: function (ctrl) {
       return (
         {tag: "div", attrs: {}, children: [
-
           {tag: "dl", attrs: {class:"accordion", "data-accordion":true}, children: [
             ctrl.jobs.mapJobs(function (job) {
-              return (m.component(JobConfigWidget, {job:job, onRemove:ctrl.removeJob.bind(ctrl, job)}));
+              return (
+                m.component(JobConfigWidget, {job:job, 
+                                 selectedJob:ctrl.selectedJob, 
+                                 onRemove:ctrl.removeJob.bind(ctrl, job), 
+                                 key:job.uuid()})
+              );
             })
           ]}, 
           m.component(f.row, {}, [

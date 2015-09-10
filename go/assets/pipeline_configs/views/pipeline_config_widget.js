@@ -15,94 +15,126 @@
  */
 
 
-define(['mithril', '../helpers/form_helper', '../models/pipeline', './parameters_config_widget',
-    './tracking_tool_widget', './environment_variable_config_widget', './stages_config_widget', './pipeline_flow_widget'],
-  function (m, f, Pipeline, ParametersConfigWidget, TrackingToolSelectorWidget, EnvironmentVariablesConfigWidget,
+define(['mithril', 'string-plus', '../helpers/form_helper', '../models/pipeline', '../models/tasks', './parameters_config_widget',
+    './tracking_tool_widget', './environment_variables_config_widget', './stages_config_widget', './pipeline_flow_widget'],
+  function (m, s, f, Pipeline, Tasks, ParametersConfigWidget, TrackingToolWidget, EnvironmentVariablesConfigWidget,
             StagesConfigWidget, PipelineFlowWidget) {
 
-
-    var PipelineConfigWidget = function (url) {
+    var PipelineConfigWidget = function (url, callback) {
       return {
         controller: function () {
           var self              = this;
           this.currentSelection = m.prop();
 
           Pipeline.get(url).then(function (data) {
-            self.pipeline   = Pipeline.fromJSON(data);
-            window.pipeline = self.pipeline;
+            self.pipeline = Pipeline.fromJSON(data);
             self.currentSelection(self.pipeline.stages().firstStage());
+            if (callback) {
+              callback(self);
+            }
           });
         },
 
         view: function (ctrl) {
           var pipeline = ctrl.pipeline;
           return (
-            {tag: "form", attrs: {}, children: [
-              {tag: "h4", attrs: {}, children: ["Pipeline Details for ", pipeline.name()]}, 
-
+            {tag: "form", attrs: {class:"pipeline"}, children: [
+              m.component(f.row, {}, [
+                m.component(f.column, {}, [
+                  {tag: "h3", attrs: {class:"heading"}, children: ["Pipeline Details for ", pipeline.name()]}
+                ])
+              ]), 
               m.component(f.row, {}, [
                 m.component(f.column, {end:true, size:12}, [
                   {tag: "fieldset", attrs: {}, children: [
-                    m.component(f.inputWithLabel, {
-                      size:4, 
-                      attrName:"labelTemplate", 
-                      fieldName:"pipeline[label_template]", 
-                      end:true, 
-                      model:pipeline}), 
+                    m.component(f.row, {}, [
+                      m.component(f.inputWithLabel, {
+                        model:pipeline, 
+                        attrName:"labelTemplate", 
+                        size:4}), 
 
-                    m.component(f.inputWithLabel, {
-                      size:4, 
-                      attrName:"timer", 
-                      fieldName:"pipeline[timer]", 
-                      end:true, 
-                      model:pipeline}), 
+                      m.component(f.checkBox, {
+                        model:pipeline, 
+                        attrName:"locked", 
+                        end:true})
+                    ]), 
 
-                    m.component(f.checkBox, {
-                      model:pipeline, 
-                      attrName:"locked", 
-                      fieldName:"pipeline[locked]"}
-                      )
+                    m.component(f.row, {}, [
+                      m.component(f.column, {size:"12"}, [
+                        m.component(PipelineConfigWidget.TimerWidget, {timer:pipeline.timer()})
+                      ])
+                    ]), 
+
+                    m.component(f.row, {}, [
+                      m.component(f.column, {end:true, size:12}, [
+                        m.component(TrackingToolWidget, {trackingTool:pipeline.trackingTool})
+                      ])
+                    ]), 
+
+                    m.component(f.row, {}, [
+                      m.component(f.column, {end:true, size:12}, [
+                        m.component(ParametersConfigWidget, {parameters:pipeline.parameters()})
+                      ])
+                    ]), 
+
+                    m.component(f.row, {}, [
+                      m.component(f.column, {end:true, size:12}, [
+                        m.component(EnvironmentVariablesConfigWidget, {variables:pipeline.environmentVariables()})
+                      ])
+                    ]), 
+
+                    m.component(f.row, {}, [
+                      m.component(f.column, {end:true, size:12}, [
+                        m.component(PipelineFlowWidget, {stages:pipeline.stages(), 
+                                            materials:pipeline.materials(), 
+                                            currentSelection:ctrl.currentSelection})
+                      ])
+                    ]), 
+
+                    m.component(f.row, {}, [
+                      m.component(f.column, {end:true, size:12}, [
+                        m.component(StagesConfigWidget, {stages:pipeline.stages(), 
+                                            materials:pipeline.materials(), 
+                                            currentSelection:ctrl.currentSelection})
+                      ])
+                    ])
+
                   ]}
-                ])
-              ]), 
-
-              m.component(f.row, {}, [
-                m.component(f.column, {end:true, size:12}, [
-                  m.component(TrackingToolSelectorWidget, {trackingTool:pipeline.trackingTool})
-                ])
-              ]), 
-
-              m.component(f.row, {}, [
-                m.component(f.column, {end:true, size:12}, [
-                  m.component(ParametersConfigWidget, {parameters:pipeline.parameters()})
-                ])
-              ]), 
-
-              m.component(f.row, {}, [
-                m.component(f.column, {end:true, size:12}, [
-                  m.component(EnvironmentVariablesConfigWidget, {variables:pipeline.environmentVariables()})
-                ])
-              ]), 
-
-              m.component(f.row, {}, [
-                m.component(f.column, {end:true, size:12}, [
-                  m.component(PipelineFlowWidget, {stages:pipeline.stages(), 
-                                      materials:pipeline.materials(), 
-                                      currentSelection:ctrl.currentSelection})
-                ])
-              ]), 
-
-              m.component(f.row, {}, [
-                m.component(f.column, {end:true, size:12}, [
-                  m.component(StagesConfigWidget, {stages:pipeline.stages(), 
-                                      materials:pipeline.materials(), 
-                                      currentSelection:ctrl.currentSelection})
                 ])
               ])
             ]}
           );
         }
       };
+    };
+
+    PipelineConfigWidget.TimerWidget = {
+      controller: function (args) {
+        this.timer = args.timer;
+      },
+
+      view: function (ctrl, args) {
+        return (
+          {tag: "fieldset", attrs: {}, children: [
+            {tag: "legend", attrs: {}, children: ["Timer"]}, 
+            m.component(f.row, {}, [
+              m.component(f.inputWithLabel, {
+                model:ctrl.timer, 
+                attrName:"spec", 
+                label:"Cron timer specification", 
+                size:4}), 
+
+              m.component(f.checkBox, {
+                model:ctrl.timer, 
+                attrName:"onlyOnChanges", 
+                label:"Run only on new material", 
+                disabled:s.isBlank(ctrl.timer.spec()), 
+                size:4, 
+                end:true})
+            ])
+          ]}
+        );
+      }
     };
 
     return PipelineConfigWidget;

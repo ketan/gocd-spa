@@ -15,46 +15,72 @@
  */
 
 
-define(['mithril', 'lodash', '../helpers/form_helper', '../models/materials'], function (m, _, f, Materials) {
+define(['mithril', 'lodash', 'jquery', '../helpers/form_helper', '../models/materials', 'foundation.accordion'], function (m, _, $, f, Materials) {
 
   var MaterialViews = {
     base: {
+      controller: function (args) {
+        this.uuid             = f.uuid();
+        this.material         = args.material;
+        this.onRemove         = args.onRemove;
+        this.selectedMaterial = args.selectedMaterial;
+      },
+
       view: function (ctrl, args, children) {
-        var material = args.material;
+        var destinationField, filterField;
 
-        var destinationField = null;
-
-        if (material.dest) {
+        if (ctrl.material.destination) {
           destinationField = (
             m.component(f.inputWithLabel, {
-              attrName:"dest", 
+              attrName:"destination", 
               label:"Destination", 
-              fieldName:"material[dest]", 
-              model:material, 
-              onchange:m.withAttr('value', material.dest)})
+              model:ctrl.material})
+          );
+        }
+
+        if (ctrl.material.filter) {
+          // TODO: make this an 'intelligent' text component that maps to an array.
+          filterField = (
+            m.component(f.inputWithLabel, {
+              attrName:"ignore", 
+              label:"Ignore", 
+              model:ctrl.material.filter()})
           );
         }
 
         return (
-          {tag: "fieldset", attrs: {className:'material material-type-' + material.type()}, children: [
-            {tag: "legend", attrs: {}, children: [material.name()]}, 
-            m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"name", 
-                fieldName:"material[name]", 
-                model:material}), 
+          {tag: "dd", attrs: {class:"accordion-navigation"}, children: [
+            {tag: "a", attrs: {href:'#panel-' + ctrl.uuid}, children: [
+              ctrl.material.name(), 
+              {tag: "a", attrs: {
+                href:"javascript:void(0)", 
+                class:"remove", 
+                onclick:ctrl.onRemove
+                }}
+            ]}, 
 
-              destinationField, 
+            {tag: "div", attrs: {id:'panel-' + ctrl.uuid, 
+                 class:'content ' + ((ctrl.selectedMaterial() === ctrl.material) ? 'active' : '')}, children: [
+              m.component(f.row, {}, [
+                {tag: "div", attrs: {class:"material-definition", "data-key":ctrl.material.name()}, children: [
+                  m.component(f.inputWithLabel, {
+                    attrName:"name", 
+                    model:ctrl.material}), 
 
-              m.component(f.checkBox, {
-                model:material, 
-                attrName:"autoUpdate", 
-                fieldName:"material[type]", 
-                end:true}
-                )
-            ]), 
+                  destinationField, 
 
-            children
+                  m.component(f.checkBox, {
+                    model:ctrl.material, 
+                    attrName:"autoUpdate", 
+                    end:true})
+                ]}
+              ]), 
+              children, 
+
+              m.component(f.row, {}, [
+                filterField
+              ])
+            ]}
           ]}
         );
       }
@@ -64,32 +90,24 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/materials'], f
       view: function (controller, args) {
         var material = args.material;
         return (
-          m.component(MaterialViews.base, {material:material}, [
+          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, selectedMaterial:args.selectedMaterial}, [
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"url", 
-                fieldName:"material[url]", 
                 type:"url", 
-                model:material, 
-                onchange:m.withAttr('value', material.url)}), 
+                model:material}), 
               m.component(f.inputWithLabel, {
                 attrName:"username", 
-                fieldName:"material[username]", 
-                model:material, 
-                onchange:m.withAttr('value', material.username)}), 
+                model:material}), 
               m.component(f.inputWithLabel, {
                 attrName:"password", 
                 type:"password", 
-                fieldName:"material[password]", 
-                model:material, 
-                onchange:m.withAttr('value', material.password)}), 
+                model:material}), 
               m.component(f.checkBox, {
-                fieldName:"material[check_externals]", 
                 type:"checkbox", 
                 model:material, 
                 attrName:"checkExternals", 
-                end:true}
-                )
+                end:true})
             ])
           ])
         );
@@ -99,20 +117,16 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/materials'], f
       view: function (controller, args) {
         var material = args.material;
         return (
-          m.component(MaterialViews.base, {material:material}, [
+          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, selectedMaterial:args.selectedMaterial}, [
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"url", 
-                fieldName:"material[url]", 
                 type:"url", 
-                model:material, 
-                onchange:m.withAttr('value', material.url)}), 
+                model:material}), 
               m.component(f.inputWithLabel, {
                 attrName:"branch", 
-                fieldName:"material[branch]", 
                 model:material, 
-                end:true, 
-                onchange:m.withAttr('value', material.branch)})
+                end:true})
             ])
           ])
         );
@@ -123,20 +137,16 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/materials'], f
       view: function (controller, args) {
         var material = args.material;
         return (
-          m.component(MaterialViews.base, {material:material}, [
+          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, selectedMaterial:args.selectedMaterial}, [
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"url", 
-                fieldName:"material[url]", 
                 type:"url", 
-                model:material, 
-                onchange:m.withAttr('value', material.url)}), 
+                model:material}), 
               m.component(f.inputWithLabel, {
                 attrName:"branch", 
-                fieldName:"material[branch]", 
                 model:material, 
-                end:true, 
-                onchange:m.withAttr('value', material.branch)})
+                end:true})
             ])
           ])
         );
@@ -147,24 +157,19 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/materials'], f
       view: function (controller, args) {
         var material = args.material;
         return (
-          m.component(MaterialViews.base, {material:material}, [
+          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, selectedMaterial:args.selectedMaterial}, [
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"port", 
-                fieldName:"material[port]", 
                 model:material, 
                 onchange:m.withAttr('value', material.port)}), 
               m.component(f.inputWithLabel, {
                 attrName:"username", 
-                fieldName:"material[username]", 
-                model:material, 
-                onchange:m.withAttr('value', material.username)}), 
+                model:material}), 
               m.component(f.inputWithLabel, {
                 attrName:"password", 
                 type:"password", 
-                fieldName:"material[password]", 
-                model:material, 
-                onchange:m.withAttr('value', material.password)}), 
+                model:material}), 
               m.component(f.checkBox, {
                 name:"material[use_tickets]", 
                 type:"checkbox", 
@@ -176,10 +181,8 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/materials'], f
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"view", 
-                fieldName:"material[view]", 
                 model:material, 
-                end:true, 
-                onchange:m.withAttr('value', material.view)})
+                end:true})
             ])
           ])
         );
@@ -190,42 +193,32 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/materials'], f
       view: function (controller, args) {
         var material = args.material;
         return (
-          m.component(MaterialViews.base, {material:material}, [
+          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, selectedMaterial:args.selectedMaterial}, [
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"url", 
-                fieldName:"material[url]", 
                 type:"url", 
-                model:material, 
-                onchange:m.withAttr('value', material.url)}), 
+                model:material}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"domain", 
-                fieldName:"material[domain]", 
-                model:material, 
-                onchange:m.withAttr('value', material.domain)}), 
+                model:material}), 
 
               m.component(f.inputWithLabel, {
                 attrName:"username", 
-                fieldName:"material[username]", 
-                model:material, 
-                onchange:m.withAttr('value', material.username)}), 
+                model:material}), 
               m.component(f.inputWithLabel, {
                 attrName:"password", 
                 type:"password", 
-                fieldName:"material[password]", 
                 model:material, 
-                end:true, 
-                onchange:m.withAttr('value', material.password)})
+                end:true})
             ]), 
 
             m.component(f.row, {}, [
               m.component(f.inputWithLabel, {
                 attrName:"projectPath", 
-                fieldName:"material[project_path]", 
                 model:material, 
-                end:true, 
-                onchange:m.withAttr('value', material.projectPath)})
+                end:true})
             ])
           ])
         );
@@ -235,38 +228,75 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/materials'], f
 
   var MaterialTypeSelector = {
     controller: function (args) {
-      this.materials   = args.materials;
-      this.selected    = m.prop('git');
-      this.addMaterial = function (type) {
-        var newMaterial = this.materials.createMaterial({type: type()});
-      };
+      this.materials      = args.materials;
+      this.createMaterial = args.createMaterial;
+      this.selected       = m.prop('git');
     },
 
     view: function (ctrl) {
       return (
-        {tag: "div", attrs: {className:"material-selector"}, children: [
-          {tag: "select", attrs: {onchange:m.withAttr('value', ctrl.selected)}, children: [
-            _.map(Materials.Types, function (value, key) {
-              return ({tag: "option", attrs: {value:key, selected:ctrl.selected() === key}, children: [value.description]});
-            })
-          ]}, 
-          {tag: "a", attrs: {href:"javascript:void(0)", onclick:ctrl.addMaterial.bind(ctrl, ctrl.selected)}, children: ["Add Material"]}
-        ]}
+        m.component(f.row, {className:"material-selector"}, [
+          m.component(f.column, {size:3}, [
+            {tag: "label", attrs: {class:"inline"}, children: ["Add material of type", 
+              m.component(f.select, {
+                value:ctrl.selected, 
+                class:"inline", 
+                items:_.transform(Materials.Types, function(result, value, key){
+                  result[key] = value.description;
+                })}
+                )
+            ]}
+          ]), 
+          m.component(f.column, {size:2, end:true, class:"add-material"}, [
+            {tag: "a", attrs: {href:"javascript:void(0)", onclick:ctrl.createMaterial.bind(ctrl, ctrl.selected)}, children: ["Add"]}
+          ])
+        ])
       );
     }
   };
 
   var MaterialsConfigWidget = {
-    view: function (ctrl, args) {
-      var materials = args.materials;
-      return (
+    controller: function (args) {
+      this.materials        = args.materials;
+      this.selectedMaterial = m.prop();
 
+      this.removeMaterial = function (material) {
+        var previousMaterial = this.materials.previousMaterial(material);
+        var firstMaterial    = this.materials.firstMaterial();
+        this.selectMaterial(previousMaterial || firstMaterial);
+        this.materials.removeMaterial(material);
+      };
+
+      this.createMaterial = function (type) {
+        var newMaterial = this.materials.createMaterial({type: type()});
+        this.selectMaterial(newMaterial);
+      };
+
+      this.selectMaterial = function (material) {
+        this.selectedMaterial(material);
+        window.setTimeout(function () {
+          $(document).foundation('accordion', 'reflow');
+        }, 30);
+      };
+
+      this.selectMaterial(this.materials.firstMaterial());
+    },
+
+    view: function (ctrl, args) {
+      return (
         {tag: "div", attrs: {}, children: [
-          materials.mapMaterials(function (material) {
-            var materialView = MaterialViews[material.type()];
-            return (m.component(materialView, {material: material}));
-          }), 
-          m.component(MaterialTypeSelector, {materials:materials})
+          {tag: "dl", attrs: {class:"accordion", "data-accordion":true}, children: [
+            ctrl.materials.mapMaterials(function (material) {
+              var materialView = MaterialViews[material.type()];
+              return (m.component(materialView, {
+                material:         material,
+                selectedMaterial: ctrl.selectedMaterial,
+                onRemove:         ctrl.removeMaterial.bind(ctrl, material),
+                key:              material.uuid()
+              }));
+            })
+          ]}, 
+          m.component(MaterialTypeSelector, {materials:ctrl.materials, createMaterial:ctrl.createMaterial.bind(ctrl)})
         ]}
       );
     }

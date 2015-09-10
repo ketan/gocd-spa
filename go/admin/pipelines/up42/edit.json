@@ -1,9 +1,13 @@
 {
-  "name": "yourproject",
+  "name": "build-all",
   "label_template": "foo-1.0.${COUNT}-${svn}",
   "locked": true,
+  "timer": {
+    "spec": "0 0 22 ? * MON-FRI",
+    "only_on_changes": true
+  },
   "template": null,
-  "params": [
+  "parameters": [
     {
       "name": "COMMAND",
       "value": "echo"
@@ -21,7 +25,6 @@
       "grouping_conditions": "status > 'In Dev'"
     }
   },
-  "timer": "0 0 22 ? * MON-FRI",
   "materials": [
     {
       "type": "svn",
@@ -30,8 +33,14 @@
         "password": "bob'sP@ssw0rd",
         "name": "svn_material",
         "url": "http://your-svn/",
-        "dest": "dest_folder",
-        "auto_update": true
+        "destination": "dest_folder",
+        "auto_update": true,
+        "filter": {
+          "ignore": [
+            "*.doc",
+            "*.xls"
+          ]
+        }
       }
     }
   ],
@@ -96,17 +105,38 @@
                 "target": "clean",
                 "working_dir": "dir"
               }
+            },
+            {
+              "type": "plugin",
+              "attributes": {
+                "plugin_id": "indix.s3fetch",
+                "version": 1,
+                "configuration": [
+                  {
+                    "name": "Repo",
+                    "value": "foo"
+                  },
+                  {
+                    "name": "Package",
+                    "value": "foobar-widgets"
+                  },
+                  {
+                    "name": "Destination",
+                    "value": "pkg/"
+                  }
+                ]
+              }
             }
           ],
           "artifacts": [
             {
-              "src": "target/dist.jar",
-              "dest": "pkg",
+              "source": "target/dist.jar",
+              "destination": "pkg",
               "type": "build"
             },
             {
-              "src": "target/reports/**/*Test.xml",
-              "dest": "reports",
+              "source": "target/reports/**/*Test.xml",
+              "destination": "reports",
               "type": "test"
             }
           ],
@@ -119,7 +149,7 @@
           "properties": [
             {
               "name": "coverage.class",
-              "src": "target/emma/coverage.xml",
+              "source": "target/emma/coverage.xml",
               "xpath": "substring-before(//report/data/all/coverage[starts-with(@type,'class')]/@value, '%')"
             }
           ]
@@ -178,13 +208,13 @@
           ],
           "artifacts": [
             {
-              "src": "target/dist.jar",
-              "dest": "pkg",
+              "source": "target/dist.jar",
+              "destination": "pkg",
               "type": "build"
             },
             {
-              "src": "target/reports/**/*Test.xml",
-              "dest": "reports",
+              "source": "target/reports/**/*Test.xml",
+              "destination": "reports",
               "type": "test"
             }
           ],
@@ -197,7 +227,7 @@
           "properties": [
             {
               "name": "coverage.class",
-              "src": "target/emma/coverage.xml",
+              "source": "target/emma/coverage.xml",
               "xpath": "substring-before(//report/data/all/coverage[starts-with(@type,'class')]/@value, '%')"
             }
           ]

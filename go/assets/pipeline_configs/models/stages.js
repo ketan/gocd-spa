@@ -15,24 +15,37 @@
  */
 
 
-define(['mithril', 'lodash', './model_mixins', './jobs', './environment_variables'], function (m, _, Mixins, Jobs, EnvironmentVariables) {
+define(['mithril', 'lodash', 'string-plus', './model_mixins', './jobs', './environment_variables'], function (m, _, s, Mixins, Jobs, EnvironmentVariables) {
 
   var Stages = function (data) {
-    Mixins.Validator.call(this);
-    Mixins.HasMany.call(this, {factory: Stages.Stage.create, as: 'Stage', collection: data});
+    Mixins.HasMany.call(this, {factory: Stages.Stage.create, as: 'Stage', collection: data, uniqueOn: 'name'});
   };
 
-
   Stages.Stage = function (data) {
-    Mixins.Validator.call(this);
-    Mixins.UniqueInCollection.call(this, {uniqueOn: 'name', type: 'Stage'});
+    this.constructor.modelType = 'stage';
+    Mixins.HasUUID.call(this);
 
-    this.name                  = m.prop(data.name || null);
+    this.parent = Mixins.GetterSetter();
+
+    this.name                  = m.prop(s.defaultToIfBlank(data.name, ''));
     this.fetchMaterials        = m.prop(data.fetchMaterials);
     this.cleanWorkingDirectory = m.prop(data.cleanWorkingDirectory);
     this.neverCleanArtifacts   = m.prop(data.neverCleanArtifacts);
-    this.environmentVariables  = m.prop(data.environmentVariables || new EnvironmentVariables());
-    this.jobs                  = m.prop(data.jobs || new Jobs());
+    this.environmentVariables  = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.environmentVariables, new EnvironmentVariables())));
+    this.jobs                  = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.jobs, new Jobs())));
+
+    this.validate = function () {
+      var errors = new Mixins.Errors();
+
+      if (s.isBlank(this.name())) {
+        errors.add('name', Mixins.ErrorMessages.mustBePresent('name'));
+      } else {
+        this.parent().validateUniqueStageName(this, errors);
+      }
+
+
+      return errors;
+    };
   };
 
   Stages.Stage.create = function (data) {

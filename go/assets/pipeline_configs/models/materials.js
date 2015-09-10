@@ -15,24 +15,82 @@
  */
 
 
-define(['mithril', 'lodash', 'string', './model_mixins'], function (m, _, s, Mixins) {
+define(['mithril', 'lodash', 'string-plus', './model_mixins'], function (m, _, s, Mixins) {
 
   var Materials = function (data) {
-    Mixins.Validator.call(this);
-    Mixins.HasMany.call(this, {factory: Materials.create, as: 'Material', collection: data});
+    Mixins.HasMany.call(this, {factory: Materials.create, as: 'Material', collection: data, uniqueOn: 'name'});
   };
 
   Materials.create = function (data) {
-    return new Materials.Types[data.type].type({});
+    return new Materials.Types[data.type].type(data);
   };
 
-  Materials.Material = function (type, data) {
-    Mixins.Validator.call(this);
-    Mixins.UniqueInCollection.call(this, {uniqueOn: 'name', type: 'Material'});
+  Materials.Filter = function (data) {
+    this.constructor.modelType = 'materialFilter';
+    Mixins.HasUUID.call(this);
+
+    this.ignore = m.prop(s.defaultToIfBlank(data.ignore, []));
+
+    this.toJSON = function () {
+      return {
+        filter: {
+          ignore: this.ignore()
+        }
+      };
+    };
+  };
+
+  Materials.Filter.fromJSON = function (data) {
+    if (!_.isEmpty(data)) {
+      return new Materials.Filter({
+        ignore: data.ignore
+      });
+    }
+  };
+
+  Materials.Material = function (type, hasFilter, data) {
+    this.constructor.modelType = 'material';
+    Mixins.HasUUID.call(this);
+
+    this.parent = Mixins.GetterSetter();
 
     this.type       = m.prop(type);
-    this.name       = m.prop(data.name || '');
+    this.name       = m.prop(s.defaultToIfBlank(data.name, ''));
     this.autoUpdate = m.prop(data.autoUpdate);
+
+    if (hasFilter) {
+      this.filter = m.prop(s.defaultToIfBlank(data.filter, new Materials.Filter(s.defaultToIfBlank(data.filter, {}))));
+    }
+
+    this._validate = function (errors) {
+      if (!s.isBlank(this.name())) {
+        this.parent().validateUniqueMaterialName(this, errors);
+      }
+    };
+
+    var commonAttributes = function () {
+      var attrs = {
+        name:        this.name(),
+        auto_update: this.autoUpdate()
+      };
+
+      if (hasFilter) {
+        _.merge(attrs, this.filter().toJSON());
+      }
+      return attrs;
+    };
+
+    this.toJSON = function () {
+      return {
+        type:       this.type(),
+        attributes: _.merge(commonAttributes.call(this), this._attributesToJSON())
+      };
+    };
+
+    this._attributesToJSON = function () {
+      throw new Error("Subclass responsibility!");
+    };
+
   };
 
   Mixins.fromJSONCollection({
@@ -42,12 +100,34 @@ define(['mithril', 'lodash', 'string', './model_mixins'], function (m, _, s, Mix
   });
 
   Materials.Material.SVN = function (data) {
-    Materials.Material.call(this, "svn", data);
-    this.dest           = m.prop(data.dest || '');
-    this.url            = m.prop(data.url || '');
-    this.username       = m.prop(data.username || '');
-    this.password       = m.prop(data.password || '');
+    Materials.Material.call(this, "svn", true, data);
+    this.destination    = m.prop(s.defaultToIfBlank(data.destination, ''));
+    this.url            = m.prop(s.defaultToIfBlank(data.url, ''));
+    this.username       = m.prop(s.defaultToIfBlank(data.username, ''));
+    this.password       = m.prop(s.defaultToIfBlank(data.password, ''));
     this.checkExternals = m.prop(data.checkExternals);
+
+    this.validate = function () {
+      var errors = new Mixins.Errors();
+
+      this._validate(errors);
+
+      if (s.isBlank(this.url())) {
+        errors.add('url', Mixins.ErrorMessages.mustBePresent("url"));
+      }
+
+      return errors;
+    };
+
+    this._attributesToJSON = function () {
+      return {
+        destination:    this.destination(),
+        url:            this.url(),
+        username:       this.username(),
+        password:       this.password(),
+        checkExternals: this.checkExternals()
+      };
+    };
   };
 
   Materials.Material.SVN.fromJSON = function (data) {
@@ -56,77 +136,182 @@ define(['mithril', 'lodash', 'string', './model_mixins'], function (m, _, s, Mix
       username:       data.username,
       password:       data.password,
       checkExternals: data.check_externals,
-      dest:           data.dest,
+      destination:    data.destination,
       name:           data.name,
-      autoUpdate:     data.auto_update
+      autoUpdate:     data.auto_update,
+      filter:         Materials.Filter.fromJSON(data.filter)
     });
   };
 
   Materials.Material.Git = function (data) {
-    Materials.Material.call(this, "git", data);
-    this.dest   = m.prop(data.dest || '');
-    this.url    = m.prop(data.url || '');
-    this.branch = m.prop(data.branch || '');
+    Materials.Material.call(this, "git", true, data);
+    this.destination = m.prop(s.defaultToIfBlank(data.destination, ''));
+    this.url         = m.prop(s.defaultToIfBlank(data.url, ''));
+    this.branch      = m.prop(s.defaultToIfBlank(data.branch, ''));
+
+    this.validate = function () {
+      var errors = new Mixins.Errors();
+
+      this._validate(errors);
+
+      if (s.isBlank(this.url())) {
+        errors.add('url', Mixins.ErrorMessages.mustBePresent("url"));
+      }
+
+      return errors;
+    };
+
+    this._attributesToJSON = function () {
+      return {
+        destination: this.destination(),
+        url:         this.url(),
+        branch:      this.branch()
+      };
+    };
   };
 
   Materials.Material.Git.fromJSON = function (data) {
     return new Materials.Material.Git({
-      url:        data.url,
-      branch:     data.branch,
-      dest:       data.dest,
-      name:       data.name,
-      autoUpdate: data.auto_update
+      url:         data.url,
+      branch:      data.branch,
+      destination: data.destination,
+      name:        data.name,
+      autoUpdate:  data.auto_update,
+      filter:      Materials.Filter.fromJSON(data.filter)
     });
   };
 
   Materials.Material.Mercurial = function (data) {
-    Materials.Material.call(this, "hg", data);
-    this.dest   = m.prop(data.dest || '');
-    this.url    = m.prop(data.url || '');
-    this.branch = m.prop(data.branch || '');
+    Materials.Material.call(this, "hg", true, data);
+    this.destination = m.prop(s.defaultToIfBlank(data.destination, ''));
+    this.url         = m.prop(s.defaultToIfBlank(data.url, ''));
+    this.branch      = m.prop(s.defaultToIfBlank(data.branch, ''));
+
+    this.validate = function () {
+      var errors = new Mixins.Errors();
+
+      this._validate(errors);
+
+      if (s.isBlank(this.url())) {
+        errors.add('url', Mixins.ErrorMessages.mustBePresent("url"));
+      }
+
+      return errors;
+    };
+
+    this._attributesToJSON = function () {
+      return {
+        destination: this.destination(),
+        url:         this.url(),
+        branch:      this.branch()
+      };
+    };
   };
 
   Materials.Material.Mercurial.fromJSON = function (data) {
     return new Materials.Material.Mercurial({
-      url:        data.url,
-      branch:     data.branch,
-      dest:       data.dest,
-      name:       data.name,
-      autoUpdate: data.auto_update
+      url:         data.url,
+      branch:      data.branch,
+      destination: data.destination,
+      name:        data.name,
+      autoUpdate:  data.auto_update,
+      filter:      Materials.Filter.fromJSON(data.filter)
     });
   };
 
   Materials.Material.Perforce = function (data) {
-    Materials.Material.call(this, "p4", data);
-    this.dest       = m.prop(data.dest || '');
-    this.port       = m.prop(data.port || '');
-    this.username   = m.prop(data.username || '');
-    this.password   = m.prop(data.password || '');
-    this.view       = m.prop(data.view || '');
-    this.useTickets = m.prop(data.useTickets);
+    Materials.Material.call(this, "p4", true, data);
+    this.destination = m.prop(s.defaultToIfBlank(data.destination, ''));
+    this.port        = m.prop(s.defaultToIfBlank(data.port, ''));
+    this.username    = m.prop(s.defaultToIfBlank(data.username, ''));
+    this.password    = m.prop(s.defaultToIfBlank(data.password, ''));
+    this.view        = m.prop(s.defaultToIfBlank(data.view, ''));
+    this.useTickets  = m.prop(data.useTickets);
+
+
+    this.validate = function () {
+      var errors = new Mixins.Errors();
+
+      this._validate(errors);
+
+      if (s.isBlank(this.port())) {
+        errors.add('port', Mixins.ErrorMessages.mustBePresent("port"));
+      }
+
+      if (s.isBlank(this.view())) {
+        errors.add('view', Mixins.ErrorMessages.mustBePresent("view"));
+      }
+
+      return errors;
+    };
+
+    this._attributesToJSON = function () {
+      return {
+        destination: this.destination(),
+        port:        this.port(),
+        username:    this.username(),
+        password:    this.password(),
+        view:        this.view(),
+        useTickets:  this.useTickets()
+      };
+    };
+
   };
 
   Materials.Material.Perforce.fromJSON = function (data) {
     return new Materials.Material.Perforce({
-      port:       data.port,
-      username:   data.username,
-      password:   data.password,
-      useTickets: data.use_tickets,
-      dest:       data.dest,
-      view:       data.view,
-      autoUpdate: data.auto_update,
-      name:       data.name
+      port:        data.port,
+      username:    data.username,
+      password:    data.password,
+      useTickets:  data.use_tickets,
+      destination: data.destination,
+      view:        data.view,
+      autoUpdate:  data.auto_update,
+      name:        data.name,
+      filter:      Materials.Filter.fromJSON(data.filter)
     });
   };
 
   Materials.Material.TFS = function (data) {
-    Materials.Material.call(this, "tfs", data);
-    this.dest        = m.prop(data.dest || '');
-    this.url         = m.prop(data.url || '');
-    this.domain      = m.prop(data.domain || '');
-    this.username    = m.prop(data.username || '');
-    this.password    = m.prop(data.password) || '';
-    this.projectPath = m.prop(data.projectPath || '');
+    Materials.Material.call(this, "tfs", true, data);
+    this.destination = m.prop(s.defaultToIfBlank(data.destination, ''));
+    this.url         = m.prop(s.defaultToIfBlank(data.url, ''));
+    this.domain      = m.prop(s.defaultToIfBlank(data.domain, ''));
+    this.username    = m.prop(s.defaultToIfBlank(data.username, ''));
+    this.password    = m.prop(s.defaultToIfBlank(data.password, ''));
+    this.projectPath = m.prop(s.defaultToIfBlank(data.projectPath, ''));
+
+    this.validate = function () {
+      var errors = new Mixins.Errors();
+
+      this._validate(errors);
+
+      if (s.isBlank(this.url())) {
+        errors.add('url', Mixins.ErrorMessages.mustBePresent("url"));
+      }
+
+      if (s.isBlank(this.username())) {
+        errors.add('username', Mixins.ErrorMessages.mustBePresent("username"));
+      }
+
+      if (s.isBlank(this.projectPath())) {
+        errors.add('projectPath', Mixins.ErrorMessages.mustBePresent("projectPath"));
+      }
+
+      return errors;
+    };
+
+    this._attributesToJSON = function () {
+      return {
+        destination:  this.destination(),
+        url:          this.url(),
+        domain:       this.domain(),
+        username:     this.username(),
+        password:     this.password(),
+        project_path: this.projectPath()
+      };
+    };
+
   };
 
   Materials.Material.TFS.fromJSON = function (data) {
@@ -135,10 +320,11 @@ define(['mithril', 'lodash', 'string', './model_mixins'], function (m, _, s, Mix
       domain:      data.domain,
       username:    data.username,
       password:    data.password,
-      dest:        data.dest,
+      destination: data.destination,
       projectPath: data.project_path,
       autoUpdate:  data.auto_update,
-      name:        data.name
+      name:        data.name,
+      filter:      Materials.Filter.fromJSON(data.filter)
     });
   };
 
