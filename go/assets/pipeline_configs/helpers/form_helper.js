@@ -15,7 +15,7 @@
  */
 
 
-define(['mithril', 'string-plus'], function (m, s) {
+define(['mithril', 'string-plus', '../models/model_mixins', 'foundation.dropdown'], function (m, s, Mixin) {
 
   var deleteKeyAndReturnValue = function (object, key, defaultValue) {
     var value = object[key];
@@ -27,14 +27,23 @@ define(['mithril', 'string-plus'], function (m, s) {
     return typeof param === 'function' ? param : m.prop(typeof param === 'undefined' ? defaultValue : param);
   };
 
-  var f = {
-    uuid: s.uuid,
+  var compactClasses = function (args) {
+    var initialClasses = [].slice.call(arguments, 1);
+    return _([initialClasses, args.class, args.className]).flatten().compact().join(' ');
+  };
 
+  var foundationReflow = function (component) {
+    return function (elem, isInitialized) {
+      $(document).foundation(component, 'reflow');
+    };
+  };
+
+  var f = {
     row: {
       view: function (ctrl, args, children) {
         var classes = _.compact(['row', deleteKeyAndReturnValue(args, 'class'), deleteKeyAndReturnValue(args, 'className')]);
 
-        if (args.collapse) {
+        if (deleteKeyAndReturnValue(args, 'collapse')) {
           classes.push('collapse');
         }
 
@@ -48,15 +57,8 @@ define(['mithril', 'string-plus'], function (m, s) {
 
     column: {
       view: function (ctrl, args, children) {
-        var classes = _.compact(['columns', args['class'], args.className]);
-        classes.push("small-" + (args.size || 6));
-
-        if (args.end) {
-          classes.push('end');
-        }
-
         return (
-          {tag: "div", attrs: {class:classes.join(' ')}, children: [
+          {tag: "div", attrs: {class:compactClasses(args, 'columns', "small-" + (args.size || 6), args.end ? 'end' : null)}, children: [
             children
           ]}
         );
@@ -134,6 +136,7 @@ define(['mithril', 'string-plus'], function (m, s) {
             placeHolder = deleteKeyAndReturnValue(args, 'placeHolder', ''),
             labelText   = deleteKeyAndReturnValue(args, 'label'),
             onchange    = deleteKeyAndReturnValue(args, 'onchange', _.noop),
+            tooltip     = deleteKeyAndReturnValue(args, 'tooltip'),
             modelType   = deleteKeyAndReturnValue(args, 'modelType', (model.constructor ? model.constructor.modelType : null));
 
         if (!args.size) {
@@ -141,7 +144,6 @@ define(['mithril', 'string-plus'], function (m, s) {
         }
 
         var propertyError;
-
         if (model.validate) {
           var errors = model.validate();
           if (errors.errors(attrName)) {
@@ -154,20 +156,21 @@ define(['mithril', 'string-plus'], function (m, s) {
           onchange();
         };
 
-        labelText = labelText || s.humanize(attrName);
-
         return (
-          m.component(f.column, Object.assign({},  args), [
-            {tag: "label", attrs: {className:propertyError ? 'error' : ''}, children: [
-              labelText, 
-              {tag: "input", attrs: {
-                "data-prop-name":attrName, 
-                "data-model-type":modelType, 
-                value:model[attrName](), 
-                type:type, 
-                placeholder:placeHolder, 
-                oninput:onInput}}
+          m.component(f.column, Object.assign({},  args,{class:propertyError ? 'error' : null}), [
+            {tag: "label", attrs: {className:_.compact([propertyError ? 'error' : null, tooltip ? 'has-tooltip' : null]).join(' ')}, children: [
+              labelText || s.humanize(attrName)
             ]}, 
+
+            m.component(f.tooltip, {tooltip:tooltip, model:model, attrName:attrName}), 
+
+            {tag: "input", attrs: {
+              "data-prop-name":attrName, 
+              "data-model-type":modelType, 
+              value:model[attrName](), 
+              type:type, 
+              placeholder:placeHolder, 
+              oninput:onInput}}, 
             propertyError
           ])
         );
@@ -180,15 +183,13 @@ define(['mithril', 'string-plus'], function (m, s) {
             attrName  = deleteKeyAndReturnValue(args, 'attrName'),
             labelText = deleteKeyAndReturnValue(args, 'label'),
             disabled  = deleteKeyAndReturnValue(args, 'disabled'),
-            id        = f.uuid(),
+            tooltip   = deleteKeyAndReturnValue(args, 'tooltip'),
+            id        = s.uuid(),
             modelType = deleteKeyAndReturnValue(args, 'modelType', (model.constructor ? model.constructor.modelType : null));
 
         if (!args.size) {
           args.size = 3;
         }
-
-
-        labelText = labelText || s.humanize(attrName);
 
         return (
           m.component(f.column, Object.assign({},  args), [
@@ -202,7 +203,12 @@ define(['mithril', 'string-plus'], function (m, s) {
                      onchange:m.withAttr('checked', model[attrName])}}, 
               {tag: "label", attrs: {for:id}}
             ]}, 
-            {tag: "label", attrs: {class:"inline", for:id}, children: [labelText]}
+
+            {tag: "label", attrs: {class:_.compact(['inline', tooltip ? 'has-tooltip' : null]).join(' '), for:id}, children: [
+              labelText || s.humanize(attrName)
+            ]}, 
+
+            m.component(f.tooltip, {tooltip:tooltip, model:model, attrName:attrName})
           ])
         );
       }
@@ -210,51 +216,91 @@ define(['mithril', 'string-plus'], function (m, s) {
 
     tabs: {
       controller: function (args) {
-        this.tabTitles        = m.prop(args.tabTitles);
-        this.selectedTabIndex = m.prop(args.selectedTabIndex || 0);
-
-        this.selectTabWithIndex = function (index, e) {
-          this.selectedTabIndex(index);
-          e.preventDefault();
-        };
+        this.selectedIndex = coerceToMprop(args.selectedIndex || 0);
       },
 
       view: function (ctrl, args, children) {
-        var classNameForTab = function (tabIndex) {
-          return ctrl.selectedTabIndex() === tabIndex ? 'active' : '';
+        var componentClass = compactClasses(args);
+
+        var prefixedClass = function (suffix) {
+          if (!s.isBlank(componentClass)) {
+            return componentClass + '-' + suffix;
+          }
         };
 
-        return (
-          {tag: "div", attrs: {}, children: [
-            {tag: "ul", attrs: {class:"tabs", "data-tab":true}, children: [
-              _.map(ctrl.tabTitles(), function (tabTitle, tabIndex) {
-                return (
-                  {tag: "li", attrs: {
-                    class:'tab-title ' + classNameForTab(tabIndex), 
-                    onclick:ctrl.selectTabWithIndex.bind(ctrl, tabIndex)}, children: [
-                    {tag: "a", attrs: {href:"javascript:void(0)"}, children: [tabTitle]}
-                  ]}
-                );
-              })
-            ]}, 
-            {tag: "div", attrs: {class:"tabs-content"}, children: [
-              _.map(children, function (child, tabIndex) {
-                return (
-                  {tag: "div", attrs: {class:'content ' + classNameForTab(tabIndex)}, children: [
-                    child
-                  ]}
-                );
-              })
-            ]}
+        var classNameForTab = function (tabIndex) {
+          return ctrl.selectedIndex() === tabIndex ? 'active' : '';
+        };
+
+        var tabs = (
+          {tag: "ul", attrs: {class:_.compact(['tabs', args.isVertical ? 'vertical': undefined]).join(' ')}, children: [
+            _.map(args.tabTitles, function (tabTitle, tabIndex) {
+
+              var tabTitleElem;
+
+              if (s.isBlank(tabTitle)) {
+                tabTitleElem = ({tag: "a", attrs: {href:"javascript:void(0)"}, children: [m.trust('&nbsp;')]});
+              }
+              else if (_.isString(tabTitle)) {
+                tabTitleElem = ({tag: "a", attrs: {href:"javascript:void(0)"}, children: [tabTitle]});
+              } else {
+                tabTitleElem = tabTitle;
+              }
+
+              return (
+                {tag: "li", attrs: {
+                  class:_.compact(['tab-title', classNameForTab(tabIndex), prefixedClass('tab-title')]).join(' '), 
+                  onclick:ctrl.selectedIndex.bind(ctrl, tabIndex), 
+                  key:args.tabKeys[tabIndex]}, children: [
+                  tabTitleElem
+                ]}
+              );
+            })
           ]}
         );
+
+        var tabsContent = (
+          {tag: "div", attrs: {
+            class:_.compact(['tabs-content', 'tabs-content-container', prefixedClass('tabs-content-container')]).join(' ')}, children: [
+            _.map(_.flatten(children), function (child, tabIndex) {
+              return (
+                {tag: "div", attrs: {
+                  class:_.compact(['content', classNameForTab(tabIndex), prefixedClass('tab-content')]).join(' ')}, children: [
+                  child
+                ]}
+              );
+            })
+          ]}
+        );
+
+        var tabContainer = (
+          {tag: "div", attrs: {class:_.compact(['tab-container', prefixedClass('tab-container')]).join(' ')}, children: [
+            tabs, 
+            tabsContent
+          ]}
+        );
+
+        if (args.isVertical) {
+          return (
+            m.component(f.row, {class:componentClass}, [
+              m.component(f.column, {size:12, end:true}, [
+                tabContainer
+              ])
+            ])
+          );
+        } else {
+          return (
+            {tag: "div", attrs: {class:componentClass}, children: [
+              tabContainer
+            ]}
+          );
+        }
       }
     },
 
     select: {
       controller: function (args) {
         this.value = coerceToMprop(args.value, '');
-        this.items = s.defaultToIfBlank(args.items, {});
       },
 
       view: function (ctrl, args) {
@@ -262,7 +308,7 @@ define(['mithril', 'string-plus'], function (m, s) {
           {tag: "select", attrs: {value:ctrl.value(), 
                   onchange:m.withAttr('value', ctrl.value), 
                   class:s.defaultToIfBlank(args.selectClass, '')}, children: [
-            _.map(ctrl.items, function (text, value) {
+            _.map(s.defaultToIfBlank(args.items, {}), function (text, value) {
               return (
                 {tag: "option", attrs: {value:value, selected:value === ctrl.value()}, children: [text]}
               );
@@ -270,7 +316,82 @@ define(['mithril', 'string-plus'], function (m, s) {
           ]}
         );
       }
+    },
+
+    accordion: {
+      controller: function (args) {
+        this.selectedIndex = Mixin.TogglingGetterSetter(coerceToMprop(args.selectedIndex || 0));
+      },
+
+      view: function (ctrl, args, children) {
+        var maybeActiveClass = function (index) {
+          return ctrl.selectedIndex() === index ? 'active' : '';
+        };
+
+        return (
+          {tag: "dl", attrs: {class:compactClasses(args, 'accordion')}, children: [
+            _.map(_.flatten(children), function (child, index) {
+              return (
+                {tag: "dd", attrs: {class:_.compact(['accordion-navigation', maybeActiveClass(index)]).join(' '), 
+                    key:args.accordionKeys[index]}, children: [
+                  {tag: "a", attrs: {href:"javascript:void(0)", 
+                     onclick:ctrl.selectedIndex.bind(ctrl, index)}, children: [
+                    args.accordionTitles[index]
+                  ]}, 
+
+                  {tag: "div", attrs: {class:_.compact(['content', maybeActiveClass(index)]).join(' ')}, children: [
+                    child
+                  ]}
+                ]}
+              );
+            })
+          ]}
+        );
+      }
+    },
+
+    removeButton: {
+      view: function (ctrl, args, children) {
+        return (
+          {tag: "a", attrs: {href:"javascript:void(0)", 
+             class:compactClasses(args, 'remove'), 
+             onclick:args.onclick}, children: [children]}
+        );
+      }
+    },
+
+    tooltip: {
+      view: function (ctrl, args, children) {
+        if (!args.tooltip && _.isEmpty(children)) {
+          return {tag: "noscript", attrs: {}};
+        }
+
+        var direction = deleteKeyAndReturnValue(args.tooltip, 'direction', 'bottom'),
+            size      = deleteKeyAndReturnValue(args.tooltip, 'size', 'medium'),
+            content   = deleteKeyAndReturnValue(args.tooltip, 'content', children),
+            tooltipId = 'help-tooltip-';
+
+        if (args.model && args.model.uuid) {
+          tooltipId += (args.model.uuid() + '-' + args.attrName);
+        } else {
+          tooltipId += s.uuid();
+        }
+
+        return (
+          {tag: "span", attrs: {class:"tooltip-wrapper", config:foundationReflow('dropdown')}, children: [
+            {tag: "a", attrs: {href:"javascript:void(0)", 
+               "data-dropdown":tooltipId, 
+               "data-options":'is_hover: true; hover_timeout: 400; align: ' + direction, 
+               class:"tooltip-question-mark"}}, 
+            {tag: "div", attrs: {id:tooltipId, "data-dropdown-content":true,
+                 class:_.compact(['f-dropdown', 'content', 'tooltip-content', size]).join(' ')}, children: [
+              content
+            ]}
+          ]}
+        );
+      }
     }
   };
+
   return f;
 });

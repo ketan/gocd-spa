@@ -1,7 +1,7 @@
 {
   "name": "build-all",
   "label_template": "foo-1.0.${COUNT}-${svn}",
-  "locked": true,
+  "enable_pipeline_locking": true,
   "timer": {
     "spec": "0 0 22 ? * MON-FRI",
     "only_on_changes": true

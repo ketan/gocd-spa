@@ -15,7 +15,7 @@
  */
 
 
-define(['mithril', 'string-plus', '../helpers/form_helper'], function (m, _, f) {
+define(['mithril', '../helpers/form_helper', '../helpers/tooltips'], function (m, f, tt) {
   var ParametersConfigWidget = {
     controller: function (args) {
       this.parameters = args.parameters;
@@ -45,39 +45,41 @@ define(['mithril', 'string-plus', '../helpers/form_helper'], function (m, _, f) 
     view: function (ctrl) {
       var removeLink = function (parameter) {
         if (parameter !== ctrl.lastParameter()) {
-          return ({tag: "a", attrs: {
-              href:"javascript:void(0)", 
-              class:"remove", 
-              onclick:ctrl.remove.bind(ctrl, parameter)}}
+          return (
+            m.component(f.removeButton, {onclick:ctrl.remove.bind(ctrl, parameter)})
           );
         }
       };
 
       return (
-        {tag: "fieldset", attrs: {class:"parameters"}, children: [
-          {tag: "legend", attrs: {}, children: ["Parameters"]}, 
-          ctrl.parameters.mapParameters(function (parameter) {
-            return (
-              m.component(f.row, {class:"parameter", "data-parameter-name":parameter.name(), key:parameter.uuid()}, [
-                m.component(f.input, {
-                  model:parameter, 
-                  attrName:"name", 
-                  onchange:ctrl.paramChanged.bind(ctrl), 
-                  size:4}), 
-
-                m.component(f.input, {
-                  model:parameter, 
-                  attrName:"value", 
-                  onchange:ctrl.paramChanged.bind(ctrl), 
-                  size:4}), 
-
-                m.component(f.column, {size:3, end:true}, [
-                  removeLink(parameter)
+        m.component(f.accordion, {accordionTitles:[
+                        (
+                          {tag: "span", attrs: {}, children: ["Parameters", m.component(f.tooltip, {tooltip:{content: tt.pipeline.parameters.main}})]}
+                        )
+                     ], 
+                     accordionKeys:['parameters'], 
+                     selectedIndex:-1, 
+                     class:"parameters"}, [
+          {tag: "div", attrs: {}, children: [
+            ctrl.parameters.mapParameters(function (parameter) {
+              return (
+                m.component(f.row, {class:"parameter", "data-parameter-name":parameter.name(), key:parameter.uuid()}, [
+                  m.component(f.input, {model:parameter, 
+                           attrName:"name", 
+                           onchange:ctrl.paramChanged.bind(ctrl), 
+                           size:4}), 
+                  m.component(f.input, {model:parameter, 
+                           attrName:"value", 
+                           onchange:ctrl.paramChanged.bind(ctrl), 
+                           size:4}), 
+                  m.component(f.column, {size:3, end:true}, [
+                    removeLink(parameter)
+                  ])
                 ])
-              ])
-            );
-          })
-        ]}
+              );
+            })
+          ]}
+        ])
       );
     }
   };

@@ -15,7 +15,7 @@
  */
 
 
-define(['mithril', 'string-plus', '../helpers/form_helper'], function (m, _, f) {
+define(['mithril', '../helpers/form_helper'], function (m, f) {
   var TabsConfigWidget = {
     controller: function (args) {
       this.tabs = args.tabs;
@@ -45,32 +45,25 @@ define(['mithril', 'string-plus', '../helpers/form_helper'], function (m, _, f) 
     view: function (ctrl) {
       var removeLink = function (tab) {
         if (tab !== ctrl.lastTab()) {
-          return ({tag: "a", attrs: {
-              href:"javascript:void(0)", 
-              class:"remove", 
-              onclick:ctrl.remove.bind(ctrl, tab)}}
+          return (
+            m.component(f.removeButton, {onclick:ctrl.remove.bind(ctrl, tab)})
           );
         }
       };
 
       return (
-        {tag: "fieldset", attrs: {class:"tabs"}, children: [
-          {tag: "legend", attrs: {}, children: ["Tabs"]}, 
+        {tag: "div", attrs: {class:"job-tabs"}, children: [
           ctrl.tabs.mapTabs(function (tab) {
             return (
               m.component(f.row, {class:"tab", "data-tab-name":tab.name(), key:tab.uuid()}, [
-                m.component(f.input, {
-                  model:tab, 
-                  attrName:"name", 
-                  onchange:ctrl.tabChanged.bind(ctrl), 
-                  size:4}), 
-
-                m.component(f.input, {
-                  model:tab, 
-                  attrName:"path", 
-                  onchange:ctrl.tabChanged.bind(ctrl), 
-                  size:4}), 
-
+                m.component(f.input, {model:tab, 
+                         attrName:"name", 
+                         onchange:ctrl.tabChanged.bind(ctrl), 
+                         size:4}), 
+                m.component(f.input, {model:tab, 
+                         attrName:"path", 
+                         onchange:ctrl.tabChanged.bind(ctrl), 
+                         size:4}), 
                 m.component(f.column, {size:3, end:true}, [
                   removeLink(tab)
                 ])

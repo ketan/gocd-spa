@@ -640,7 +640,7 @@ select {
 /* line 228, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_grid.scss */
 .row {
   margin: 0 auto;
-  max-width: 62.5rem;
+  max-width: 100%;
   width: 100%;
 }
 /* line 172, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_global.scss */
@@ -2257,6 +2257,330 @@ select {
   opacity: 0;
 }
 
+/* Foundation Dropdowns */
+/* line 231, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown {
+  display: none;
+  left: -9999px;
+  list-style: none;
+  margin-left: 0;
+  position: absolute;
+  background: #FFFFFF;
+  border: solid 1px #cccccc;
+  font-size: 0.875rem;
+  height: auto;
+  max-height: none;
+  width: 100%;
+  z-index: 89;
+  margin-top: 2px;
+  max-width: 200px;
+}
+/* line 73, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.open {
+  display: block;
+}
+/* line 77, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown > *:first-child {
+  margin-top: 0;
+}
+/* line 78, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown > *:last-child {
+  margin-bottom: 0;
+}
+/* line 105, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown:before {
+  border: inset 6px;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  border-color: transparent transparent #FFFFFF transparent;
+  border-bottom-style: solid;
+  position: absolute;
+  top: -12px;
+  left: 10px;
+  z-index: 89;
+}
+/* line 112, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown:after {
+  border: inset 7px;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  border-color: transparent transparent #cccccc transparent;
+  border-bottom-style: solid;
+  position: absolute;
+  top: -14px;
+  left: 9px;
+  z-index: 88;
+}
+/* line 120, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.right:before {
+  left: auto;
+  right: 10px;
+}
+/* line 124, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.right:after {
+  left: auto;
+  right: 9px;
+}
+/* line 234, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-right {
+  display: none;
+  left: -9999px;
+  list-style: none;
+  margin-left: 0;
+  position: absolute;
+  background: #FFFFFF;
+  border: solid 1px #cccccc;
+  font-size: 0.875rem;
+  height: auto;
+  max-height: none;
+  width: 100%;
+  z-index: 89;
+  margin-top: 0;
+  margin-left: 2px;
+  max-width: 200px;
+}
+/* line 73, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-right.open {
+  display: block;
+}
+/* line 77, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-right > *:first-child {
+  margin-top: 0;
+}
+/* line 78, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-right > *:last-child {
+  margin-bottom: 0;
+}
+/* line 135, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-right:before {
+  border: inset 6px;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  border-color: transparent #FFFFFF transparent transparent;
+  border-right-style: solid;
+  position: absolute;
+  top: 10px;
+  left: -12px;
+  z-index: 89;
+}
+/* line 142, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-right:after {
+  border: inset 7px;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  border-color: transparent #cccccc transparent transparent;
+  border-right-style: solid;
+  position: absolute;
+  top: 9px;
+  left: -14px;
+  z-index: 88;
+}
+/* line 238, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-left {
+  display: none;
+  left: -9999px;
+  list-style: none;
+  margin-left: 0;
+  position: absolute;
+  background: #FFFFFF;
+  border: solid 1px #cccccc;
+  font-size: 0.875rem;
+  height: auto;
+  max-height: none;
+  width: 100%;
+  z-index: 89;
+  margin-top: 0;
+  margin-left: -2px;
+  max-width: 200px;
+}
+/* line 73, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-left.open {
+  display: block;
+}
+/* line 77, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-left > *:first-child {
+  margin-top: 0;
+}
+/* line 78, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-left > *:last-child {
+  margin-bottom: 0;
+}
+/* line 156, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-left:before {
+  border: inset 6px;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  border-color: transparent transparent transparent #FFFFFF;
+  border-left-style: solid;
+  position: absolute;
+  top: 10px;
+  right: -12px;
+  left: auto;
+  z-index: 89;
+}
+/* line 164, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-left:after {
+  border: inset 7px;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  border-color: transparent transparent transparent #cccccc;
+  border-left-style: solid;
+  position: absolute;
+  top: 9px;
+  right: -14px;
+  left: auto;
+  z-index: 88;
+}
+/* line 242, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-top {
+  display: none;
+  left: -9999px;
+  list-style: none;
+  margin-left: 0;
+  position: absolute;
+  background: #FFFFFF;
+  border: solid 1px #cccccc;
+  font-size: 0.875rem;
+  height: auto;
+  max-height: none;
+  width: 100%;
+  z-index: 89;
+  margin-left: 0;
+  margin-top: -2px;
+  max-width: 200px;
+}
+/* line 73, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-top.open {
+  display: block;
+}
+/* line 77, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-top > *:first-child {
+  margin-top: 0;
+}
+/* line 78, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-top > *:last-child {
+  margin-bottom: 0;
+}
+/* line 179, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-top:before {
+  border: inset 6px;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  border-color: #FFFFFF transparent transparent transparent;
+  border-top-style: solid;
+  bottom: -12px;
+  position: absolute;
+  top: auto;
+  left: 10px;
+  right: auto;
+  z-index: 89;
+}
+/* line 188, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.drop-top:after {
+  border: inset 7px;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  border-color: #cccccc transparent transparent transparent;
+  border-top-style: solid;
+  bottom: -14px;
+  position: absolute;
+  top: auto;
+  left: 9px;
+  right: auto;
+  z-index: 88;
+}
+/* line 247, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown li {
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  margin: 0;
+}
+/* line 215, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown li:hover, .f-dropdown li:focus {
+  background: #EEEEEE;
+}
+/* line 218, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown li.radius {
+  border-radius: 3px;
+}
+/* line 220, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown li a {
+  display: block;
+  padding: 0.5rem;
+  color: #555555;
+}
+/* line 250, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.content {
+  display: none;
+  left: -9999px;
+  list-style: none;
+  margin-left: 0;
+  position: absolute;
+  background: #FFFFFF;
+  border: solid 1px #cccccc;
+  font-size: 0.875rem;
+  height: auto;
+  max-height: none;
+  padding: 1.25rem;
+  width: 100%;
+  z-index: 89;
+  max-width: 200px;
+}
+/* line 73, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.content.open {
+  display: block;
+}
+/* line 77, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.content > *:first-child {
+  margin-top: 0;
+}
+/* line 78, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.content > *:last-child {
+  margin-bottom: 0;
+}
+/* line 253, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.tiny {
+  max-width: 200px;
+}
+/* line 254, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.small {
+  max-width: 300px;
+}
+/* line 255, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.medium {
+  max-width: 500px;
+}
+/* line 256, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.large {
+  max-width: 800px;
+}
+/* line 257, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.mega {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+/* line 261, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_dropdown.scss */
+.f-dropdown.mega.open {
+  left: 0 !important;
+}
+
 /* Standard Forms */
 /* line 387, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_forms.scss */
 form {
@@ -2906,6 +3230,67 @@ label.error {
 /* line 236, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_switches.scss */
 .switch.round label:after {
   border-radius: 2rem;
+}
+
+/* line 131, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tables.scss */
+table {
+  background: #FFFFFF;
+  border: solid 1px #DDDDDD;
+  margin-bottom: 1.25rem;
+  table-layout: auto;
+}
+/* line 69, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tables.scss */
+table caption {
+  background: transparent;
+  color: #222222;
+  font-size: 1rem;
+  font-weight: bold;
+}
+/* line 78, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tables.scss */
+table thead {
+  background: #F5F5F5;
+}
+/* line 82, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tables.scss */
+table thead tr th,
+table thead tr td {
+  color: #222222;
+  font-size: 0.875rem;
+  font-weight: bold;
+  padding: 0.5rem 0.625rem 0.625rem;
+}
+/* line 92, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tables.scss */
+table tfoot {
+  background: #F5F5F5;
+}
+/* line 96, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tables.scss */
+table tfoot tr th,
+table tfoot tr td {
+  color: #222222;
+  font-size: 0.875rem;
+  font-weight: bold;
+  padding: 0.5rem 0.625rem 0.625rem;
+}
+/* line 107, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tables.scss */
+table tr th,
+table tr td {
+  color: #222222;
+  font-size: 0.875rem;
+  padding: 0.5625rem 0.625rem;
+  text-align: left;
+}
+/* line 115, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tables.scss */
+table tr.even, table tr.alt, table tr:nth-of-type(even) {
+  background: #F9F9F9;
+}
+/* line 120, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tables.scss */
+table thead tr th,
+table tfoot tr th,
+table tfoot tr td,
+table tbody tr th,
+table tbody tr td,
+table tr td {
+  display: table-cell;
+  line-height: 1.125rem;
 }
 
 /* line 30, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_tabs.scss */
@@ -3621,7 +4006,7 @@ meta.foundation-mq-topbar {
   .contain-to-grid .top-bar {
     margin-bottom: 0;
     margin: 0 auto;
-    max-width: 62.5rem;
+    max-width: 100%;
   }
 
   /* line 528, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/vendor/bundle/jruby/1.9/gems/foundation-rails-5.5.2.1/vendor/assets/stylesheets/foundation/components/_top-bar.scss */
@@ -5161,11 +5546,17 @@ form .switch.inline ~ label {
   top: -7px;
   padding-left: 0.9375rem;
 }
-/* line 38, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+/* line 37, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+form .switch.inline ~ label.has-tooltip ~ .tooltip-wrapper {
+  display: inline-block;
+  position: relative;
+  top: -7px;
+}
+/* line 46, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
 form .accordion-navigation {
   border: 1px solid #DDDDDD;
 }
-/* line 41, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+/* line 49, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
 form .accordion-navigation > a {
   padding-right: 10px;
 }
@@ -5193,6 +5584,59 @@ form .accordion-navigation.active > a:before {
   margin: 5px;
   -webkit-font-smoothing: antialiased;
 }
+/* line 1428, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+form .tooltip-question-mark:after {
+  font-family: 'FontAwesome';
+  content: "\f059";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1em;
+  margin: 5px;
+  font-size: 0.875rem;
+  color: #333333;
+  -webkit-font-smoothing: antialiased;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+/* line 66, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+form label.has-tooltip {
+  display: inline-block;
+}
+/* line 70, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+form .tooltip-content {
+  cursor: auto;
+  font-size: 0.8125rem;
+}
+/* line 73, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+form .tooltip-content * {
+  font-size: 0.8125rem;
+}
+/* line 80, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+form .f-dropdown > *:only-child > *:first-child {
+  margin-top: 0;
+}
+/* line 81, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+form .f-dropdown > *:only-child > *:last-child {
+  margin-bottom: 0;
+}
+/* line 84, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+form .f-dropdown.tiny {
+  width: 200px;
+}
+/* line 85, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+form .f-dropdown.small {
+  width: 300px;
+}
+/* line 86, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+form .f-dropdown.medium {
+  width: 500px;
+}
+/* line 87, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/application.scss */
+form .f-dropdown.large {
+  width: 800px;
+}
 
 /*
  * Copyright 2015 ThoughtWorks, Inc.
@@ -5209,78 +5653,49 @@ form .accordion-navigation.active > a:before {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* line 19, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .box, [data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget, [data-controller-name=pipeline_configs][data-action-name=edit] .add-stage {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #cccccc;
+/* line 1, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_dragula-3.0.1.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+/* line 9, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_dragula-3.0.1.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .gu-hide {
+  display: none !important;
+}
+/* line 12, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_dragula-3.0.1.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+/* line 18, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_dragula-3.0.1.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+/* line 20, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .box, [data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .pipeline-flow-box, [data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .add-stage {
   height: 4em;
   width: 6em;
-  cursor: pointer;
   display: inline-block;
   position: relative;
   text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cccccc;
 }
 /* line 33, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .box .label, [data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget .label, [data-controller-name=pipeline_configs][data-action-name=edit] .add-stage .label {
+[data-controller-name=pipeline_configs][data-action-name=edit] .box .label, [data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .pipeline-flow-box .label, [data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .add-stage .label {
   position: absolute;
   width: 100%;
   text-align: center;
   top: 1em;
-}
-/* line 41, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] ul.stages-widget {
-  margin-bottom: 0;
-}
-/* line 48, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget .remove {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-}
-/* line 54, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget.selected-stage {
-  background: #fafafa;
-  border-color: #999999;
-}
-/* line 59, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget ~ .stage-widget {
-  margin-left: 3em;
-}
-/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
-[data-controller-name=pipeline_configs][data-action-name=edit] .stage-widget ~ .stage-widget:before {
-  font-family: 'FontAwesome';
-  content: "\f054";
-  font-weight: normal;
-  font-style: normal;
-  display: inline-block;
-  text-decoration: inherit;
-  line-height: 1em;
-  margin: 5px;
-  -webkit-font-smoothing: antialiased;
-  position: absolute;
-  top: 17px;
-  left: -33px;
-}
-/* line 69, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .add-stage {
-  margin-left: 3em;
-  border: 1px solid;
-}
-/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
-[data-controller-name=pipeline_configs][data-action-name=edit] .add-stage:before {
-  font-family: 'FontAwesome';
-  content: "\f067";
-  font-weight: normal;
-  font-style: normal;
-  display: inline-block;
-  text-decoration: inherit;
-  line-height: 1em;
-  margin: 5px;
-  -webkit-font-smoothing: antialiased;
-  position: absolute;
-  top: 17px;
-  left: 34px;
 }
 /* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
 [data-controller-name=pipeline_configs][data-action-name=edit] .remove:before {
@@ -5295,12 +5710,101 @@ form .accordion-navigation.active > a:before {
   color: #008CBA;
   -webkit-font-smoothing: antialiased;
 }
-/* line 86, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .job-definition.accordion-navigation .add-task {
+/* line 45, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .heading {
+  margin-top: 1.125rem;
+}
+/* line 49, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes {
+  padding-bottom: 18px;
+}
+/* line 53, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .pipeline-flow-box {
+  cursor: pointer;
+}
+/* line 57, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .pipeline-flow-box.stage {
+  cursor: move;
+}
+/* line 61, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .pipeline-flow-box.active {
+  background: #fafafa;
+  border-color: #999999;
+}
+/* line 65, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .pipeline-flow-box.active .bottom-triangle-outer {
+  height: 0;
+  width: 0;
+  border-bottom: 20px solid #999999;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: calc(50% - 20px);
+}
+/* line 73, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .pipeline-flow-box.active .bottom-triangle-outer .bottom-triangle-inner {
+  height: 0;
+  width: 0;
+  border-bottom: 20px solid white;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  position: absolute;
+  top: calc(100% + 1px);
+  left: calc(50% - 20px);
+}
+/* line 83, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .pipeline-flow-box ~ .pipeline-flow-box {
+  margin-left: 3em;
+}
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+[data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .pipeline-flow-box ~ .pipeline-flow-box:before {
+  font-family: 'FontAwesome';
+  content: "\f054";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1em;
+  margin: 5px;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  top: 17px;
+  left: -33px;
+}
+/* line 93, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .add-stage {
+  margin-left: 3em;
+}
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+[data-controller-name=pipeline_configs][data-action-name=edit] .pipeline-flow-boxes .add-stage:before {
+  font-family: 'FontAwesome';
+  content: "\f067";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1em;
+  margin: 5px;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  top: 17px;
+  left: 34px;
+}
+/* line 106, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions > * {
+  border: 1px solid #999999;
+}
+/* line 110, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .material-definitions {
+  padding: 1.125rem;
+}
+/* line 113, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .material-definitions .add-material {
   padding-top: 1.75rem;
 }
 /* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
-[data-controller-name=pipeline_configs][data-action-name=edit] .job-definition.accordion-navigation .add-task a:before {
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .material-definitions .add-material a:before {
   font-family: 'FontAwesome';
   content: "\f055";
   font-weight: normal;
@@ -5311,17 +5815,22 @@ form .accordion-navigation.active > a:before {
   margin: 5px;
   -webkit-font-smoothing: antialiased;
 }
-/* line 93, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .job-definition.accordion-navigation > a .remove {
-  position: absolute;
-  left: calc(100% - 42px);
+/* line 120, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .material-definitions a.remove {
+  position: relative;
+  left: calc(100% - 28px);
+  top: -58px;
 }
-/* line 100, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .stage-definition .add-job {
+/* line 127, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition {
+  padding: 0 1.125rem;
+}
+/* line 130, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .add-job {
   margin: 1.125rem 0;
 }
 /* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
-[data-controller-name=pipeline_configs][data-action-name=edit] .stage-definition .add-job a:before {
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .add-job a:before {
   font-family: 'FontAwesome';
   content: "\f055";
   font-weight: normal;
@@ -5332,34 +5841,83 @@ form .accordion-navigation.active > a:before {
   margin: 5px;
   -webkit-font-smoothing: antialiased;
 }
-/* line 107, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .stage-definition > .remove {
+/* line 138, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition > .remove {
+  position: relative;
+  left: calc(100% - 8px);
+}
+/* line 143, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions {
+  padding-top: 1.125rem;
+}
+/* line 151, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definitions-tab-title a {
+  background-color: #EFEFEF;
+}
+/* line 153, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definitions-tab-title a:hover {
+  background-color: #e3e3e3;
+}
+/* line 158, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definitions-tab-title.active {
+  border-left: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
+  border-top: 1px solid #DDDDDD;
+  border-right: inherit;
+}
+/* line 164, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definitions-tab-title.active a {
+  background-color: #e8e8e8;
+}
+/* line 170, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definitions-tab-content.content.active {
+  padding-top: 0;
+}
+/* line 175, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definition .add-task {
+  padding-top: 1.75rem;
+}
+/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definition .add-task a:before {
+  font-family: 'FontAwesome';
+  content: "\f055";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1em;
+  margin: 5px;
+  -webkit-font-smoothing: antialiased;
+}
+/* line 182, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definition legend {
+  background-color: inherit;
+}
+/* line 186, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definition > * {
+  border: 1px solid #DDDDDD;
+  padding: 1.125rem;
+}
+@media only screen and (min-width: 40.0625em) {
+  /* line 186, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+  [data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definition > * {
+    width: calc(100% - 20% - 10px);
+  }
+}
+/* line 195, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definition .task-definition .remove {
   position: absolute;
   top: 39px;
   left: calc(100% - 42px);
 }
-/* line 115, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .material-definitions .add-material {
-  padding-top: 1.75rem;
-}
-/* line 1421, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_font-awesome-glyphs.css.scss.erb */
-[data-controller-name=pipeline_configs][data-action-name=edit] .material-definitions .add-material a:before {
-  font-family: 'FontAwesome';
-  content: "\f055";
-  font-weight: normal;
-  font-style: normal;
-  display: inline-block;
-  text-decoration: inherit;
-  line-height: 1em;
-  margin: 5px;
-  -webkit-font-smoothing: antialiased;
-}
-/* line 123, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .material-definitions .accordion-navigation > a .remove {
+/* line 202, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .stage-and-material-definitions .stage-definition .job-definitions .job-definition .remove-job {
   position: absolute;
-  left: calc(100% - 62px);
+  left: calc(100% - 32px);
+  top: 0;
+  z-index: 10;
 }
-/* line 131, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+/* line 215, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
 [data-controller-name=pipeline_configs][data-action-name=edit] .environment-variable .prefix-container {
   width: 30px;
 }
@@ -5376,16 +5934,12 @@ form .accordion-navigation.active > a:before {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
-/* line 139, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .heading {
-  margin-top: 1.125rem;
-}
-/* line 144, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .tabs .tab-title {
+/* line 225, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .tabs:not(.vertical) .tab-title {
   border-bottom: 1px solid #DDDDDD;
 }
-/* line 147, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
-[data-controller-name=pipeline_configs][data-action-name=edit] .tabs .tab-title.active {
+/* line 228, /Users/ketanpadegaonkar/projects/gocd/gocd/server/webapp/WEB-INF/rails.new/app/assets/stylesheets/pipeline_configs/_pipeline.scss */
+[data-controller-name=pipeline_configs][data-action-name=edit] .tabs:not(.vertical) .tab-title.active {
   border-left: 1px solid #DDDDDD;
   border-right: 1px solid #DDDDDD;
   border-top: 1px solid #DDDDDD;

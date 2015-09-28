@@ -15,7 +15,7 @@
  */
 
 
-define(['mithril', 'lodash', '../helpers/form_helper', '../models/tracking_tool'], function (m, _, f, TrackingTool) {
+define(['mithril', 'lodash', '../helpers/form_helper', '../helpers/tooltips', '../models/tracking_tool'], function (m, _, f, tt, TrackingTool) {
 
   var TrackingToolViews = {
     none: function () {
@@ -25,48 +25,72 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tracking_tool'
       return (
         {tag: "div", attrs: {}, children: [
           m.component(f.row, {}, [
-            m.component(f.inputWithLabel, {
-              model:trackingTool(), 
-              attrName:"baseUrl", 
-              label:"Base URL", 
-              type:"url", 
-              size:8})
+            m.component(f.inputWithLabel, {model:trackingTool(), 
+                              attrName:"baseUrl", 
+                              label:"Base URL", 
+                              type:"url", 
+                              tooltip:{
+                                          content: m.component(tt.trackingTool.mingle.baseUrl, {callback:trackingTool().baseUrl}),
+                                          direction: 'bottom',
+                                          size: 'medium'
+                                        }, 
+                              size:8})
           ]), 
-          m.component(f.row, {}, [
 
-            m.component(f.inputWithLabel, {
-              model:trackingTool(), 
-              attrName:"projectIdentifier", 
-              size:8})
+          m.component(f.row, {}, [
+            m.component(f.inputWithLabel, {model:trackingTool(), 
+                              attrName:"projectIdentifier", 
+                              tooltip:{
+                                          content: m.component(tt.trackingTool.mingle.projectIdentifier, {callback:trackingTool().projectIdentifier}),
+                                          direction: 'bottom',
+                                          size: 'medium'
+                                        }, 
+                              size:8})
           ]), 
-          m.component(f.row, {}, [
 
-            m.component(f.inputWithLabel, {
-              model:trackingTool(), 
-              attrName:"groupingConditions", 
-              size:8})
+          m.component(f.row, {}, [
+            m.component(f.inputWithLabel, {model:trackingTool(), 
+                              attrName:"groupingConditions", 
+                              tooltip:{
+                                          content: m.component(tt.trackingTool.mingle.groupingConditions, {callback:trackingTool().groupingConditions}),
+                                          direction: 'bottom',
+                                          size: 'medium'
+                                        }, 
+                              size:8})
           ])
         ]}
       );
     },
 
     generic: function (trackingTool) {
+
+      var useTrackingToolRegex = function () {
+        debugger;
+      };
       return (
         {tag: "div", attrs: {}, children: [
           m.component(f.row, {}, [
-            m.component(f.inputWithLabel, {
-              model:trackingTool(), 
-              attrName:"urlPattern", 
-              label:"URL Pattern", 
-              type:"url", 
-              size:8})
+            m.component(f.inputWithLabel, {model:trackingTool(), 
+                              attrName:"regex", 
+                              label:"Regular expression", 
+                              tooltip:{
+                                          content: m.component(tt.trackingTool.generic.regex, {callback:trackingTool().regex}),
+                                          direction: 'bottom',
+                                          size: 'large'
+                                        }, 
+                              size:8})
           ]), 
-
           m.component(f.row, {}, [
-            m.component(f.inputWithLabel, {
-              model:trackingTool(), 
-              attrName:"regex", 
-              size:8})
+            m.component(f.inputWithLabel, {model:trackingTool(), 
+                              attrName:"urlPattern", 
+                              label:"URL Pattern", 
+                              type:"url", 
+                              tooltip:{
+                                          content: m.component(tt.trackingTool.generic.urlPattern, {callback:trackingTool().urlPattern}),
+                                          direction: 'bottom',
+                                          size: 'large'
+                                        }, 
+                              size:8})
           ])
         ]}
       );
@@ -99,13 +123,19 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tracking_tool'
       var trackingTools = _.merge({none: {type: undefined, description: "None"}}, TrackingTool.Types);
 
       return (
-        {tag: "fieldset", attrs: {}, children: [
-          {tag: "legend", attrs: {}, children: ["Project Management"]}, 
-          m.component(f.row, {}, [
-            m.component(f.column, {size:4, end:true}, [
-              _.map(trackingTools, function (value, key) {
-                return (
-                  {tag: "span", attrs: {}, children: [
+        m.component(f.accordion, {accordionTitles:[
+                        (
+                          {tag: "span", attrs: {}, children: ["Tracking Tool", m.component(f.tooltip, {tooltip:{content: tt.trackingTool.main}})]}
+                        )
+                     ], 
+                     accordionKeys:['tracking-tool'], 
+                     selectedIndex:-1}, [
+          {tag: "div", attrs: {}, children: [
+            m.component(f.row, {}, [
+              m.component(f.column, {size:4, end:true}, [
+                _.map(trackingTools, function (value, key) {
+                  return (
+                    {tag: "span", attrs: {}, children: [
                     {tag: "input", attrs: {type:"radio", 
                            name:"tracking-tool-button-group", 
                            id:'tracking-tool-' + key, 
@@ -113,17 +143,18 @@ define(['mithril', 'lodash', '../helpers/form_helper', '../models/tracking_tool'
                            onclick:ctrl.setTrackingTool.bind(ctrl, ctrl.possibleTrackingTools[key])}}, 
                     {tag: "label", attrs: {for:'tracking-tool-' + key}, children: [" ", value.description]}
                   ]}
-                );
-              })
-            ])
-          ]), 
+                  );
+                })
+              ])
+            ]), 
 
-          m.component(f.row, {class:'tracking-tool tracking-tool' + (ctrl.trackingTool() ? ctrl.trackingTool().type() : 'none')}, [
-            m.component(f.column, {size:6, end:true}, [
-              TrackingToolViews[ctrl.trackingTool() ? ctrl.trackingTool().type() : 'none'](ctrl.trackingTool)
+            m.component(f.row, {class:'tracking-tool tracking-tool-' + (ctrl.trackingTool() ? ctrl.trackingTool().type() : 'none')}, [
+              m.component(f.column, {size:6, end:true}, [
+                TrackingToolViews[ctrl.trackingTool() ? ctrl.trackingTool().type() : 'none'](ctrl.trackingTool)
+              ])
             ])
-          ])
-        ]}
+          ]}
+        ])
       );
     }
   };

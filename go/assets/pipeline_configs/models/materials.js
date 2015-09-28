@@ -68,7 +68,8 @@ define(['mithril', 'lodash', 'string-plus', './model_mixins'], function (m, _, s
       }
     };
 
-    var commonAttributes = function () {
+
+    this.toJSON = function () {
       var attrs = {
         name:        this.name(),
         auto_update: this.autoUpdate()
@@ -77,13 +78,10 @@ define(['mithril', 'lodash', 'string-plus', './model_mixins'], function (m, _, s
       if (hasFilter) {
         _.merge(attrs, this.filter().toJSON());
       }
-      return attrs;
-    };
 
-    this.toJSON = function () {
       return {
         type:       this.type(),
-        attributes: _.merge(commonAttributes.call(this), this._attributesToJSON())
+        attributes: _.merge(attrs, this._attributesToJSON())
       };
     };
 

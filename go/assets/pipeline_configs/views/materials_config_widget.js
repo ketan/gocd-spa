@@ -15,15 +15,14 @@
  */
 
 
-define(['mithril', 'lodash', 'jquery', '../helpers/form_helper', '../models/materials', 'foundation.accordion'], function (m, _, $, f, Materials) {
+define(['mithril', 'lodash', 'jquery', '../helpers/form_helper', '../helpers/tooltips', '../models/materials'], function (m, _, $, f, tt, Materials) {
 
   var MaterialViews = {
     base: {
       controller: function (args) {
-        this.uuid             = f.uuid();
-        this.material         = args.material;
-        this.onRemove         = args.onRemove;
-        this.selectedMaterial = args.selectedMaterial;
+        this.material              = args.material;
+        this.onRemove              = args.onRemove;
+        this.selectedMaterialIndex = args.selectedMaterialIndex;
       },
 
       view: function (ctrl, args, children) {
@@ -31,56 +30,47 @@ define(['mithril', 'lodash', 'jquery', '../helpers/form_helper', '../models/mate
 
         if (ctrl.material.destination) {
           destinationField = (
-            m.component(f.inputWithLabel, {
-              attrName:"destination", 
-              label:"Destination", 
-              model:ctrl.material})
+            m.component(f.inputWithLabel, {attrName:"destination", 
+                              label:"Destination", 
+                              model:ctrl.material, 
+                              tooltip:{
+                                          content: tt.material.destination,
+                                          direction: 'bottom',
+                                          size: 'small'
+                                        }})
           );
         }
 
         if (ctrl.material.filter) {
           // TODO: make this an 'intelligent' text component that maps to an array.
           filterField = (
-            m.component(f.inputWithLabel, {
-              attrName:"ignore", 
-              label:"Ignore", 
-              model:ctrl.material.filter()})
+            m.component(f.inputWithLabel, {attrName:"ignore", 
+                              label:"Ignore", 
+                              model:ctrl.material.filter()})
           );
         }
 
         return (
-          {tag: "dd", attrs: {class:"accordion-navigation"}, children: [
-            {tag: "a", attrs: {href:'#panel-' + ctrl.uuid}, children: [
-              ctrl.material.name(), 
-              {tag: "a", attrs: {
-                href:"javascript:void(0)", 
-                class:"remove", 
-                onclick:ctrl.onRemove
-                }}
-            ]}, 
+          {tag: "div", attrs: {class:"material-definition"}, children: [
+            m.component(f.removeButton, {onclick:ctrl.onRemove}), 
+            m.component(f.row, {}, [
+              m.component(f.inputWithLabel, {attrName:"name", 
+                                model:ctrl.material, 
+                                tooltip:{
+                                          content: tt.material.name,
+                                          direction: 'bottom',
+                                          size: 'small'
+                                        }}), 
+              destinationField, 
+              m.component(f.checkBox, {model:ctrl.material, 
+                          attrName:"autoUpdate", 
+                          end:true})
+            ]), 
+            children, 
 
-            {tag: "div", attrs: {id:'panel-' + ctrl.uuid, 
-                 class:'content ' + ((ctrl.selectedMaterial() === ctrl.material) ? 'active' : '')}, children: [
-              m.component(f.row, {}, [
-                {tag: "div", attrs: {class:"material-definition", "data-key":ctrl.material.name()}, children: [
-                  m.component(f.inputWithLabel, {
-                    attrName:"name", 
-                    model:ctrl.material}), 
-
-                  destinationField, 
-
-                  m.component(f.checkBox, {
-                    model:ctrl.material, 
-                    attrName:"autoUpdate", 
-                    end:true})
-                ]}
-              ]), 
-              children, 
-
-              m.component(f.row, {}, [
-                filterField
-              ])
-            ]}
+            m.component(f.row, {}, [
+              filterField
+            ])
           ]}
         );
       }
@@ -90,24 +80,21 @@ define(['mithril', 'lodash', 'jquery', '../helpers/form_helper', '../models/mate
       view: function (controller, args) {
         var material = args.material;
         return (
-          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, selectedMaterial:args.selectedMaterial}, [
+          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, 
+                              selectedMaterialIndex:args.selectedMaterialIndex}, [
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"url", 
-                type:"url", 
-                model:material}), 
-              m.component(f.inputWithLabel, {
-                attrName:"username", 
-                model:material}), 
-              m.component(f.inputWithLabel, {
-                attrName:"password", 
-                type:"password", 
-                model:material}), 
-              m.component(f.checkBox, {
-                type:"checkbox", 
-                model:material, 
-                attrName:"checkExternals", 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"url", 
+                                type:"url", 
+                                model:material}), 
+              m.component(f.inputWithLabel, {attrName:"username", 
+                                model:material}), 
+              m.component(f.inputWithLabel, {attrName:"password", 
+                                type:"password", 
+                                model:material}), 
+              m.component(f.checkBox, {type:"checkbox", 
+                          model:material, 
+                          attrName:"checkExternals", 
+                          end:true})
             ])
           ])
         );
@@ -117,16 +104,15 @@ define(['mithril', 'lodash', 'jquery', '../helpers/form_helper', '../models/mate
       view: function (controller, args) {
         var material = args.material;
         return (
-          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, selectedMaterial:args.selectedMaterial}, [
+          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, 
+                              selectedMaterialIndex:args.selectedMaterialIndex}, [
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"url", 
-                type:"url", 
-                model:material}), 
-              m.component(f.inputWithLabel, {
-                attrName:"branch", 
-                model:material, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"url", 
+                                type:"url", 
+                                model:material}), 
+              m.component(f.inputWithLabel, {attrName:"branch", 
+                                model:material, 
+                                end:true})
             ])
           ])
         );
@@ -137,16 +123,15 @@ define(['mithril', 'lodash', 'jquery', '../helpers/form_helper', '../models/mate
       view: function (controller, args) {
         var material = args.material;
         return (
-          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, selectedMaterial:args.selectedMaterial}, [
+          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, 
+                              selectedMaterialIndex:args.selectedMaterialIndex}, [
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"url", 
-                type:"url", 
-                model:material}), 
-              m.component(f.inputWithLabel, {
-                attrName:"branch", 
-                model:material, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"url", 
+                                type:"url", 
+                                model:material}), 
+              m.component(f.inputWithLabel, {attrName:"branch", 
+                                model:material, 
+                                end:true})
             ])
           ])
         );
@@ -157,32 +142,28 @@ define(['mithril', 'lodash', 'jquery', '../helpers/form_helper', '../models/mate
       view: function (controller, args) {
         var material = args.material;
         return (
-          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, selectedMaterial:args.selectedMaterial}, [
+          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, 
+                              selectedMaterialIndex:args.selectedMaterialIndex}, [
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"port", 
-                model:material, 
-                onchange:m.withAttr('value', material.port)}), 
-              m.component(f.inputWithLabel, {
-                attrName:"username", 
-                model:material}), 
-              m.component(f.inputWithLabel, {
-                attrName:"password", 
-                type:"password", 
-                model:material}), 
-              m.component(f.checkBox, {
-                name:"material[use_tickets]", 
-                type:"checkbox", 
-                end:true, 
-                model:material, 
-                attrName:"useTickets"})
+              m.component(f.inputWithLabel, {attrName:"port", 
+                                model:material, 
+                                onchange:m.withAttr('value', material.port)}), 
+              m.component(f.inputWithLabel, {attrName:"username", 
+                                model:material}), 
+              m.component(f.inputWithLabel, {attrName:"password", 
+                                type:"password", 
+                                model:material}), 
+              m.component(f.checkBox, {name:"material[use_tickets]", 
+                          type:"checkbox", 
+                          end:true, 
+                          model:material, 
+                          attrName:"useTickets"})
             ]), 
 
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"view", 
-                model:material, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"view", 
+                                model:material, 
+                                end:true})
             ])
           ])
         );
@@ -193,32 +174,26 @@ define(['mithril', 'lodash', 'jquery', '../helpers/form_helper', '../models/mate
       view: function (controller, args) {
         var material = args.material;
         return (
-          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, selectedMaterial:args.selectedMaterial}, [
+          m.component(MaterialViews.base, {material:material, onRemove:args.onRemove, 
+                              selectedMaterialIndex:args.selectedMaterialIndex}, [
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"url", 
-                type:"url", 
-                model:material}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"domain", 
-                model:material}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"username", 
-                model:material}), 
-              m.component(f.inputWithLabel, {
-                attrName:"password", 
-                type:"password", 
-                model:material, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"url", 
+                                type:"url", 
+                                model:material}), 
+              m.component(f.inputWithLabel, {attrName:"domain", 
+                                model:material}), 
+              m.component(f.inputWithLabel, {attrName:"username", 
+                                model:material}), 
+              m.component(f.inputWithLabel, {attrName:"password", 
+                                type:"password", 
+                                model:material, 
+                                end:true})
             ]), 
 
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"projectPath", 
-                model:material, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"projectPath", 
+                                model:material, 
+                                end:true})
             ])
           ])
         );
@@ -257,45 +232,43 @@ define(['mithril', 'lodash', 'jquery', '../helpers/form_helper', '../models/mate
 
   var MaterialsConfigWidget = {
     controller: function (args) {
-      this.materials        = args.materials;
-      this.selectedMaterial = m.prop();
+      this.materials = args.materials;
+
+      this.selectedMaterialIndex = args.selectedMaterialIndex;
 
       this.removeMaterial = function (material) {
         var previousMaterial = this.materials.previousMaterial(material);
-        var firstMaterial    = this.materials.firstMaterial();
-        this.selectMaterial(previousMaterial || firstMaterial);
         this.materials.removeMaterial(material);
+
+        var firstMaterial = this.materials.firstMaterial();
+        this.selectedMaterialIndex(this.materials.indexOfMaterial(previousMaterial || firstMaterial));
       };
 
       this.createMaterial = function (type) {
         var newMaterial = this.materials.createMaterial({type: type()});
-        this.selectMaterial(newMaterial);
+        this.selectedMaterialIndex(this.materials.indexOfMaterial(newMaterial));
       };
 
-      this.selectMaterial = function (material) {
-        this.selectedMaterial(material);
-        window.setTimeout(function () {
-          $(document).foundation('accordion', 'reflow');
-        }, 30);
-      };
-
-      this.selectMaterial(this.materials.firstMaterial());
+      this.selectedMaterialIndex(0);
     },
 
-    view: function (ctrl, args) {
+    view: function (ctrl) {
       return (
         {tag: "div", attrs: {}, children: [
-          {tag: "dl", attrs: {class:"accordion", "data-accordion":true}, children: [
+          m.component(f.accordion, {class:"materials-definition", 
+                       accordionTitles:ctrl.materials.collectMaterialProperty('name'), 
+                       accordionKeys:ctrl.materials.collectMaterialProperty('uuid'), 
+                       selectedIndex:ctrl.selectedMaterialIndex}, [
             ctrl.materials.mapMaterials(function (material) {
               var materialView = MaterialViews[material.type()];
               return (m.component(materialView, {
-                material:         material,
-                selectedMaterial: ctrl.selectedMaterial,
-                onRemove:         ctrl.removeMaterial.bind(ctrl, material),
-                key:              material.uuid()
+                material:              material,
+                selectedMaterialIndex: ctrl.selectedMaterialIndex,
+                onRemove:              ctrl.removeMaterial.bind(ctrl, material),
+                key:                   material.uuid()
               }));
             })
-          ]}, 
+          ]), 
           m.component(MaterialTypeSelector, {materials:ctrl.materials, createMaterial:ctrl.createMaterial.bind(ctrl)})
         ]}
       );

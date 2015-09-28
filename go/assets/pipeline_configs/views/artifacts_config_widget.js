@@ -15,7 +15,7 @@
  */
 
 
-define(['mithril', 'lodash', '../helpers/form_helper'], function (m, _, f) {
+define(['mithril', '../helpers/form_helper'], function (m, f) {
   var ArtifactsConfigWidget = {
     controller: function (args) {
       this.artifacts = args.artifacts;
@@ -45,43 +45,33 @@ define(['mithril', 'lodash', '../helpers/form_helper'], function (m, _, f) {
     view: function (ctrl) {
       var removeLink = function (artifact) {
         if (artifact !== ctrl.lastArtifact()) {
-          return ({tag: "a", attrs: {
-              href:"javascript:void(0)", 
-              class:"remove", 
-              onclick:ctrl.remove.bind(ctrl, artifact)}}
+          return (
+            m.component(f.removeButton, {onclick:ctrl.remove.bind(ctrl, artifact)})
           );
         }
       };
 
       return (
-        {tag: "fieldset", attrs: {class:"artifacts"}, children: [
-          {tag: "legend", attrs: {}, children: ["Artifacts"]}, 
+        {tag: "div", attrs: {class:"job-artifacts"}, children: [
           ctrl.artifacts.mapArtifacts(function (artifact) {
             return (
               m.component(f.row, {class:"artifact", "data-artifact-source":artifact.source(), key:artifact.uuid()}, [
-                m.component(f.input, {
-                  model:artifact, 
-                  attrName:"source", 
-                  onchange:ctrl.artifactChanged.bind(ctrl), 
-                  size:3}), 
-
-                m.component(f.input, {
-                  model:artifact, 
-                  attrName:"destination", 
-                  onchange:ctrl.artifactChanged.bind(ctrl), 
-                  size:3}), 
-
+                m.component(f.input, {model:artifact, 
+                         attrName:"source", 
+                         onchange:ctrl.artifactChanged.bind(ctrl), 
+                         size:3}), 
+                m.component(f.input, {model:artifact, 
+                         attrName:"destination", 
+                         onchange:ctrl.artifactChanged.bind(ctrl), 
+                         size:3}), 
                 m.component(f.column, {size:2}, [
-                  m.component(f.select, {
-                    value:ctrl.selected, 
-                    class:"inline", 
-                    items:{
+                  m.component(f.select, {value:ctrl.selected, 
+                            class:"inline", 
+                            items:{
                       build: 'build',
                       test: 'test'
-                    }}
-                    )
+                    }})
                 ]), 
-
                 m.component(f.column, {size:1, end:true}, [
                   removeLink(artifact)
                 ])

@@ -15,7 +15,7 @@
  */
 
 
-define(['mithril', 'lodash', '../helpers/form_helper'], function (m, _, f) {
+define(['mithril', '../helpers/form_helper'], function (m, f) {
   var PropertiesConfigWidget = {
     controller: function (args) {
       this.properties = args.properties;
@@ -45,38 +45,29 @@ define(['mithril', 'lodash', '../helpers/form_helper'], function (m, _, f) {
     view: function (ctrl) {
       var removeLink = function (property) {
         if (property !== ctrl.lastProperty()) {
-          return ({tag: "a", attrs: {
-              href:"javascript:void(0)", 
-              class:"remove", 
-              onclick:ctrl.remove.bind(ctrl, property)}}
+          return (
+            m.component(f.removeButton, {onclick:ctrl.remove.bind(ctrl, property)})
           );
         }
       };
 
       return (
-        {tag: "fieldset", attrs: {class:"properties"}, children: [
-          {tag: "legend", attrs: {}, children: ["Properties"]}, 
+        {tag: "div", attrs: {class:"job-properties"}, children: [
           ctrl.properties.mapProperties(function (property) {
             return (
               m.component(f.row, {class:"property", "data-property-source":property.source(), key:property.uuid()}, [
-                m.component(f.input, {
-                  model:property, 
-                  attrName:"name", 
-                  onchange:ctrl.propertyChanged.bind(ctrl), 
-                  size:3}), 
-
-                m.component(f.input, {
-                  model:property, 
-                  attrName:"source", 
-                  onchange:ctrl.propertyChanged.bind(ctrl), 
-                  size:3}), 
-
-                m.component(f.input, {
-                  model:property, 
-                  attrName:"xpath", 
-                  onchange:ctrl.propertyChanged.bind(ctrl), 
-                  size:3}), 
-
+                m.component(f.input, {model:property, 
+                         attrName:"name", 
+                         onchange:ctrl.propertyChanged.bind(ctrl), 
+                         size:3}), 
+                m.component(f.input, {model:property, 
+                         attrName:"source", 
+                         onchange:ctrl.propertyChanged.bind(ctrl), 
+                         size:3}), 
+                m.component(f.input, {model:property, 
+                         attrName:"xpath", 
+                         onchange:ctrl.propertyChanged.bind(ctrl), 
+                         size:3}), 
                 m.component(f.column, {size:1, end:true}, [
                   removeLink(property)
                 ])

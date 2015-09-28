@@ -31,7 +31,7 @@ define(['mithril', 'lodash', 'string-plus', './model_mixins'], function (m, _, s
     this.constructor.modelType = 'property';
     Mixins.HasUUID.call(this);
 
-    this.parent                = Mixins.GetterSetter();
+    this.parent = Mixins.GetterSetter();
 
     this.name   = m.prop(s.defaultToIfBlank(data.name, ''));
     this.source = m.prop(s.defaultToIfBlank(data.source, ''));

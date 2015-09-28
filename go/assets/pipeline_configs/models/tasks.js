@@ -216,10 +216,9 @@ define(['mithril', 'lodash', 'string-plus', './model_mixins'], function (m, _, s
     });
 
     function configForKey(key) {
-      var config = this.findConfiguration(function (config) {
+      return this.findConfiguration(function (config) {
         return config.name() === key;
       });
-      return config;
     }
 
     this.valueFor = function (key) {

@@ -15,7 +15,7 @@
  */
 
 
-define(['mithril', 'lodash'], function (m, _) {
+define(['mithril', 'lodash', 'jquery', 'dragula', '../helpers/form_helper', './stages_config_widget'], function (m, _, $, dragula, f, StagesConfigWidget) {
   var StagesWidget = {
     controller: function (args) {
       this.stages           = args.stages;
@@ -23,19 +23,7 @@ define(['mithril', 'lodash'], function (m, _) {
       this.currentSelection = args.currentSelection;
 
       this.appendStage = function () {
-        this.setSelection(this.stages.createStage());
-      };
-
-      this.removeStage = function (stage, evt) {
-        evt.stopPropagation();
-        var previousStage = this.stages.previousStage(stage);
-        var firstStage    = this.stages.firstStage();
-        this.setSelection(previousStage || firstStage);
-        this.stages.removeStage(stage);
-      };
-
-      this.setSelection = function (stageOrMaterials) {
-        this.currentSelection(stageOrMaterials);
+        this.currentSelection(this.stages.createStage());
       };
     },
 
@@ -44,25 +32,69 @@ define(['mithril', 'lodash'], function (m, _) {
         {tag: "li", attrs: {class:"add-stage", onclick:ctrl.appendStage.bind(ctrl)}}
       );
 
-      var className = function (selection) {
-        return ('stage-widget ' + ((ctrl.currentSelection() === selection) ? ' selected-stage' : ''));
+      var className = function (selection, additionalClasses) {
+        return _(['pipeline-flow-box', additionalClasses, (ctrl.currentSelection() === selection) ? 'active' : null]).flatten().compact().value().join(' ');
+      };
+
+      var dragDropConfig = function (elem, isInitialized) {
+        if (isInitialized) {
+          return;
+        }
+
+        var drake = dragula([elem], {
+          revertOnSpill:   true,
+          mirrorContainer: elem
+        });
+
+        drake.on('drop', function () {
+          m.startComputation();
+          try {
+            var reorderedStages = _.map($(elem).find('.stage:not(.gu-mirror)'), function (eachStageElem) {
+              return ctrl.stages.stageAtIndex($(eachStageElem).attr('data-stage-index'));
+            });
+            ctrl.stages.setStages(reorderedStages);
+          } finally {
+            m.endComputation();
+          }
+        });
       };
 
       return (
-        {tag: "ul", attrs: {class:"stages-widget"}, children: [
-          {tag: "li", attrs: {class:className(ctrl.materials), onclick:ctrl.setSelection.bind(ctrl, ctrl.materials)}, children: [
-            {tag: "div", attrs: {className:"label"}, children: ["Materials"]}
-          ]}, 
+        m.component(f.accordion, {accordionTitles:['Stages'], 
+                     accordionKeys:['stages']}, [
+          {tag: "div", attrs: {}, children: [
+            {tag: "div", attrs: {class:"pipeline-flow-boxes"}, children: [
+              {tag: "div", attrs: {class:className(ctrl.materials, 'materials'), 
+                   onclick:ctrl.currentSelection.bind(ctrl, ctrl.materials)}, children: [
+                {tag: "div", attrs: {className:"label"}, children: ["Materials"]}, 
+                {tag: "div", attrs: {class:"bottom-triangle-outer"}, children: [
+                  {tag: "div", attrs: {class:"bottom-triangle-inner"}}
+                ]}
+              ]}, 
 
-          ctrl.stages.mapStages(function (stage) {
-            return (
-              {tag: "li", attrs: {class:className(stage), onclick:ctrl.setSelection.bind(ctrl, stage), key:stage.uuid()}, children: [
-                {tag: "div", attrs: {className:"label"}, children: [stage.name()]}
-              ]}
-            );
-          }), 
-          appendStage
-        ]}
+              ctrl.stages.mapStages(function (stage, stageIndex) {
+                return (
+                  {tag: "div", attrs: {class:className(stage, 'stage'), 
+                       "data-stage-index":stageIndex, 
+                       onclick:ctrl.currentSelection.bind(ctrl, stage), 
+                       key:stage.uuid()}, children: [
+                    {tag: "div", attrs: {className:"label"}, children: [stage.name()]}, 
+                    {tag: "div", attrs: {class:"bottom-triangle-outer"}, children: [
+                      {tag: "div", attrs: {class:"bottom-triangle-inner"}}
+                    ]}
+                  ]}
+                );
+              }), 
+
+              appendStage
+            ]}, 
+
+            m.component(StagesConfigWidget, {stages:pipeline.stages(), 
+                                materials:pipeline.materials(), 
+                                currentSelection:ctrl.currentSelection})
+
+          ]}
+        ])
       );
     }
 

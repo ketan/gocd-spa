@@ -91,12 +91,28 @@ define(['lodash', 'string-plus'], function (_, s) {
       return _.first(collection());
     };
 
+    this[_.camelCase(associationName) + 'AtIndex'] = function (index) {
+      return collection()[index];
+    };
+
+    this['set' + associationNamePlural] = function (newItems) {
+      return collection(newItems);
+    };
+
     this['count' + associationName] = function () {
       return collection().length;
     };
 
+    this['isEmpty' + associationName] = function () {
+      return collection().length === 0;
+    };
+
+    this['indexOf' + associationName] = function (thing) {
+      return _.indexOf(collection(), thing);
+    };
+
     this['previous' + associationName] = function (thing) {
-      return collection()[_.indexOf(collection(), thing) - 1];
+      return collection()[this['indexOf' + associationName](thing) - 1];
     };
 
     this['last' + associationName] = function () {
@@ -155,6 +171,15 @@ define(['lodash', 'string-plus'], function (_, s) {
     };
   };
 
+  Mixins.TogglingGetterSetter = function (store) {
+    return function () {
+      if (arguments.length) {
+        store(store() === arguments[0] ? undefined : arguments[0]);
+      }
+      return store();
+    };
+  };
+
   Mixins.Validations = {};
 
   Mixins.ErrorMessages = {
@@ -165,7 +190,11 @@ define(['lodash', 'string-plus'], function (_, s) {
       return s.humanize(attribute).replace(/\bxpath\b/i, 'XPath').replace(/\burl\b/i, 'URL') + " must be present";
     },
     mustBeAUrl:    function (attribute) {
-      return s.humanize(attribute) + "must be a valid http(s) url";
+      return s.humanize(attribute) + " must be a valid http(s) url";
+    },
+
+    mustContainString: function(attribute, string){
+      return s.humanize(attribute) + " must contain the string '" + string + "'";
     }
   };
 

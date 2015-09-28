@@ -15,7 +15,7 @@
  */
 
 
-define(['mithril', 'lodash', '../helpers/form_helper'], function (m, _, f) {
+define(['mithril', '../helpers/form_helper', '../helpers/tooltips'], function (m, f, tt) {
   var EnvironmentVariablesConfigWidget = {
     controller: function (args) {
       this.variables = args.variables;
@@ -45,49 +45,51 @@ define(['mithril', 'lodash', '../helpers/form_helper'], function (m, _, f) {
     view: function (ctrl) {
       var removeLink = function (variable) {
         if (variable !== ctrl.lastVariable()) {
-          return ({tag: "a", attrs: {
-              href:"javascript:void(0)", 
-              class:"remove", 
-              onclick:ctrl.remove.bind(ctrl, variable)}}
+          return (
+            m.component(f.removeButton, {onclick:ctrl.remove.bind(ctrl, variable)})
           );
         }
       };
 
       return (
-        {tag: "fieldset", attrs: {class:"environment-variables"}, children: [
-          {tag: "legend", attrs: {}, children: ["Environment Variables"]}, 
-          ctrl.variables.mapVariables(function (variable) {
-            return (
-              m.component(f.row, {class:"environment-variable", "data-variable-name":variable.name(), key:variable.uuid()}, [
-                m.component(f.column, {size:4}, [
-                  m.component(f.row, {collapse:true}, [
-                    m.component(f.column, {size:2, class:"prefix-container"}, [
-                      {tag: "span", attrs: {class:"prefix"}}
-                    ]), 
+        m.component(f.accordion, {accordionTitles:[
+                        (
+                          {tag: "span", attrs: {}, children: ["EnvironmentVariables", m.component(f.tooltip, {tooltip:{content: tt.environmentVariables}})]}
+                        )
+                     ], 
+                     accordionKeys:['environment-variables'], 
+                     selectedIndex:-1, 
+                     class:"environment-variables"}, [
+          {tag: "div", attrs: {}, children: [
+            ctrl.variables.mapVariables(function (variable) {
+              return (
+                m.component(f.row, {class:"environment-variable", "data-variable-name":variable.name(), key:variable.uuid()}, [
+                  m.component(f.column, {size:4}, [
+                    m.component(f.row, {collapse:true}, [
+                      m.component(f.column, {size:2, class:"prefix-container"}, [
+                        {tag: "span", attrs: {class:"prefix"}}
+                      ]), 
 
-                    m.component(f.column, {end:true, size:10}, [
-                      m.component(f.input, {
-                        model:variable, 
-                        attrName:"name", 
-                        onchange:ctrl.variableChanged.bind(ctrl), 
-                        size:12})
+                      m.component(f.input, {model:variable, 
+                               attrName:"name", 
+                               onchange:ctrl.variableChanged.bind(ctrl), 
+                               size:10, 
+                               end:true})
                     ])
+                  ]), 
+                  m.component(f.input, {model:variable, 
+                           attrName:"value", 
+                           onchange:ctrl.variableChanged.bind(ctrl), 
+                           type:variable.secure() ? 'password' : 'text', 
+                           size:4}), 
+                  m.component(f.column, {size:1, end:true}, [
+                    removeLink(variable)
                   ])
-                ]), 
-
-                m.component(f.input, {
-                  model:variable, 
-                  attrName:"value", 
-                  onchange:ctrl.variableChanged.bind(ctrl), 
-                  type:variable.secure() ? 'password' : 'text', 
-                  size:4}), 
-                m.component(f.column, {size:1, end:true}, [
-                  removeLink(variable)
                 ])
-              ])
-            );
-          })
-        ]}
+              );
+            })
+          ]}
+        ])
       );
     }
   };

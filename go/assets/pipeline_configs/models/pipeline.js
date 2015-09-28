@@ -20,16 +20,16 @@ define(['mithril', 'lodash', 'string-plus', './model_mixins', './environment_var
     this.constructor.modelType = 'pipeline';
     Mixins.HasUUID.call(this);
 
-    this.name                 = m.prop(data.name);
-    this.locked               = m.prop(data.locked);
-    this.templateName         = m.prop(s.defaultToIfBlank(data.templateName, ''));
-    this.labelTemplate        = m.prop(s.defaultToIfBlank(data.labelTemplate, ''));
-    this.timer                = m.prop(s.defaultToIfBlank(data.timer, new Pipeline.Timer({})));
-    this.environmentVariables = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.environmentVariables, new EnvironmentVariables())));
-    this.parameters           = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.parameters, new Parameters())));
-    this.materials            = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.materials, new Materials())));
-    this.trackingTool         = s.overrideToJSON(m.prop(data.trackingTool));
-    this.stages               = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.stages, new Stages())));
+    this.name                  = m.prop(data.name);
+    this.enablePipelineLocking = m.prop(data.enablePipelineLocking);
+    this.templateName          = m.prop(s.defaultToIfBlank(data.templateName, ''));
+    this.labelTemplate         = m.prop(s.defaultToIfBlank(data.labelTemplate, ''));
+    this.timer                 = m.prop(s.defaultToIfBlank(data.timer, new Pipeline.Timer({})));
+    this.environmentVariables  = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.environmentVariables, new EnvironmentVariables())));
+    this.parameters            = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.parameters, new Parameters())));
+    this.materials             = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.materials, new Materials())));
+    this.trackingTool          = s.overrideToJSON(m.prop(data.trackingTool));
+    this.stages                = s.overrideToJSON(m.prop(s.defaultToIfBlank(data.stages, new Stages())));
 
     this.validate = function () {
       var errors = new Mixins.Errors();
@@ -50,21 +50,22 @@ define(['mithril', 'lodash', 'string-plus', './model_mixins', './environment_var
 
   Pipeline.fromJSON = function (data) {
     return new Pipeline({
-      name:                 data.name,
-      locked:               data.locked,
-      templateName:         data.template_name,
-      labelTemplate:        data.label_template,
-      timer:                Pipeline.Timer.fromJSON(data.timer),
-      trackingTool:         TrackingTool.fromJSON(data.tracking_tool),
-      environmentVariables: EnvironmentVariables.fromJSON(data.environment_variables),
-      parameters:           Parameters.fromJSON(data.parameters),
-      materials:            Materials.fromJSON(data.materials),
-      stages:               Stages.fromJSON(data.stages)
+      name:                  data.name,
+      enablePipelineLocking: data.enable_pipeline_locking,
+      templateName:          data.template_name,
+      labelTemplate:         data.label_template,
+      timer:                 Pipeline.Timer.fromJSON(data.timer),
+      trackingTool:          TrackingTool.fromJSON(data.tracking_tool),
+      environmentVariables:  EnvironmentVariables.fromJSON(data.environment_variables),
+      parameters:            Parameters.fromJSON(data.parameters),
+      materials:             Materials.fromJSON(data.materials),
+      stages:                Stages.fromJSON(data.stages)
     });
   };
 
   Pipeline.Timer = function (data) {
     this.constructor.modelType = 'pipelineTimer';
+    Mixins.HasUUID.call(this);
 
     this.spec          = m.prop(s.defaultToIfBlank(data.spec, ''));
     this.onlyOnChanges = m.prop(data.onlyOnChanges);

@@ -19,11 +19,12 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
 
   var TaskViews = {
     base: {
-      view: function (controller, args, children) {
+      view: function (ctrl, args, children) {
         var task = args.task;
         return (
-          {tag: "fieldset", attrs: {className:'task task-type-' + task.type()}, children: [
+          {tag: "fieldset", attrs: {className:'task-definition task-type-' + task.type()}, children: [
             {tag: "legend", attrs: {class:"task-type"}, children: [task.type()]}, 
+            m.component(f.removeButton, {onclick:args.onRemove}), 
             children
           ]}
         );
@@ -31,53 +32,42 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
     },
 
     ant:  {
-      view: function (controller, args) {
+      view: function (ctrl, args) {
         var task = args.task;
         return (
-          m.component(TaskViews.base, {task:task}, [
+          m.component(TaskViews.base, {task:task, onRemove:args.onRemove}, [
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"target", 
-                model:task}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"buildFile", 
-                model:task}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"workingDir", 
-                model:task, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"target", 
+                                model:task}), 
+              m.component(f.inputWithLabel, {attrName:"buildFile", 
+                                model:task}), 
+              m.component(f.inputWithLabel, {attrName:"workingDir", 
+                                model:task, 
+                                end:true})
             ])
           ])
         );
       }
     },
     nant: {
-      view: function (controller, args) {
+      view: function (ctrl, args) {
         var task = args.task;
         return (
-          m.component(TaskViews.base, {task:task}, [
+          m.component(TaskViews.base, {task:task, onRemove:args.onRemove}, [
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"target", 
-                model:task}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"workingDir", 
-                model:task}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"buildFile", 
-                model:task, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"target", 
+                                model:task}), 
+              m.component(f.inputWithLabel, {attrName:"workingDir", 
+                                model:task}), 
+              m.component(f.inputWithLabel, {attrName:"buildFile", 
+                                model:task, 
+                                end:true})
             ]), 
 
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"nantHome", 
-                model:task, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"nantHome", 
+                                model:task, 
+                                end:true})
             ])
 
           ])
@@ -86,23 +76,18 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
     },
 
     exec: {
-      view: function (controller, args) {
+      view: function (ctrl, args) {
         var task = args.task;
         return (
-          m.component(TaskViews.base, {task:task}, [
+          m.component(TaskViews.base, {task:task, onRemove:args.onRemove}, [
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"command", 
-                model:task}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"args", 
-                model:task}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"workingDir", 
-                model:task, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"command", 
+                                model:task}), 
+              m.component(f.inputWithLabel, {attrName:"args", 
+                                model:task}), 
+              m.component(f.inputWithLabel, {attrName:"workingDir", 
+                                model:task, 
+                                end:true})
             ])
           ])
         );
@@ -110,23 +95,18 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
     },
 
     rake: {
-      view: function (controller, args) {
+      view: function (ctrl, args) {
         var task = args.task;
         return (
-          m.component(TaskViews.base, {task:task}, [
+          m.component(TaskViews.base, {task:task, onRemove:args.onRemove}, [
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"target", 
-                model:task}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"buildFile", 
-                model:task}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"workingDir", 
-                model:task, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"target", 
+                                model:task}), 
+              m.component(f.inputWithLabel, {attrName:"buildFile", 
+                                model:task}), 
+              m.component(f.inputWithLabel, {attrName:"workingDir", 
+                                model:task, 
+                                end:true})
             ])
           ])
         );
@@ -134,34 +114,26 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
     },
 
     fetchartifact: {
-      view: function (controller, args) {
+      view: function (ctrl, args) {
         var task = args.task;
         return (
-          m.component(TaskViews.base, {task:task}, [
+          m.component(TaskViews.base, {task:task, onRemove:args.onRemove}, [
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"pipeline", 
-                model:task}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"stage", 
-                model:task}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"job", 
-                model:task, 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"pipeline", 
+                                model:task}), 
+              m.component(f.inputWithLabel, {attrName:"stage", 
+                                model:task}), 
+              m.component(f.inputWithLabel, {attrName:"job", 
+                                model:task, 
+                                end:true})
             ]), 
 
             m.component(f.row, {}, [
-              m.component(f.inputWithLabel, {
-                attrName:"type", 
-                model:task.source()}), 
-
-              m.component(f.inputWithLabel, {
-                attrName:"location", 
-                model:task.source(), 
-                end:true})
+              m.component(f.inputWithLabel, {attrName:"type", 
+                                model:task.source()}), 
+              m.component(f.inputWithLabel, {attrName:"location", 
+                                model:task.source(), 
+                                end:true})
             ])
           ])
         );
@@ -173,9 +145,8 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
         this.task              = args.task;
         this.templateHTML      = PluggableTasks.Types[this.task.pluginId()].templateHTML;
         this.defaultTaskConfig = PluggableTasks.Types[this.task.pluginId()].configuration;
-        this.uuid              = f.uuid();
-        this.ngControllerName  = 'controller-' + this.uuid;
-        this.appName           = 'app-' + this.uuid;
+        this.ngControllerName  = 'controller-' + this.task.uuid();
+        this.appName           = 'app-' + this.task.uuid();
         this.ngModule          = angular.module(this.appName, []);
 
         this.hasBootstrapped = false;
@@ -198,8 +169,34 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
 
           $scope.clearErrors();
 
+          var ajaxValidator = _.debounce(function (configuration, config, newValue) {
+            configuration.setConfiguration(config.name, newValue);
+            var req = {
+              url:     Routes.apiInternalPluggableTaskValidationPath({plugin_id: ctrl.task.pluginId()}),
+              method:  'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': $('meta[name=csrf-token]').attr('content')
+              },
+              data:    JSON.stringify(configuration)
+            };
+
+            $http(req).then(
+              $scope.clearErrors.bind($scope),
+              function (response) {
+                if (response.status === 422) {
+                  _.each(response.data, $scope.addError, $scope);
+                } else if (response.status === 520) {
+                  $scope.pluggableTaskGenericError = response.data.error;
+                } else {
+                  console.log('Something went wrong, we do not know what!');
+                }
+              });
+          }, 250);
+
           _.map(ctrl.defaultTaskConfig, function (config) {
-            var value = ctrl.task.configuration().valueFor(config.name);
+            var configuration = ctrl.task.configuration();
+            var value         = configuration.valueFor(config.name);
 
             if (!value) {
               value = config.value;
@@ -207,49 +204,27 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
 
             $scope[config.name] = value;
 
-            $scope.$watch(config.name, _.debounce(function (newValue, oldValue) {
-              ctrl.task.configuration().setConfiguration(config.name, newValue);
-              var req = {
-                url:     Routes.apiInternalPluggableTaskValidationPath({plugin_id: ctrl.task.pluginId()}),
-                method:  'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').getAttribute('content')
-                },
-                data:    JSON.stringify(ctrl.task.configuration())
-              };
-
-              $http(req).then(
-                $scope.clearErrors.bind($scope),
-                function (response) {
-                  if (response.status === 422) {
-                    _.each(response.data, $scope.addError, $scope);
-                  } else if (response.status === 520) {
-                    $scope.pluggableTaskGenericError = response.data.error;
-                  } else {
-                    console.log('Something went wrong, we do not know what!');
-                  }
-                });
-            }, 100));
+            $scope.$watch(config.name, function (newValue, oldValue) {
+              ajaxValidator(configuration, config, newValue);
+            });
           });
         }]);
       },
 
       view: function (ctrl, args) {
-        window.setTimeout(function () {
-          var pluginTaskElem            = $('#' + ctrl.uuid);
-          var pluginTaskTemplateElement = $('#template-' + ctrl.uuid);
-          if (!ctrl.hasBootstrapped) {
+        var config = function (elem, isInitialized) {
+          if (!isInitialized) {
+            var pluginTaskElem            = $('#pluggable-task-' + ctrl.task.uuid());
+            var pluginTaskTemplateElement = $('#pluggable-task-template-' + ctrl.task.uuid());
             angular.bootstrap(pluginTaskTemplateElement.get(0), [ctrl.appName]);
-            ctrl.hasBootstrapped = true;
+            pluginTaskElem.show();
           }
-          pluginTaskElem.show();
-        }, 25);
+        };
 
         return (
-          {tag: "div", attrs: {id:ctrl.uuid, style:"display:none"}, children: [
-            m.component(TaskViews.base, {task:ctrl.task}, [
-              {tag: "div", attrs: {id:'template-' + ctrl.uuid, "ng-controller":ctrl.ngControllerName}, children: [
+          {tag: "div", attrs: {id:'pluggable-task-' + ctrl.task.uuid(), style:"display:none", config:config}, children: [
+            m.component(TaskViews.base, {task:ctrl.task, onRemove:args.onRemove}, [
+              {tag: "div", attrs: {id:'pluggable-task-template-' + ctrl.task.uuid(), "ng-controller":ctrl.ngControllerName}, children: [
                 {tag: "div", attrs: {class:"alert-box alert", "ng-show":"pluggableTaskGenericError"}, children: ['{{pluggableTaskGenericError}}']}, 
                 m.trust(ctrl.templateHTML)
               ]}
@@ -280,7 +255,6 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
     },
 
     view: function (ctrl) {
-
       var items = _.transform(_.merge({}, Tasks.Types, PluggableTasks.Types), function (result, value, key) {
         result[key] = value.description;
       });
@@ -289,10 +263,9 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
         m.component(f.row, {className:"task-selector"}, [
           m.component(f.column, {size:3}, [
             {tag: "label", attrs: {class:"inline"}, children: ["Add task of type", 
-              m.component(f.select, {
-                value:ctrl.selected, 
-                class:"inline", 
-                items:items})
+              m.component(f.select, {value:ctrl.selected, 
+                        class:"inline", 
+                        items:items})
             ]}
           ]), 
           m.component(f.column, {size:2, end:true, class:"add-task"}, [
@@ -304,13 +277,21 @@ define(['mithril', 'lodash', 'jquery', 'angular', '../helpers/form_helper', '../
   };
 
   var TasksConfigWidget = {
+    controller: function (args) {
+      this.tasks = args.tasks;
+    },
+
     view: function (ctrl, args) {
       var tasks = args.tasks;
       return (
-        {tag: "div", attrs: {className:"tasks"}, children: [
+        {tag: "div", attrs: {className:"task-definitions"}, children: [
           tasks.mapTasks(function (task) {
             var taskView = TaskViews[task.type()];
-            return (m.component(taskView, {task: task, key: task.uuid()}));
+            return (m.component(taskView, {
+              task:     task,
+              onRemove: ctrl.tasks.removeTask.bind(ctrl.tasks, task),
+              key:      task.uuid()
+            }));
           }), 
           m.component(TaskTypeSelector, {tasks:tasks})
         ]}
